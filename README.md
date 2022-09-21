@@ -1,7 +1,7 @@
 # API-project
 
 ## Database Schema Design
-<img width="1038" alt="Screen Shot 2022-09-21 at 2 37 58 PM" src="https://user-images.githubusercontent.com/101982618/191615240-dac59eb1-ecbd-4e72-bd7b-2d238d1c2a72.png">
+<img width="848" alt="Screen Shot 2022-09-21 at 2 53 36 PM" src="https://user-images.githubusercontent.com/101982618/191617425-377e1301-b780-494e-bd34-c8c6e96fa98a.png">
 
 
 ## API Documentation
@@ -278,7 +278,7 @@ Returns all the spots owned (created) by the current user.
 * Require Authentication: true
 * Request
   * Method: GET
-  * URL: /owners/:ownerId/spots
+  * URL: /users/:userId/spotsOwned
   * Body: none
 
 * Successful Response
