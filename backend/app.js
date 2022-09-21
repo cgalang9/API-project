@@ -26,20 +26,18 @@ app.use(
   helmet.crossOriginResourcePolicy({
     policy: "cross-origin"
   })
-  );
+);
 
-  // Set the _csrf token and create req.csrfToken method
-  app.use(
-    csurf({
-      cookie: {
-        secure: isProduction,
-        sameSite: isProduction && "Lax",
-        httpOnly: true
+// Set the _csrf token and create req.csrfToken method
+app.use(
+  csurf({
+    cookie: {
+      secure: isProduction,
+      sameSite: isProduction && "Lax",
+      httpOnly: true
     }
   })
-  );
+);
 
-
-  app.use(routes);
-
-  module.exports = app;
+app.use(routes);
+module.exports = app;
