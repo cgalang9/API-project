@@ -1,7 +1,8 @@
 # API-project
 
 ## Database Schema Design
-<img width="848" alt="Screen Shot 2022-09-21 at 2 53 36 PM" src="https://user-images.githubusercontent.com/101982618/191617425-377e1301-b780-494e-bd34-c8c6e96fa98a.png">
+<img width="742" alt="airbnb_dbdiagram" src="https://user-images.githubusercontent.com/101982618/192052119-3952be85-af15-4d15-b958-388d41f41082.png">
+
 
 
 ## API Documentation
