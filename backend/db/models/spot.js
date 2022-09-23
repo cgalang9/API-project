@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     state: {
       type: DataTypes.STRING,
-      allowNull: false
+      defaultValue: 'N/A'
     },
     country: {
       type: DataTypes.STRING,

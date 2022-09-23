@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    preiview: {
+    preview: {
       type: DataTypes.BOOLEAN,
       allowNull: false
     }
