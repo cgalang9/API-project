@@ -11,16 +11,13 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      ReviewImage.belongsTo(
-        models.Review, { foreignKey: 'reviewId', onDelete: 'CASCADE',  hooks: true }
-      )
+      ReviewImage.belongsTo( models.Review, { foreignKey: 'reviewId' } )
     }
   }
   ReviewImage.init({
     reviewId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      onDelete: 'CASCADE'
     },
     url: {
       type: DataTypes.INTEGER,
