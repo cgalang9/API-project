@@ -28,7 +28,7 @@ router.get('/', async (req, res, next) => {
             {
                 model: SpotImage,
                 attributes: [],
-                order: [['id', 'DESC']]
+                order: [['preview', 'DESC']]
             }
         ],
         group: ['spot.id']
@@ -38,8 +38,30 @@ router.get('/', async (req, res, next) => {
 })
 
 //Get all Spots owned by the Current User
-router.get('/current', requireAuth, (req, res, next) => {
-    res.send('success')
+router.get('/current', requireAuth, async (req, res, next) => {
+    const spots = await Spot.findAll({
+        where: { ownerId: req.user.id },
+        attributes: {
+            include: [
+                [ sequelize.fn("ROUND", sequelize.fn("AVG", sequelize.col("Reviews.stars")), 1), "avgRating" ],
+                [ sequelize.col("SpotImages.url"), 'previewImage' ],
+            ]
+        },
+        include: [
+            {
+                model: Review,
+                attributes: []
+            },
+            {
+                model: SpotImage,
+                attributes: [],
+                order: [['preview', 'DESC']]
+            }
+        ],
+        group: ['spot.id']
+    })
+
+    res.json(spots)
 })
 
 //Get details of a Spot from an id

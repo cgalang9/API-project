@@ -15,42 +15,42 @@ module.exports = {
       },
       {
         spotId: 2,
-        url: 'Prevtest1.png',
+        url: 'PrevFor2.png',
         preview: true
       },
       {
         spotId: 3,
-        url: 'Prevtest2.png',
+        url: 'PrevFor3.png',
         preview: true
       },
       {
         spotId: 4,
-        url: 'Prevtest3.png',
+        url: 'PrevFor4.png',
         preview: true
       },
       {
         spotId: 5,
-        url: 'Prevtest4.png',
+        url: 'PrevFor5.png',
         preview: true
       },
       {
         spotId: 1,
-        url: 'test5.png',
-        preview: false
+        url: 'PrevFor1.png',
+        preview: true
       },
       {
         spotId: 1,
         url: 'Prevtest6.png',
-        preview: true
+        preview: false
       },
       {
         spotId: 6,
-        url: 'Prevtest7.png',
+        url: 'PrevFor6.png',
         preview: true
       },
       {
         spotId: 7,
-        url: 'Prevtest8.png',
+        url: 'PrevFor7.png',
         preview: true
       },
       {
@@ -60,7 +60,7 @@ module.exports = {
       },
       {
         spotId: 8,
-        url: 'PrevTest9.png',
+        url: 'PrevFor8.png',
         preview: true
       },
     ])
