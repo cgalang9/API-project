@@ -2,19 +2,11 @@
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-    /**
-     * Add altering commands here.
-     *
-     * Example:
-     * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
-     */
     await queryInterface.addColumn('Users', 'firstName', {
-      type: Sequelize.STRING(30),
-      allowNull: false
+      type: Sequelize.STRING(30)
     })
     await queryInterface.addColumn('Users', 'lastName', {
-      type: Sequelize.STRING(30),
-      allowNull: false,
+      type: Sequelize.STRING(30)
     })
   },
 

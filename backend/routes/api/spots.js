@@ -7,6 +7,7 @@ require('express-async-errors')
 
 const { Spot, Review, SpotImage, User } = require('../../db/models');
 const spot = require('../../db/models/spot');
+const { requireAuth } = require('../../utils/auth');
 
 router.use(express.json())
 
@@ -15,7 +16,7 @@ router.get('/', async (req, res, next) => {
     const spots = await Spot.findAll({
         attributes: {
             include: [
-                [ sequelize.fn("ROUND", sequelize.fn("AVG", sequelize.col("Reviews.stars")), 1), "averageStars" ],
+                [ sequelize.fn("ROUND", sequelize.fn("AVG", sequelize.col("Reviews.stars")), 1), "avgRating" ],
                 [ sequelize.col("SpotImages.url"), 'previewImage' ],
             ]
         },
@@ -33,7 +34,12 @@ router.get('/', async (req, res, next) => {
         group: ['spot.id']
     })
 
-    res.json({"Spots": spots})
+    res.json({ "Spots": spots })
+})
+
+//Get all Spots owned by the Current User
+router.get('/current', requireAuth, (req, res, next) => {
+    res.send('success')
 })
 
 //Get details of a Spot from an id
@@ -44,7 +50,7 @@ router.get('/:spotId', async (req, res, next) => {
             attributes: {
                 include: [
                     [ sequelize.fn("COUNT", sequelize.col("Reviews.id")), "numReviews" ],
-                    [ sequelize.fn("ROUND", sequelize.fn("AVG", sequelize.col("Reviews.stars")), 1), "averageStars" ]
+                    [ sequelize.fn("ROUND", sequelize.fn("AVG", sequelize.col("Reviews.stars")), 1), "avgStarRating" ]
 
                 ]
             },
