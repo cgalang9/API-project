@@ -10,6 +10,32 @@ const spot = require('../../db/models/spot');
 
 router.use(express.json())
 
+//Get all spots
+router.get('/', async (req, res, next) => {
+    const spots = await Spot.findAll({
+        attributes: {
+            include: [
+                [ sequelize.fn("ROUND", sequelize.fn("AVG", sequelize.col("Reviews.stars")), 1), "averageStars" ],
+                [ sequelize.col("SpotImages.url"), 'previewImage' ],
+            ]
+        },
+        include: [
+            {
+                model: Review,
+                attributes: []
+            },
+            {
+                model: SpotImage,
+                attributes: [],
+                order: [['id', 'DESC']]
+            }
+        ],
+        group: ['spot.id']
+    })
+
+    res.json({"Spots": spots})
+})
+
 //Get details of a Spot from an id
 router.get('/:spotId', async (req, res, next) => {
     try {

@@ -11,21 +11,26 @@ module.exports = {
       {
         spotId: 2,
         url: 'test1.png',
+        preview: false
+      },
+      {
+        spotId: 2,
+        url: 'Prevtest1.png',
         preview: true
       },
       {
         spotId: 3,
-        url: 'test2.png',
-        preview: false
+        url: 'Prevtest2.png',
+        preview: true
       },
       {
         spotId: 4,
-        url: 'test3.png',
+        url: 'Prevtest3.png',
         preview: true
       },
       {
         spotId: 5,
-        url: 'test4.png',
+        url: 'Prevtest4.png',
         preview: true
       },
       {
@@ -35,21 +40,26 @@ module.exports = {
       },
       {
         spotId: 1,
-        url: 'Pretest6.png',
+        url: 'Prevtest6.png',
         preview: true
       },
       {
-        spotId: 2,
-        url: 'test7.png',
+        spotId: 6,
+        url: 'Prevtest7.png',
+        preview: true
+      },
+      {
+        spotId: 7,
+        url: 'Prevtest8.png',
+        preview: true
+      },
+      {
+        spotId: 8,
+        url: 'test9.png',
         preview: false
       },
       {
-        spotId: 2,
-        url: 'test8.png',
-        preview: false
-      },
-      {
-        spotId: 2,
+        spotId: 8,
         url: 'PrevTest9.png',
         preview: true
       },
