@@ -6,7 +6,7 @@ module.exports = {
       {
         spotId: 1,
         url: 'test.png',
-        preview: true
+        preview: false
       },
       {
         spotId: 2,
@@ -16,7 +16,7 @@ module.exports = {
       {
         spotId: 3,
         url: 'test2.png',
-        preview: true
+        preview: false
       },
       {
         spotId: 4,
@@ -35,13 +35,23 @@ module.exports = {
       },
       {
         spotId: 1,
-        url: 'test6.png',
-        preview: false
+        url: 'Pretest6.png',
+        preview: true
       },
       {
         spotId: 2,
         url: 'test7.png',
         preview: false
+      },
+      {
+        spotId: 2,
+        url: 'test8.png',
+        preview: false
+      },
+      {
+        spotId: 2,
+        url: 'PrevTest9.png',
+        preview: true
       },
     ])
   },
