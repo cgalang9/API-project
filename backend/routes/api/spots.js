@@ -186,8 +186,37 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
 })
 
 
-router.put('/:spotId', requireAuth, async (req, res, next) => {
-    res.json('hi')
+router.put('/:spotId', requireAuth, validateCreateSpot, async (req, res, next) => {
+    try {
+        const spot = await Spot.findOne({ where: { id: req.params.spotId }})
+        if(!spot) { throw new Error("Spot couldn't be found") }
+
+        if(spot.ownerId !== req.user.id) {
+            let err = new Error('Forbidden')
+            err.status = 403
+            next(err)
+        }
+
+        const { address, city, state, country, lat, lng, name, description, price } = req.body
+        const newSpot = await Spot.create({
+            ownerId: req.user.id,
+            address,
+            city,
+            state,
+            country,
+            lat,
+            lng,
+            name,
+            description,
+            price
+        })
+        res.json(newSpot)
+
+
+    } catch (err) {
+        err.status = 404
+        next(err)
+    }
 })
 
 module.exports = router
