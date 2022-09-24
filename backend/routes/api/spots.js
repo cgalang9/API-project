@@ -1,6 +1,8 @@
 const express = require('express')
 const router = express.Router()
 const sequelize = require("sequelize");
+const { check } = require('express-validator');
+const { handleValidationErrors } = require('../../utils/validation');
 
 require('dotenv').config()
 require('express-async-errors')
@@ -10,6 +12,38 @@ const spot = require('../../db/models/spot');
 const { requireAuth } = require('../../utils/auth');
 
 router.use(express.json())
+
+const validateCreateSpot = [
+    check('address')
+      .exists({ checkFalsy: true })
+      .withMessage('Street address is required'),
+    check('city')
+      .exists({ checkFalsy: true })
+      .withMessage('City is required'),
+    check('state')
+        .exists({ checkFalsy: true })
+        .withMessage('State is required'),
+    check('country')
+        .exists({ checkFalsy: true })
+        .withMessage('Country is required'),
+    check('lat')
+      .isNumeric()
+      .withMessage('Latitude is not valid'),
+    check('lng')
+      .isNumeric()
+      .withMessage('Longitude is not valid'),
+    check('name')
+      .exists({ checkFalsy: true })
+      .isLength({ max: 49 })
+      .withMessage('Name must be less than 50 characters'),
+    check('description')
+      .exists({ checkFalsy: true })
+      .withMessage('Description is required'),
+    check('price')
+      .exists({ checkFalsy: true })
+      .withMessage('Price per day is required'),
+    handleValidationErrors
+];
 
 //Get all spots
 router.get('/', async (req, res, next) => {
@@ -61,7 +95,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
         group: ['spot.id']
     })
 
-    res.json(spots)
+    res.json({ "Spots": spots })
 })
 
 //Get details of a Spot from an id
@@ -101,6 +135,25 @@ router.get('/:spotId', async (req, res, next) => {
         err.status = 404
         next(err)
     }
+})
+
+//Creates and returns a new spot
+router.post('/', requireAuth, validateCreateSpot, async (req, res, next) => {
+    const { address, city, state, country, lat, lng, name, description, price } = req.body
+    const newSpot = await Spot.create({
+        ownerId: req.user.id,
+        address,
+        city,
+        state,
+        country,
+        lat,
+        lng,
+        name,
+        description,
+        price
+    })
+    res.status(201)
+    res.json(newSpot)
 })
 
 module.exports = router

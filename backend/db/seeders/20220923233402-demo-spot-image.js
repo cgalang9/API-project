@@ -40,7 +40,7 @@ module.exports = {
       },
       {
         spotId: 1,
-        url: 'Prevtest6.png',
+        url: 'test6.png',
         preview: false
       },
       {
