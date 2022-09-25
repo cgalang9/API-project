@@ -122,14 +122,32 @@ router.get('/:spotId', async (req, res, next) => {
                 {
                     model: User,
                     attributes: ['id', 'firstName', 'lastName'],
-                    as: 'Owner'
                 }
             ],
             group: ['SpotImages.id']
         })
 
         if(!spot) { throw new Error("Spot couldn't be found")}
-        res.json(spot)
+
+        res.json({
+            "id": spot.id,
+            "ownerId": spot.ownerId,
+            "address": spot.address,
+            "city": spot.city,
+            "state": spot.state,
+            "country": spot.country,
+            "lat": spot.lat,
+            "lng": spot.lng,
+            "name": spot.name,
+            "description": spot.description,
+            "price": spot.price,
+            "createdAt": spot.createdAt,
+            "updatedAt": spot.updatedAt,
+            "numReviews": spot.numReviews,
+            "avgStarRating": spot.avgStarRating,
+            "SpotImages": spot.SpotImages,
+            "Owner": spot.User
+        })
 
     } catch (err) {
         err.status = 404
