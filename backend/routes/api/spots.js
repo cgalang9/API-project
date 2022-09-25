@@ -48,54 +48,114 @@ const validateCreateSpot = [
 //Get all spots
 router.get('/', async (req, res, next) => {
     const spots = await Spot.findAll({
-        attributes: {
-            include: [
-                [ sequelize.fn("ROUND", sequelize.fn("AVG", sequelize.col("Reviews.stars")), 1), "avgRating" ],
-                [ sequelize.col("SpotImages.url"), 'previewImage' ],
-            ]
-        },
         include: [
             {
                 model: Review,
-                attributes: []
+                attributes: ['stars']
             },
             {
                 model: SpotImage,
-                attributes: [],
-                order: [['preview', 'DESC']]
+                attributes: ['url', 'preview']
             }
         ],
-        group: ['spot.id']
     })
 
-    res.json({ "Spots": spots })
+    let spotsArr = []
+    spots.forEach(spot => {
+        const parsed = spot.toJSON();
+
+        let sumStars = 0
+        parsed.Reviews.forEach(review => {
+            sumStars += review['stars']
+        })
+        const avgStars = sumStars/(parsed.Reviews.length)
+        const avgStarsRounded = Math.round(avgStars * 10) / 10
+
+        let prevUrl = ''
+        parsed.SpotImages.forEach(img => {
+            if (img.preview === true) {
+                prevUrl = img.url
+            }
+        })
+
+
+        let spotObj = {
+            "id": parsed.id,
+            "ownerId": parsed.ownerId,
+            "address": parsed.address,
+            "city": parsed.city,
+            "state": parsed.state,
+            "country": parsed.country,
+            "lat": parsed.lat,
+            "lng": parsed.lng,
+            "name": parsed.name,
+            "description": parsed.description,
+            "price": parsed.price,
+            "createdAt": parsed.createdAt,
+            "updatedAt": parsed.updatedAt,
+            "avgRating": avgStarsRounded,
+            "previewImage": prevUrl
+        }
+        spotsArr.push(spotObj)
+    })
+    res.json({ "Spots": spotsArr })
 })
 
 //Get all Spots owned by the Current User
 router.get('/current', requireAuth, async (req, res, next) => {
     const spots = await Spot.findAll({
         where: { ownerId: req.user.id },
-        attributes: {
-            include: [
-                [ sequelize.fn("ROUND", sequelize.fn("AVG", sequelize.col("Reviews.stars")), 1), "avgRating" ],
-                [ sequelize.col("SpotImages.url"), 'previewImage' ],
-            ]
-        },
         include: [
             {
                 model: Review,
-                attributes: []
+                attributes: ['stars']
             },
             {
                 model: SpotImage,
-                attributes: [],
-                order: [['preview', 'DESC']]
+                attributes: ['url', 'preview']
             }
         ],
-        group: ['spot.id']
     })
 
-    res.json({ "Spots": spots })
+    let spotsArr = []
+    spots.forEach(spot => {
+        const parsed = spot.toJSON();
+
+        let sumStars = 0
+        parsed.Reviews.forEach(review => {
+            sumStars += review['stars']
+        })
+        const avgStars = sumStars/(parsed.Reviews.length)
+        const avgStarsRounded = Math.round(avgStars * 10) / 10
+
+        let prevUrl = ''
+        parsed.SpotImages.forEach(img => {
+            if (img.preview === true) {
+                prevUrl = img.url
+            }
+        })
+
+
+        let spotObj = {
+            "id": parsed.id,
+            "ownerId": parsed.ownerId,
+            "address": parsed.address,
+            "city": parsed.city,
+            "state": parsed.state,
+            "country": parsed.country,
+            "lat": parsed.lat,
+            "lng": parsed.lng,
+            "name": parsed.name,
+            "description": parsed.description,
+            "price": parsed.price,
+            "createdAt": parsed.createdAt,
+            "updatedAt": parsed.updatedAt,
+            "avgRating": avgStarsRounded,
+            "previewImage": prevUrl
+        }
+        spotsArr.push(spotObj)
+    })
+    res.json({ "Spots": spotsArr })
 })
 
 //Get details of a Spot from an id
@@ -103,17 +163,11 @@ router.get('/:spotId', async (req, res, next) => {
     try {
         const spot = await Spot.findOne({
             where: { id: req.params.spotId },
-            attributes: {
-                include: [
-                    [ sequelize.fn("COUNT", sequelize.col("Reviews.id")), "numReviews" ],
-                    [ sequelize.fn("ROUND", sequelize.fn("AVG", sequelize.col("Reviews.stars")), 1), "avgStarRating" ]
 
-                ]
-            },
             include: [
                 {
                     model: Review,
-                    attributes: []
+                    attributes: ['stars']
                 },
                 {
                     model: SpotImage,
@@ -122,19 +176,51 @@ router.get('/:spotId', async (req, res, next) => {
                 {
                     model: User,
                     attributes: ['id', 'firstName', 'lastName'],
-                    as: 'Owner'
                 }
             ],
-            group: ['SpotImages.id']
         })
 
         if(!spot) { throw new Error("Spot couldn't be found")}
-        res.json(spot)
+
+        const parsed = spot.toJSON()
+        const numReviews = parsed.Reviews.length
+
+        let sum = 0
+        parsed.Reviews.forEach(review => {
+            sum += review.stars
+        })
+
+        const avgStars = sum / numReviews
+        const avgStarsRounded = Math.round(avgStars * 10) / 10
+
+
+        res.json({
+            "id": parsed.id,
+            "ownerId": parsed.ownerId,
+            "address": parsed.address,
+            "city": parsed.city,
+            "state": parsed.state,
+            "country": parsed.country,
+            "lat": parsed.lat,
+            "lng": parsed.lng,
+            "name": parsed.name,
+            "description": parsed.description,
+            "price": parsed.price,
+            "createdAt": parsed.createdAt,
+            "updatedAt": parsed.updatedAt,
+            "numReviews": numReviews,
+            "avgStarRating": avgStarsRounded,
+            "SpotImages": parsed.SpotImages,
+            "Owner": parsed.User
+
+        })
 
     } catch (err) {
         err.status = 404
         next(err)
     }
+
+
 })
 
 //Creates and returns a new spot
@@ -226,7 +312,6 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
         if(!spot) { throw new Error("Spot couldn't be found") }
 
         if(spot.ownerId !== req.user.id) {
-            console.log('kkkkkkkkkkk')
             let err = new Error('Forbidden')
             err.status = 403
             next(err)
