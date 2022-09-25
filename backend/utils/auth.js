@@ -52,13 +52,26 @@ const setTokenCookie = (res, user) => {
 
 // If there is no current user, return an error
 const requireAuth = function (req, _res, next) {
-    if (req.user) return next();
+  if (req.user) return next();
 
-    const err = new Error('Unauthorized');
-    err.title = 'Unauthorized';
-    err.errors = ['Unauthorized'];
-    err.status = 401;
-    return next(err);
-  }
+  const err = new Error("Authentication required");
+  err.title = 'Unauthorized';
+  // err.errors = ['Unauthorized'];
+  err.status = 401;
+  return next(err);
+}
 
-  module.exports = { setTokenCookie, restoreUser, requireAuth };
+// const checkAuthorization = (idToCheck) => {
+//   return (req, res, next) => {
+//     if(req.params.spotId !== req.user.id) {
+//       let err = new Error('Forbidden')
+//       err.status = 403
+//       next(err)
+//     } else {
+//       next()
+//     }
+//   }
+// }
+
+
+module.exports = { setTokenCookie, restoreUser, requireAuth };
