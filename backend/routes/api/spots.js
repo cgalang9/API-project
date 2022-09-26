@@ -10,6 +10,7 @@ require('express-async-errors')
 const { Spot, Review, SpotImage, User, ReviewImage } = require('../../db/models');
 const spot = require('../../db/models/spot');
 const { requireAuth } = require('../../utils/auth');
+const review = require('../../db/models/review');
 
 router.use(express.json())
 
@@ -46,10 +47,10 @@ const validateSpot = [
 ];
 
 const validateReview = [
-    check('address')
+    check('review')
     .exists({ checkFalsy: true })
     .withMessage('Review text is required'),
-  check('city')
+  check('stars')
     .exists({ checkFalsy: true })
     .isInt({ min: 0, max: 5 })
     .withMessage('Stars must be an integer from 1 to 5'),
@@ -326,7 +327,25 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res, ne
         next(err)
     }
 
-    const newReview = Review.create({
+    try {
+        const reviews = await Review.findAll({
+            where: { spotId: req.params.spotId }
+        })
+        reviews.forEach( review => {
+            const parsedReview = review.toJSON()
+            if (parsedReview.userId == req.user.id) {
+                throw new Error("User already has a review for this spot")
+            }
+        })
+    } catch (err) {
+        err.status = 403
+        next(err)
+    }
+
+
+    const newReview = await Review.create({
+        "spotId": req.params.spotId,
+        "userId": req.user.id,
         "review": req.body.review,
         "stars": req.body.stars
     })
