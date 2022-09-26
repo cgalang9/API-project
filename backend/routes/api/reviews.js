@@ -16,7 +16,7 @@ router.use(express.json())
 // Get all Reviews of the Current User
 router.get('/current', requireAuth, async (req, res, next) => {
     const reviews = await Review.findAll({
-        where: { id: req.user.id },
+        where: { userId: req.user.id },
         include: [
             {
                 model: User,
