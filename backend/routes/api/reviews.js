@@ -131,12 +131,17 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
 
 //Edit a Review
 router.put('/:reviewId', requireAuth, validateReview, async (req, res, next) => {
+    const review  = await Review.findOne({ where: { id: req.params.reviewId } })
 
     try {
-        const review  = await Review.findOne({ where: { id: req.params.reviewId } })
         if (!review) { throw new Error("Review couldn't be found")}
+    } catch (err) {
+        err.status = 404
+        next(err)
+    }
 
-        console.log(review)
+    try {
+        if(review.userId != req.user.id) { throw new Error("Forbidden")}
 
         review.update({
             "review": req.body.review,
@@ -146,7 +151,7 @@ router.put('/:reviewId', requireAuth, validateReview, async (req, res, next) => 
         res.json(review)
 
     } catch (err) {
-        err.status = 404
+        err.status = 403
         next(err)
     }
 
