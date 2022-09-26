@@ -7,7 +7,7 @@ const { handleValidationErrors } = require('../../utils/validation');
 require('dotenv').config()
 require('express-async-errors')
 
-const { Spot, Review, SpotImage, User } = require('../../db/models');
+const { Spot, Review, SpotImage, User, ReviewImage } = require('../../db/models');
 const spot = require('../../db/models/spot');
 const { requireAuth } = require('../../utils/auth');
 
@@ -158,6 +158,38 @@ router.get('/current', requireAuth, async (req, res, next) => {
     res.json({ "Spots": spotsArr })
 })
 
+// Get all Reviews by a Spot's id
+router.get('/:spotId/reviews', async (req, res, next) => {
+    try {
+        const reviews = await Review.findAll({
+            include: [
+                {
+                    model: Spot,
+                    where: { id: req.params.spotId },
+                    attributes: []
+                },
+                {
+                    model: User,
+                    attributes: ['id', 'firstName', 'lastName']
+                },
+                {
+                    model: ReviewImage,
+                    attributes: ['id', 'url']
+                }
+            ]
+        })
+
+        if(!reviews.length) { throw new Error("Spot couldn't be found") }
+
+        res.json({ "Reviews": reviews })
+
+    } catch (err) {
+        err.status = 404
+        next(err)
+    }
+})
+
+
 //Get details of a Spot from an id
 router.get('/:spotId', async (req, res, next) => {
     try {
@@ -180,7 +212,7 @@ router.get('/:spotId', async (req, res, next) => {
             ],
         })
 
-        if(!spot) { throw new Error("Spot couldn't be found")}
+        if(!spot) { throw new Error("Spot couldn't be found") }
 
         const parsed = spot.toJSON()
         const numReviews = parsed.Reviews.length
@@ -220,8 +252,9 @@ router.get('/:spotId', async (req, res, next) => {
         next(err)
     }
 
-
 })
+
+
 
 //Creates and returns a new spot
 router.post('/', requireAuth, validateCreateSpot, async (req, res, next) => {
@@ -332,6 +365,8 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
         next(err)
     }
 })
+
+
 
 
 module.exports = router

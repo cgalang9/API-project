@@ -81,5 +81,4 @@ router.get('/current', requireAuth, async (req, res, next) => {
     res.json(allReviews)
 })
 
-
 module.exports = router
