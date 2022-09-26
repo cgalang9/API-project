@@ -107,7 +107,11 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
             "url": req.body.url
         })
 
-        res.json(newImg)
+        res.json({
+            "id": newImg.id,
+            "url": newImg.url
+        })
+
     } catch (err) {
         err.status = 403
         next(err)
