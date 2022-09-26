@@ -12,6 +12,17 @@ const { requireAuth } = require('../../utils/auth');
 
 router.use(express.json())
 
+const validateReview = [
+    check('review')
+    .exists({ checkFalsy: true })
+    .withMessage('Review text is required'),
+  check('stars')
+    .exists({ checkFalsy: true })
+    .isInt({ min: 0, max: 5 })
+    .withMessage('Stars must be an integer from 1 to 5'),
+  handleValidationErrors
+]
+
 // Get all Reviews of the Current User
 router.get('/current', requireAuth, async (req, res, next) => {
     const reviews = await Review.findAll({
@@ -116,9 +127,31 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
         err.status = 403
         next(err)
     }
+})
 
+//Edit a Review
+router.put('/:reviewId', requireAuth, validateReview, async (req, res, next) => {
 
+    try {
+        const review  = await Review.findOne({ where: { id: req.params.reviewId } })
+        if (!review) { throw new Error("Review couldn't be found")}
+
+        console.log(review)
+
+        review.update({
+            "review": req.body.review,
+            "stars": req.body.stars
+        })
+
+        res.json(review)
+
+    } catch (err) {
+        err.status = 404
+        next(err)
+    }
 
 })
+
+
 
 module.exports = router
