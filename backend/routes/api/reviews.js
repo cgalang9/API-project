@@ -8,7 +8,6 @@ require('dotenv').config()
 require('express-async-errors')
 
 const { Spot, Review, SpotImage, User, ReviewImage } = require('../../db/models');
-const spot = require('../../db/models/spot');
 const { requireAuth } = require('../../utils/auth');
 
 router.use(express.json())
@@ -79,6 +78,43 @@ router.get('/current', requireAuth, async (req, res, next) => {
     });
 
     res.json(allReviews)
+})
+
+// Add an Image to a Review based on the Review's id
+router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
+    const review = await Review.findOne({ where: { id: req.params.reviewId } })
+
+    try {
+        if(!review) { throw new Error("Review couldn't be found")}
+    } catch (err) {
+        err.status = 404
+        next(err)
+    }
+
+    try {
+        if(review.userId != req.user.id) { throw new Error("Forbidden")}
+    } catch (err) {
+        err.status = 403
+        next(err)
+    }
+
+    try {
+        const images = await ReviewImage.findAll({ where: { reviewId: req.params.reviewId }})
+        if(images.length >= 10) { throw new Error("Maximum number of images for this resource was reached")}
+
+        const newImg = await ReviewImage.create({
+            "reviewId": req.params.reviewId,
+            "url": req.body.url
+        })
+
+        res.json(newImg)
+    } catch (err) {
+        err.status = 403
+        next(err)
+    }
+
+
+
 })
 
 module.exports = router

@@ -8,9 +8,8 @@ require('dotenv').config()
 require('express-async-errors')
 
 const { Spot, Review, SpotImage, User, ReviewImage } = require('../../db/models');
-const spot = require('../../db/models/spot');
 const { requireAuth } = require('../../utils/auth');
-const review = require('../../db/models/review');
+
 
 router.use(express.json())
 
@@ -334,20 +333,22 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res, ne
                 throw new Error("User already has a review for this spot")
             }
         })
+
+        const newReview = await Review.create({
+            "spotId": req.params.spotId,
+            "userId": req.user.id,
+            "review": req.body.review,
+            "stars": req.body.stars
+        })
+        res.status(201)
+        res.json(newReview)
+
     } catch (err) {
         err.status = 403
         next(err)
     }
 
 
-    const newReview = await Review.create({
-        "spotId": req.params.spotId,
-        "userId": req.user.id,
-        "review": req.body.review,
-        "stars": req.body.stars
-    })
-    res.status(201)
-    res.json(newReview)
 })
 
 // Edit a Spot
