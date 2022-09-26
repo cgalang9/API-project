@@ -174,12 +174,8 @@ router.get('/current', requireAuth, async (req, res, next) => {
 router.get('/:spotId/reviews', async (req, res, next) => {
     try {
         const reviews = await Review.findAll({
+            where: { spotId: req.params.spotId },
             include: [
-                {
-                    model: Spot,
-                    where: { id: req.params.spotId },
-                    attributes: []
-                },
                 {
                     model: User,
                     attributes: ['id', 'firstName', 'lastName']
@@ -190,6 +186,7 @@ router.get('/:spotId/reviews', async (req, res, next) => {
                 }
             ]
         })
+
 
         if(!reviews.length) { throw new Error("Spot couldn't be found") }
 
