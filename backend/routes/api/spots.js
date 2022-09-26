@@ -13,7 +13,7 @@ const { requireAuth } = require('../../utils/auth');
 
 router.use(express.json())
 
-const validateCreateSpot = [
+const validateSpot = [
     check('address')
       .exists({ checkFalsy: true })
       .withMessage('Street address is required'),
@@ -44,6 +44,17 @@ const validateCreateSpot = [
       .withMessage('Price per day is required'),
     handleValidationErrors
 ];
+
+const validateReview = [
+    check('address')
+    .exists({ checkFalsy: true })
+    .withMessage('Review text is required'),
+  check('city')
+    .exists({ checkFalsy: true })
+    .isInt({ min: 0, max: 5 })
+    .withMessage('Stars must be an integer from 1 to 5'),
+  handleValidationErrors
+]
 
 //Get all spots
 router.get('/', async (req, res, next) => {
@@ -257,7 +268,7 @@ router.get('/:spotId', async (req, res, next) => {
 
 
 //Creates and returns a new spot
-router.post('/', requireAuth, validateCreateSpot, async (req, res, next) => {
+router.post('/', requireAuth, validateSpot, async (req, res, next) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body
     const newSpot = await Spot.create({
         ownerId: req.user.id,
@@ -305,8 +316,26 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
     }
 })
 
+// Create a Review for a Spot based on the Spot's id
+router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res, next) => {
+    try {
+        const spot = await Spot.findOne({ where: { id: req.params.spotId } })
+        if(!spot) { throw new Error("Spot couldn't be found") }
+    } catch (err) {
+        err.status = 404
+        next(err)
+    }
+
+    const newReview = Review.create({
+        "review": req.body.review,
+        "stars": req.body.stars
+    })
+    res.status(201)
+    res.json(newReview)
+})
+
 // Edit a Spot
-router.put('/:spotId', requireAuth, validateCreateSpot, async (req, res, next) => {
+router.put('/:spotId', requireAuth, validateSpot, async (req, res, next) => {
     try {
         const spot = await Spot.findOne({ where: { id: req.params.spotId }})
         if(!spot) { throw new Error("Spot couldn't be found") }
@@ -317,7 +346,7 @@ router.put('/:spotId', requireAuth, validateCreateSpot, async (req, res, next) =
             next(err)
         } else {
             const { address, city, state, country, lat, lng, name, description, price } = req.body
-            const newSpot = await Spot.create({
+            spot.update({
                 ownerId: req.user.id,
                 address,
                 city,
@@ -329,7 +358,7 @@ router.put('/:spotId', requireAuth, validateCreateSpot, async (req, res, next) =
                 description,
                 price
             })
-            res.json(newSpot)
+            res.json(spot)
         }
 
     } catch (err) {
