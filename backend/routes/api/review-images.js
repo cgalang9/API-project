@@ -26,6 +26,14 @@ router.delete('/:imageId', requireAuth, async (req, res, next) => {
         return next(err)
     }
 
+    const parsedImg = img.toJSON()
+
+    if(parsedImg.Review.userId !== req.user.id) {
+        let err = new Error('Forbidden')
+        err.status = 403
+        return next(err)
+    }
+
     res.json(img)
 })
 
