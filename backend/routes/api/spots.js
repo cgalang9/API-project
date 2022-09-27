@@ -73,6 +73,22 @@ const validateDate = [
 
 //Get all spots
 router.get('/', async (req, res, next) => {
+    let where = {}
+
+    let page = 1
+    if(req.query.page) {
+        page = Number(req.query.page);
+        if (Number.isNaN(page) || page <= 0) { page = 1 }
+        if (page > 10) { page = 10 }
+    }
+
+    let size = 20
+    if(req.query.size) {
+        size = Number(req.query.size);
+        if (Number.isNaN(size) || size <= 0 || size > 20) { size = 20 }
+    }
+    console.log(page)
+
     const spots = await Spot.findAll({
         include: [
             {
@@ -84,6 +100,8 @@ router.get('/', async (req, res, next) => {
                 attributes: ['url', 'preview']
             }
         ],
+        limit: size,
+        offset: size * (page - 1),
     })
 
     let spotsArr = []
