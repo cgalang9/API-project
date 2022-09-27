@@ -12,6 +12,18 @@ const { requireAuth } = require('../../utils/auth');
 
 router.use(express.json())
 
+const validateDate = [
+    check('endDate')
+    .custom( (endDate, { req }) => {
+        if(new Date(req.body.startDate) >= new Date(endDate)) {
+            throw new Error ('endDate cannot be on or before startDate');
+        }
+        return true;
+    }),
+  handleValidationErrors
+]
+
+
 //Get all of the Current User's Bookings
 router.get('/current', requireAuth, async (req, res, next) => {
     const bookings = await Booking.findAll({
@@ -61,6 +73,10 @@ router.get('/current', requireAuth, async (req, res, next) => {
 
     })
     res.json({ "Bookings": allBookings})
+})
+
+router.put('/:bookingId', requireAuth, validateDate, async (req, res, next) => {
+
 })
 
 
