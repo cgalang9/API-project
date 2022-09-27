@@ -7,7 +7,7 @@ const { handleValidationErrors } = require('../../utils/validation');
 require('dotenv').config()
 require('express-async-errors')
 
-const { Spot, Review, SpotImage, User, ReviewImage } = require('../../db/models');
+const { Spot, Review, SpotImage, User, ReviewImage, Booking } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth');
 
 
@@ -192,6 +192,59 @@ router.get('/:spotId/reviews', async (req, res, next) => {
 
         res.json({ "Reviews": reviews })
 
+    } catch (err) {
+        err.status = 404
+        next(err)
+    }
+})
+
+// Get all Bookings for a Spot based on the Spot's id
+router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
+    try {
+        const spot = await Spot.findOne({ where: { id: req.params.spotId }})
+
+        if(!spot) { throw new Error("Spot couldn't be found") }
+
+        const bookings = await Booking.findAll({
+            where: { spotId: req.params.spotId },
+            include: [
+                {
+                    model: User,
+                    attributes: ['id', 'firstName', 'lastName']
+                },
+                {
+                    model: Spot
+                }
+            ]
+        })
+
+        let allBookings = []
+
+        bookings.forEach(booking => {
+            const parsed = booking.toJSON()
+            if(req.user.id == parsed.Spot.ownerId) {
+                const bookingFinal = {
+                    "User": parsed.User,
+                    "id": parsed.id,
+                    "spotId": parsed.spotId,
+                    "userId": parsed.userId,
+                    "startDate": parsed.startDate.toISOString().split('T')[0],
+                    "endDate": parsed.endDate.toISOString().split('T')[0],
+                    "createdAt": parsed.createdAt,
+                    "updatedAt": parsed.updatedAt
+                }
+                allBookings.push(bookingFinal)
+            } else {
+                const bookingFinal = {
+                    "spotId": parsed.spotId,
+                    "startDate": parsed.startDate.toISOString().split('T')[0],
+                    "endDate": parsed.endDate.toISOString().split('T')[0],
+                }
+                allBookings.push(bookingFinal)
+            }
+
+        })
+        res.json({ "Bookings": allBookings })
     } catch (err) {
         err.status = 404
         next(err)
