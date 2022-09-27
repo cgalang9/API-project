@@ -19,6 +19,12 @@ router.delete('/:imageId', requireAuth, async (req, res, next) => {
         include: Spot
     })
 
+    if(!img) {
+        let err = new Error("Spot Image couldn't be found")
+        err.status = 404
+        return next(err)
+    }
+
     const parsedImg = img.toJSON()
 
     if(parsedImg.Spot.ownerId !== req.user.id) {
@@ -27,9 +33,12 @@ router.delete('/:imageId', requireAuth, async (req, res, next) => {
         return next(err)
     }
 
+    await img.destroy()
 
-
-    res.json(img)
+    res.json({
+        "message": "Successfully deleted",
+        "statusCode": 200
+      })
 })
 
 
