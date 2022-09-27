@@ -77,17 +77,20 @@ router.get('/current', requireAuth, async (req, res, next) => {
 
 router.put('/:bookingId', requireAuth, validateDate, async (req, res, next) => {
     const booking = await Booking.findOne({ where: { id: req.params.bookingId }})
+    let numErrors = 0
 
     if(!booking) {
         let err = new Error("Booking couldn't be found")
         err.status = 404
-        next(err)
+        numErrors++
+        return next(err)
     }
 
     if(booking.userId !== req.user.id) {
         let err = new Error('Forbidden')
         err.status = 403
-        next(err)
+        numErrors++
+        return next(err)
     }
 
     const bookings = await Booking.findAll({
@@ -96,42 +99,62 @@ router.put('/:bookingId', requireAuth, validateDate, async (req, res, next) => {
 
     const currentBookings = []
 
-    bookings.forEach(booking => {
-        currentBookings.push([booking.startDate, booking.endDate])
+    bookings.forEach(el => {
+        if (booking.startDate.toISOString() !== el.startDate.toISOString() && booking.endDate.toISOString() !== el.endDate.toISOString())
+        currentBookings.push([el.startDate, el.endDate])
 
     })
 
     const newStartDate = new Date(req.body.startDate)
     const newEndDate = new Date(req.body.endDate)
 
-    currentBookings.forEach(dates => {
-        if (newStartDate >= dates[0] && newStartDate <= dates[1]) {
-            let err = new Error('Sorry, this spot is already booked for the specified dates')
-            err.status = 403
-            err.errors = { "startDate": "Start date conflicts with an existing booking" }
-            if (newEndDate >= dates[0] && newEndDate <= dates[1]) {
-                err.errors = { "startDate": "Start date conflicts with an existing booking",
-                    "endDate": "End date conflicts with an existing booking" }
-            }
-            next(err)
-        }
 
-        if (newEndDate >= dates[0] && newEndDate <= dates[1]) {
-            let err = new Error('Sorry, this spot is already booked for the specified dates')
-            err.status = 403
-            err.errors = { "endDate": "End date conflicts with an existing booking" }
-            next(err)
-        }
-    })
+        currentBookings.forEach(dates => {
+            if (newStartDate >= dates[0] && newStartDate <= dates[1]) {
+                let err = new Error('Sorry, this spot is already booked for the specified dates')
+                err.status = 403
+                err.errors = { "startDate": "Start date conflicts with an existing booking" }
+                if (newEndDate >= dates[0] && newEndDate <= dates[1]) {
+                    err.errors = { "startDate": "Start date conflicts with an existing booking",
+                        "endDate": "End date conflicts with an existing booking" }
+                }
+                numErrors++
+                return next(err)
+            } else if (newEndDate >= dates[0] && newEndDate <= dates[1]) {
+                let err = new Error('Sorry, this spot is already booked for the specified dates')
+                err.status = 403
+                err.errors = { "endDate": "End date conflicts with an existing booking" }
+                numErrors++
+                return next(err)
+            }
+        })
 
 
 
     if(booking.endDate <= new Date()) {
         let err = new Error("Past bookings can't be modified")
         err.status = 403
-        next(err)
+        return next(err)
     }
-        // res.json(currentBookings)
+
+    if (numErrors <= 0) {
+        await booking.update({
+            "startDate": new Date(req.body.startDate),
+            "endDate": new Date(req.body.endDate)
+        })
+
+        res.json({
+            "id": booking.id,
+            "spotId": booking.spotId,
+            "userId": booking.userId,
+            "startDate": booking.startDate.toISOString().split('T')[0],
+            "endDate": booking.endDate.toISOString().split('T')[0],
+            "createdAt": booking.createdAt,
+            "updatedAt": booking.updatedAt
+        })
+    }
+
+
 
 
 })
