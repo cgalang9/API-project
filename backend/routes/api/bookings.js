@@ -170,15 +170,34 @@ router.put('/:bookingId', requireAuth, validateDate, async (req, res, next) => {
             "updatedAt": booking.updatedAt
         })
     }
+})
 
-    router.delete('/:bookingId', requireAuth, async (req, res, next) => {
-        const booking = await Booking.findOne({ where: { id: req.params.bookingId }})
+router.delete('/:bookingId', requireAuth, async (req, res, next) => {
+    const booking = await Booking.findOne({
+        where: { id: req.params.bookingId },
+        include: [
+            {
+                model: Spot,
+                include: User
+            }
+        ]
     })
 
+    if(!booking) {
+        let err = new Error("Booking couldn't be found")
+        err.status = 404
+        return next(err)
+    }
 
+    const parsedBooking = booking.toJSON()
 
+    if(parsedBooking.userId !== req.user.id && parsedBooking.Spot.ownerId !== req.user.id) {
+        let err = new Error('Forbidden')
+        err.status = 403
+        return next(err)
+    }
 
-
+    res.json(booking)
 
 })
 
