@@ -13,7 +13,10 @@ const { requireAuth } = require('../../utils/auth');
 router.use(express.json())
 
 const validateDate = [
+    check('startDate')
+    .isDate(),
     check('endDate')
+    .isDate()
     .custom( (endDate, { req }) => {
         if(new Date(req.body.startDate) >= new Date(endDate)) {
             throw new Error ('endDate cannot be on or before startDate');
@@ -110,6 +113,9 @@ router.put('/:bookingId', requireAuth, validateDate, async (req, res, next) => {
 
 
         currentBookings.forEach(dates => {
+            console.log(newStartDate)
+            console.log(dates[0])
+            console.log(newStartDate >= dates[0])
             if (newStartDate >= dates[0] && newStartDate <= dates[1]) {
                 let err = new Error('Sorry, this spot is already booked for the specified dates')
                 err.status = 403
