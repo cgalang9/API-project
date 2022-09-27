@@ -76,7 +76,21 @@ router.get('/current', requireAuth, async (req, res, next) => {
 })
 
 router.put('/:bookingId', requireAuth, validateDate, async (req, res, next) => {
+    const booking = await Booking.findOne({ where: { id: req.params.bookingId }})
 
+    if(!booking) {
+        let err = new Error("Booking couldn't be found")
+        err.status = 404
+        next(err)
+    }
+
+    if(booking.userId !== req.user.id) {
+        let err = new Error('Forbidden')
+        err.status = 403
+        next(err)
+    }
+
+    res.json(booking)
 })
 
 
