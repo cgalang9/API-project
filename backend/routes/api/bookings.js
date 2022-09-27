@@ -171,6 +171,12 @@ router.put('/:bookingId', requireAuth, validateDate, async (req, res, next) => {
         })
     }
 
+    router.delete('/:bookingId', requireAuth, async (req, res, next) => {
+        const booking = await Booking.findOne({ where: { id: req.params.bookingId }})
+    })
+
+
+
 
 
 
