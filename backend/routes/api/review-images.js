@@ -13,11 +13,11 @@ const { requireAuth } = require('../../utils/auth');
 
 router.use(express.json())
 
-//Delete a Spot Image
+// Delete a Review Image
 router.delete('/:imageId', requireAuth, async (req, res, next) => {
-    const img = await SpotImage.findOne({
+    const img = await ReviewImage.findOne({
         where: { id: req.params.imageId },
-        include: Spot
+        include: Review
     })
 
     if(!img) {
@@ -26,21 +26,9 @@ router.delete('/:imageId', requireAuth, async (req, res, next) => {
         return next(err)
     }
 
-    const parsedImg = img.toJSON()
-
-    if(parsedImg.Spot.ownerId !== req.user.id) {
-        let err = new Error('Forbidden')
-        err.status = 403
-        return next(err)
-    }
-
-    await img.destroy()
-
-    res.json({
-        "message": "Successfully deleted",
-        "statusCode": 200
-      })
+    res.json(img)
 })
+
 
 
 module.exports = router
