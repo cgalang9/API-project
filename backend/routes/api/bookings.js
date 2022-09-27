@@ -90,17 +90,49 @@ router.put('/:bookingId', requireAuth, validateDate, async (req, res, next) => {
         next(err)
     }
 
+    const bookings = await Booking.findAll({
+        where: { spotId: booking.spotId },
+    })
+
+    const currentBookings = []
+
+    bookings.forEach(booking => {
+        currentBookings.push([booking.startDate, booking.endDate])
+
+    })
+
     const newStartDate = new Date(req.body.startDate)
     const newEndDate = new Date(req.body.endDate)
+
+    currentBookings.forEach(dates => {
+        if (newStartDate >= dates[0] && newStartDate <= dates[1]) {
+            let err = new Error('Sorry, this spot is already booked for the specified dates')
+            err.status = 403
+            err.errors = { "startDate": "Start date conflicts with an existing booking" }
+            if (newEndDate >= dates[0] && newEndDate <= dates[1]) {
+                err.errors = { "startDate": "Start date conflicts with an existing booking",
+                    "endDate": "End date conflicts with an existing booking" }
+            }
+            next(err)
+        }
+
+        if (newEndDate >= dates[0] && newEndDate <= dates[1]) {
+            let err = new Error('Sorry, this spot is already booked for the specified dates')
+            err.status = 403
+            err.errors = { "endDate": "End date conflicts with an existing booking" }
+            next(err)
+        }
+    })
+
+
 
     if(booking.endDate <= new Date()) {
         let err = new Error("Past bookings can't be modified")
         err.status = 403
         next(err)
-    } else {
-
-        res.json(booking)
     }
+        // res.json(currentBookings)
+
 
 })
 
