@@ -90,7 +90,18 @@ router.put('/:bookingId', requireAuth, validateDate, async (req, res, next) => {
         next(err)
     }
 
-    res.json(booking)
+    const newStartDate = new Date(req.body.startDate)
+    const newEndDate = new Date(req.body.endDate)
+
+    if(booking.endDate <= new Date()) {
+        let err = new Error("Past bookings can't be modified")
+        err.status = 403
+        next(err)
+    } else {
+
+        res.json(booking)
+    }
+
 })
 
 
