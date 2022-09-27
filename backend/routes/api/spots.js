@@ -56,6 +56,18 @@ const validateReview = [
   handleValidationErrors
 ]
 
+const validateDate = [
+    check('endDate')
+    .custom( (endDate, { req }) => {
+        if(new Date(req.body.startDate) >= new Date(endDate)) {
+            throw new Error ('endDate cannot be on or before startDate');
+        }
+        return true;
+    }),
+  handleValidationErrors
+]
+
+
 //Get all spots
 router.get('/', async (req, res, next) => {
     const spots = await Spot.findAll({
@@ -404,17 +416,23 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res, ne
 })
 
 // Create a Booking from a Spot based on the Spot's id
-router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
+router.post('/:spotId/bookings', requireAuth, validateDate, async (req, res, next) => {
 
-    try {
         const spot = await Spot.findOne({
             where: { id: req.params.spotId },
             include: Booking
         })
 
         if(!spot) {
-            console.log('=')
-            throw new Error("Spot couldn't be found")
+            let err = new Error("Spot couldn't be found")
+            err.status = 404
+            next(err)
+        }
+
+        if(spot.ownerId === req.user.id) {
+            let err = new Error('Forbidden')
+            err.status = 403
+            next(err)
         }
 
         const currentBookings = []
@@ -446,19 +464,22 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
             }
         })
 
-        // const newBooking = Booking.create({
-        //     "spotId": req.params.spotId,
-        //     "userId": req.user.id,
-        //     "startDate": new Date(req.body.startDate),
-        //     "endDate": new Date(req.body.endDate)
-        // })
+        const newBooking = await Booking.create({
+            "spotId": Number(req.params.spotId),
+            "userId": req.user.id,
+            "startDate": new Date(req.body.startDate),
+            "endDate": new Date(req.body.endDate)
+        })
 
-        res.json(currentBookings)
-
-    } catch (error) {
-        err.status = 404
-        next(err)
-    }
+        res.json({
+            "id": newBooking.id,
+            "spotId": newBooking.spotId,
+            "userId": newBooking.userId,
+            "startDate": newBooking.startDate.toISOString().split('T')[0],
+            "endDate": newBooking.endDate.toISOString().split('T')[0],
+            "createdAt": newBooking.createdAt,
+            "updatedAt": newBooking.updatedAt
+        })
 
 })
 
