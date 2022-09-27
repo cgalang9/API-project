@@ -401,9 +401,67 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res, ne
         err.status = 403
         next(err)
     }
+})
 
+// Create a Booking from a Spot based on the Spot's id
+router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
+
+    try {
+        const spot = await Spot.findOne({
+            where: { id: req.params.spotId },
+            include: Booking
+        })
+
+        if(!spot) {
+            console.log('=')
+            throw new Error("Spot couldn't be found")
+        }
+
+        const currentBookings = []
+
+        spot.Bookings.forEach(booking => {
+            currentBookings.push([booking.startDate, booking.endDate])
+        })
+
+        const newStartDate = new Date(req.body.startDate)
+        const newEndDate = new Date(req.body.endDate)
+
+        currentBookings.forEach(dates => {
+            if (newStartDate >= dates[0] && newStartDate <= dates[1]) {
+                let err = new Error('Sorry, this spot is already booked for the specified dates')
+                err.status = 403
+                err.errors = { "startDate": "Start date conflicts with an existing booking" }
+                if (newEndDate >= dates[0] && newEndDate <= dates[1]) {
+                    err.errors = { "startDate": "Start date conflicts with an existing booking",
+                        "endDate": "End date conflicts with an existing booking" }
+                }
+                next(err)
+            }
+
+            if (newEndDate >= dates[0] && newEndDate <= dates[1]) {
+                let err = new Error('Sorry, this spot is already booked for the specified dates')
+                err.status = 403
+                err.errors = { "endDate": "End date conflicts with an existing booking" }
+                next(err)
+            }
+        })
+
+        // const newBooking = Booking.create({
+        //     "spotId": req.params.spotId,
+        //     "userId": req.user.id,
+        //     "startDate": new Date(req.body.startDate),
+        //     "endDate": new Date(req.body.endDate)
+        // })
+
+        res.json(currentBookings)
+
+    } catch (error) {
+        err.status = 404
+        next(err)
+    }
 
 })
+
 
 // Edit a Spot
 router.put('/:spotId', requireAuth, validateSpot, async (req, res, next) => {
