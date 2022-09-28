@@ -74,14 +74,6 @@ const validateDate = [
 ]
 
 const validateSpotQuery = [
-    query('page')
-    .optional({checkFalsy: false})
-    .isInt({ min: 1 })
-    .withMessage('Page must be greater than or equal to 1'),
-    query('size')
-    .optional({checkFalsy: false})
-    .isInt({ min: 1 })
-    .withMessage('Size must be greater than or equal to 1'),
     query('maxLat')
     .optional({checkFalsy: false})
     .isDecimal()
@@ -118,14 +110,26 @@ router.get('/', validateSpotQuery, async (req, res, next) => {
     let page = 1
     if(req.query.page) {
         page = Number(req.query.page);
-        if (Number.isNaN(page) || page <= 0) { page = 1 }
+        if (Number.isNaN(page)) { page = 1 }
         if (page > 10) { page = 10 }
+        if(page <= 0) {
+            let err = new Error('Validation Error')
+            err.status = 400
+            err.errors = { "page": "Page must be greater than or equal to 1" }
+            next(err)
+        }
     }
 
     let size = 20
     if(req.query.size) {
         size = Number(req.query.size);
-        if (Number.isNaN(size) || size <= 0 || size > 20) { size = 20 }
+        if (Number.isNaN(size) || size > 20) { size = 20 }
+        if(size <= 0) {
+            let err = new Error('Validation Error')
+            err.status = 400
+            err.errors = { "size": "Size must be greater than or equal to 1" }
+            next(err)
+        }
     }
 
     if(req.query.minLat) {
