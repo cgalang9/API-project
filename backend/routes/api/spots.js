@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const sequelize = require("sequelize");
 const { check } = require('express-validator');
+const { query } = require('express-validator/check');
 const { handleValidationErrors } = require('../../utils/validation');
 
 require('dotenv').config()
@@ -9,6 +10,8 @@ require('express-async-errors')
 
 const { Spot, Review, SpotImage, User, ReviewImage, Booking } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth');
+const { Op } = require("sequelize");
+
 
 
 router.use(express.json())
@@ -50,7 +53,7 @@ const validateReview = [
     .exists({ checkFalsy: true })
     .withMessage('Review text is required'),
   check('stars')
-    .exists({ checkFalsy: true })
+    .exists({ checkFalsy: false })
     .isInt({ min: 0, max: 5 })
     .withMessage('Stars must be an integer from 1 to 5'),
   handleValidationErrors
@@ -70,9 +73,46 @@ const validateDate = [
   handleValidationErrors
 ]
 
+const validateSpotQuery = [
+    query('page')
+    .optional({checkFalsy: false})
+    .isInt({ min: 1 })
+    .withMessage('Page must be greater than or equal to 1'),
+    query('size')
+    .optional({checkFalsy: false})
+    .isInt({ min: 1 })
+    .withMessage('Size must be greater than or equal to 1'),
+    query('maxLat')
+    .optional({checkFalsy: false})
+    .isDecimal()
+    .withMessage('Maximum latitude is invalid'),
+    query('minLat')
+    .optional({checkFalsy: false})
+    .isDecimal()
+    .withMessage('Minimum latitude is invalid'),
+    query('maxLng')
+    .optional({checkFalsy: false})
+    .isDecimal()
+    .withMessage('Maximum longitude is invalid'),
+    query('minLng')
+    .optional({checkFalsy: false})
+    .isDecimal()
+    .withMessage('Minimum longitude is invalid'),
+    query('maxPrice')
+    .optional({checkFalsy: false})
+    .isFloat({ min: 0 })
+    .withMessage('Maximum price must be greater than or equal to 0'),
+    query('minPrice')
+    .optional({checkFalsy: false})
+    .isFloat({ min: 0 })
+    .withMessage('Minimum price must be greater than or equal to 0'),
+
+    handleValidationErrors
+]
+
 
 //Get all spots
-router.get('/', async (req, res, next) => {
+router.get('/', validateSpotQuery, async (req, res, next) => {
     let where = {}
 
     let page = 1
@@ -87,9 +127,57 @@ router.get('/', async (req, res, next) => {
         size = Number(req.query.size);
         if (Number.isNaN(size) || size <= 0 || size > 20) { size = 20 }
     }
-    console.log(page)
+
+    if(req.query.minLat) {
+        if(req.query.maxLat) {
+            const innerQuery = { [Op.between]: [req.query.minLat, req.query.maxLat] }
+            where.lat = innerQuery
+        } else {
+            const innerQuery = { [Op.gte]: req.query.minLat }
+            where.lat = innerQuery
+        }
+    }
+
+    if(req.query.maxLat && !req.query.minLat) {
+        const innerQuery = { [Op.lte]: req.query.maxLat }
+        where.lat = innerQuery
+    }
+
+    if(req.query.minLng) {
+        if(req.query.maxLng) {
+            const innerQuery = { [Op.between]: [req.query.minLng, req.query.maxLng] }
+            where.lng = innerQuery
+        } else {
+            const innerQuery = { [Op.gte]: req.query.minLng }
+            where.lng = innerQuery
+        }
+    }
+
+    if(req.query.maxLng && !req.query.minLng) {
+        const innerQuery = { [Op.lte]: req.query.maxLng }
+        where.lng = innerQuery
+    }
+
+    if(req.query.minPrice) {
+        if(req.query.maxPrice) {
+            const innerQuery = { [Op.between]: [req.query.minPrice, req.query.maxPrice] }
+            where.price = innerQuery
+        } else {
+            const innerQuery = { [Op.gte]: req.query.minPrice }
+            where.price = innerQuery
+        }
+    }
+
+    if(req.query.maxPrice && !req.query.minPrice) {
+        const innerQuery = { [Op.lte]: req.query.maxPrice }
+        where.price = innerQuery
+    }
+
+
+
 
     const spots = await Spot.findAll({
+        where,
         include: [
             {
                 model: Review,
@@ -142,7 +230,11 @@ router.get('/', async (req, res, next) => {
         }
         spotsArr.push(spotObj)
     })
-    res.json({ "Spots": spotsArr })
+    res.json({
+        "Spots": spotsArr,
+        page,
+        size
+    })
 })
 
 //Get all Spots owned by the Current User
