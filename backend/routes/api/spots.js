@@ -73,6 +73,42 @@ const validateDate = [
   handleValidationErrors
 ]
 
+const validateSpotQuery = [
+    query('page')
+    .optional({checkFalsy: false})
+    .isInt({ min: 1 })
+    .withMessage('Page must be greater than or equal to 1'),
+    query('size')
+    .optional({checkFalsy: false})
+    .isInt({ min: 1 })
+    .withMessage('Size must be greater than or equal to 1'),
+    query('maxLat')
+    .optional({checkFalsy: false})
+    .isDecimal()
+    .withMessage('Maximum latitude is invalid'),
+    query('minLat')
+    .optional({checkFalsy: false})
+    .isDecimal()
+    .withMessage('Minimum latitude is invalid'),
+    query('maxLng')
+    .optional({checkFalsy: false})
+    .isDecimal()
+    .withMessage('Maximum longitude is invalid'),
+    query('minLng')
+    .optional({checkFalsy: false})
+    .isDecimal()
+    .withMessage('Minimum longitude is invalid'),
+    query('maxPrice')
+    .optional({checkFalsy: false})
+    .isFloat({ min: 0 })
+    .withMessage('Maximum price must be greater than or equal to 0'),
+    query('minPrice')
+    .optional({checkFalsy: false})
+    .isFloat({ min: 0 })
+    .withMessage('Minimum price must be greater than or equal to 0'),
+
+    handleValidationErrors
+]
 
 
 //Get all spots
