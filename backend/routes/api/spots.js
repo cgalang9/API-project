@@ -117,6 +117,10 @@ router.get('/', validateSpotQuery, async (req, res, next) => {
         }
     }
 
+    if(req.query.maxLng && !req.query.minLng) {
+        const innerQuery = { [Op.lte]: req.query.maxLng }
+        where.lng = innerQuery
+    }
 
 
 
