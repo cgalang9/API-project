@@ -88,7 +88,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
         allReviews.push(reviewFinal)
     });
 
-    res.json(allReviews)
+    res.json({ "Reviews": allReviews})
 })
 
 // Add an Image to a Review based on the Review's id
