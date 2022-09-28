@@ -78,7 +78,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
         allReviews.push(reviewFinal)
     });
 
-    res.json(allReviews)
+    res.json({ "Reviews": allReviews})
 })
 
 
