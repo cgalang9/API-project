@@ -122,6 +122,15 @@ router.get('/', validateSpotQuery, async (req, res, next) => {
         where.lng = innerQuery
     }
 
+    if(req.query.minPrice) {
+        if(req.query.maxPrice) {
+            const innerQuery = { [Op.between]: [req.query.minPrice, req.query.maxPrice] }
+            where.price = innerQuery
+        } else {
+            const innerQuery = { [Op.gte]: req.query.minPrice }
+            where.price = innerQuery
+        }
+    }
 
 
 
