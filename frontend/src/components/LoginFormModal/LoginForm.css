@@ -9,11 +9,6 @@
     align-items: center;
 }
 
-.hidden {
-    visibility: hidden;
-}
-
-
 .login_form {
     border-radius: 10px;
     width: 100%;
