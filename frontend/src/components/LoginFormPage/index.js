@@ -11,9 +11,9 @@ function LoginFormPage() {
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState([]);
 
-  if (sessionUser) return (
-    <Redirect to="/" />
-  );
+  // if (sessionUser.id) return (
+  //   <Redirect to="/" />
+  // );
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,27 +30,31 @@ function LoginFormPage() {
   }
 
   return (
-    <div className='login_form_container flex center'>
-        <form onSubmit={handleSubmit} className='login_form flex center' >
-          <ul>
+    <div className='login_form_container flex'>
+        <form onSubmit={handleSubmit} className='login_form flex' >
+          <div className='title'>Log in</div>
+          <div className='welcome'>Welcome to Airbnb</div>
+          <ul className='errors'>
             {errors.map((error, idx) => <li key={idx}>{error}</li>)}
           </ul>
-          <label>
-            Username or Email
+          <label className='flex'>
+            <span className='input_label'>Username or Email</span>
             <input
               type="text"
               value={credential}
               onChange={(e) => setCredential(e.target.value)}
               required
+              className='input_top'
             />
           </label>
-          <label>
-            Password
+          <label className='flex'>
+            <span className='input_label'>Password</span>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
+              className='input_bottom'
             />
           </label>
           <button type="submit" className='login_btn'>Log In</button>
