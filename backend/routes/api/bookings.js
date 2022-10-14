@@ -113,9 +113,6 @@ router.put('/:bookingId', requireAuth, validateDate, async (req, res, next) => {
 
 
         currentBookings.forEach(dates => {
-            console.log(newStartDate)
-            console.log(dates[0])
-            console.log(newStartDate >= dates[0])
             if (newStartDate >= dates[0] && newStartDate <= dates[1]) {
                 let err = new Error('Sorry, this spot is already booked for the specified dates')
                 err.status = 403
