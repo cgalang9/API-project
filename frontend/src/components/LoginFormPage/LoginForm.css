@@ -13,11 +13,9 @@
     visibility: hidden;
 }
 
-/* .login_form_container {
-    margin-top: 10px;
-} */
 
 .login_form {
+    margin-top: 125px;
     border: 1px solid black;
     border-radius: 10px;
     max-width: 50%;
