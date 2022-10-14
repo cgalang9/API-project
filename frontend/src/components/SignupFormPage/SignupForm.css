@@ -13,18 +13,14 @@
     visibility: hidden;
 }
 
-/* .login_form_container {
-    margin-top: 10px;
-} */
 
-.login_form {
+form {
     border: 1px solid black;
     border-radius: 10px;
     max-width: 50%;
-    min-width: 30%;
+    min-width: 50%;
     align-self: center;
     padding: 0px 20px 20px;
-    /* gap: 5px; */
 }
 
 .title {
@@ -78,7 +74,7 @@ input:focus {
 
 
 
-.login_btn {
+.signup_btn {
     width: 95%;
     padding: 10px;
     color: white;
@@ -89,7 +85,7 @@ input:focus {
     font-weight: 300;
 }
 
-.login_btn:hover {
+.signup_btn:hover {
     background-color: rgb(255, 70, 95);
 }
 
