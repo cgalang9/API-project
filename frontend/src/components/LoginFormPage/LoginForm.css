@@ -1,0 +1,28 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.flex {
+    display: flex;
+    flex-direction: column;
+}
+
+.center {
+    justify-content: center;
+    align-items: center;
+}
+
+.login_form_container {
+    /* border: 1px solid black; */
+}
+
+.login_form {
+    border: 1px solid black;
+    align-self: center;
+    padding: 20px;
+    gap: 10px;
+}
+
+.login_btn {
+    max-width: 100px;
+}
