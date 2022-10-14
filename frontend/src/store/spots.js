@@ -21,8 +21,12 @@ const initialState = {}
 export const spotsReducer = (state = initialState, action) => {
     switch(action.type) {
         case GET_ALL_SPOTS:
-            const newStateGetAll = { ...state }
-            newStateGetAll["spots"] = action.spots
+            const spotsArr = action.spots['Spots']
+            const spotsObj = {}
+            spotsArr.forEach(spot => {
+                spotsObj[spot.id] = spot
+            });
+            const newStateGetAll = Object.assign({ ...state }, {...spotsObj})
             return newStateGetAll
         default:
             return state
