@@ -12,7 +12,6 @@ function SpotsDisplay() {
 
     const spots = useSelector(state => state.spots)
     const spotsArr = Object.values(spots)
-    // console.log(spotsArr)
 
     return (
         <div className='spots_display_container'>
@@ -20,7 +19,7 @@ function SpotsDisplay() {
                 {spotsArr.length > 0 && (
                     spotsArr.map(spot => (
                         <li key={spot.id} className='spot_container'>
-                            <img src={spot.previewImage} alt="image of spot" className='spot_img'/>
+                            <img src={spot.previewImage} alt="spot" className='spot_img'/>
                             <div className='spot_container_header'>
                                 <div className='spot_location'>{spot.city}, {spot.state}</div>
                                 <div className='spot_avgStars'>
