@@ -59,6 +59,7 @@ export const createSpotThunk = (spot) => async (dispatch) => {
 
     if(response.ok) {
         const spot = await response.json()
+        console.log(spot)
         dispatch(createSpot(spot))
         return spot
     }
@@ -84,7 +85,7 @@ export const spotsReducer = (state = initialState, action) => {
             return stateGetSpot
         case CREATE_SPOT:
             const stateCreateSpot = {...state}
-            stateGetSpot[action.spot.id] = action.spot
+            stateCreateSpot[action.spot.id] = action.spot
             return stateCreateSpot
         default:
             return state

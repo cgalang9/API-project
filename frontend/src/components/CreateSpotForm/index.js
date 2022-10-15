@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { createSpotThunk } from "../../store/spots";
+import { useHistory } from "react-router-dom";
 import './CreateSpotForm.css'
 
 function CreateSpotForm() {
@@ -11,21 +13,42 @@ function CreateSpotForm() {
     const [country, setCountry] = useState('')
     const [description, setDescription] = useState('')
     const [errors, setErrors] = useState([])
+    const dispatch = useDispatch()
+    const history = useHistory()
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        //   setErrors([]);
-        //   return dispatch(sessionActions.signup({ email, username, password, firstName, lastName }))
-        //     .catch(async (res) => {
-        //       const data = await res.json();
-        //       if (data && data.errors) {
-        //             setErrors(Object.values(data.errors))
-        //             console.log(errors)
-        //         } else if (data.message) {
-        //             setErrors([data.message])
-        //         }
-        //     });
-      };
+        const newSpot = {
+            name,
+            price,
+            address,
+            city,
+            state: st,
+            country,
+            description
+        }
+
+        setErrors([]);
+        setName('')
+        setPrice(0)
+        setAddress('')
+        setCity('')
+        setCountry('')
+        setDescription('')
+
+        dispatch(createSpotThunk(newSpot))
+          .catch(async (res) => {
+            const data = await res.json();
+            if (data && data.errors) {
+                  setErrors(Object.values(data.errors))
+                  console.log(errors)
+              } else if (data.message) {
+                  setErrors([data.message])
+              }
+          });
+
+          history.push('/')
+    };
 
 
     return (
@@ -45,7 +68,7 @@ function CreateSpotForm() {
                 />
               </label>
               <label className='flex'>
-                <span className='input_label'>Price per night</span>
+                <span className='input_label'>Price per night (USD)</span>
                 <input
                   type="number"
                   value={price}

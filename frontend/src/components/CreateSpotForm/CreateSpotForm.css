@@ -47,8 +47,9 @@ input {
 }
 
 
-.signup_btn {
+.create_btn {
     /* width: 95%; */
+    margin: 30px 0;
     padding: 10px;
     color: white;
     background-color: rgb(255, 56, 95);
@@ -56,10 +57,6 @@ input {
     border-radius: 10px;
     font-size: 20px;
     font-weight: 300;
-}
-
-.signup_btn:hover {
-    background-color: rgb(255, 70, 95);
 }
 
 .errors {
