@@ -1,10 +1,12 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getAllSpotsThunk } from '../../store/spots'
+import { useHistory } from "react-router-dom";
 import './SpotsDisplay.css'
 
 function SpotsDisplay() {
     const dispatch = useDispatch()
+    const history = useHistory()
 
     useEffect(() => {
         dispatch(getAllSpotsThunk())
@@ -19,8 +21,8 @@ function SpotsDisplay() {
             <ul className='spots_list'>
                 {spotsArr.length > 0 && (
                     spotsArr.map(spot => (
-                        <li key={spot.id} className='spot_container'>
-                            <img src={spot.previewImage || 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png'} alt="spot" className='spot_img'/>
+                        <li key={spot.id} className='spot_container' onClick={() => {history.push(`/spots/${spot.id}`)}}>
+                            <img src={spot.previewImage || 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930'} alt="spot" className='spot_img'/>
                             <div className='spot_container_header'>
                                 <div className='spot_location'>{spot.city}, {spot.state}</div>
                                 <div className='spot_avgStars'>
