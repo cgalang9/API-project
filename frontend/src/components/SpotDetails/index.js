@@ -5,8 +5,6 @@ import { getSpotThunk } from '../../store/currentSpot'
 import './SpotDetails.css'
 
 function SpotDetails() {
-    const sessionUser = useSelector(state => state.session.user);
-
     const { spotId } = useParams()
     const dispatch = useDispatch()
 
@@ -15,6 +13,12 @@ function SpotDetails() {
     }, [dispatch])
 
     const spot = useSelector(state => state.currentSpot)
+    const sessionUser = useSelector(state => state.session.user);
+    //show edit link only if current user is owner
+    let isOwner = false
+    if (spot && sessionUser.id === spot.ownerId && isOwner === false) {
+        isOwner = (true)
+    }
 
     return(
         <>
@@ -25,7 +29,9 @@ function SpotDetails() {
                 <div>{spot.city}, {spot.city}</div>
                 <div>{spot.country}</div>
                 <div>{spot.description}</div>
-                <div>(<NavLink to={`/spots/${spotId}/edit`}>Edit Listing</NavLink>)</div>
+                {isOwner && (
+                    <div>(<NavLink to={`/spots/${spotId}/edit`}>Edit Listing</NavLink>)</div>
+                )}
                 <div>${spot.price}</div>
                 <div>{spot.numReviews} reviews</div>
                 <div><i className="fa-sharp fa-solid fa-star"/>{spot.avgStarRating}</div>

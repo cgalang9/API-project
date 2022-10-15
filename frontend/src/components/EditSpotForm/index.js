@@ -1,21 +1,32 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { editSpotThunk } from "../../store/spots";
-import { useHistory, useParams } from "react-router-dom";
+import { Redirect, useHistory, useParams } from "react-router-dom";
 import './EditSpotForm.css'
 
 function EditSpotForm({ spot }) {
-    const [name, setName] = useState(spot.name)
-    const [price, setPrice] = useState(spot.price)
-    const [address, setAddress] = useState(spot.address)
-    const [city, setCity] = useState(spot.city)
-    const [st, setSt] = useState(spot.state)
-    const [country, setCountry] = useState(spot.country)
-    const [description, setDescription] = useState(spot.description)
+    const [name, setName] = useState(null)
+    const [price, setPrice] = useState(null)
+    const [address, setAddress] = useState(null)
+    const [city, setCity] = useState(null)
+    const [st, setSt] = useState(null)
+    const [country, setCountry] = useState(null)
+    const [description, setDescription] = useState(null)
     const [errors, setErrors] = useState([])
     const dispatch = useDispatch()
     const history = useHistory()
     const { spotId } = useParams()
+
+    //fixed bug when refreshing page spot was undefined and gave an error
+    if(spot) {
+      if(name === null) setName(spot.name)
+      if(name === null) setPrice(spot.price)
+      if(name === null) setAddress(spot.address)
+      if(name === null) setCity(spot.city)
+      if(name === null) setSt(spot.state)
+      if(name === null) setCountry(spot.country)
+      if(name === null) setDescription(spot.description)
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -53,6 +64,8 @@ function EditSpotForm({ spot }) {
 
 
     return (
+      <>
+      {spot && (
         <div className='edit_form_container flex'>
             <form onSubmit={handleSubmit} className='edit_form flex'>
               <div className='title'>Edit Your Listing</div>
@@ -125,6 +138,8 @@ function EditSpotForm({ spot }) {
               <button type="submit" className="confirm_changes_btn">Confirm Changes</button>
             </form>
         </div>
+      )}
+      </>
     )
 }
 
