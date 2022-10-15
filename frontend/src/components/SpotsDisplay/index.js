@@ -10,7 +10,7 @@ function SpotsDisplay() {
 
     useEffect(() => {
         dispatch(getAllSpotsThunk())
-    })
+    }, [dispatch])
 
     const spots = useSelector(state => state.spots)
     const spotsArr = Object.values(spots)

@@ -1,12 +1,20 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { NavLink, useParams, Route } from 'react-router-dom'
-import { getSpotThunk } from '../../store/spots'
+import { NavLink, useParams } from 'react-router-dom'
+import { getSpotThunk } from '../../store/currentSpot'
 import './SpotDetails.css'
 
-function SpotDetails({ spot }) {
-    const { spotId } = useParams()
+function SpotDetails() {
     const sessionUser = useSelector(state => state.session.user);
+
+    const { spotId } = useParams()
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(getSpotThunk(spotId))
+    }, [dispatch])
+
+    const spot = useSelector(state => state.currentSpot)
 
     return(
         <>
@@ -21,7 +29,7 @@ function SpotDetails({ spot }) {
                 <div>${spot.price}</div>
                 <div>{spot.numReviews} reviews</div>
                 <div><i className="fa-sharp fa-solid fa-star"/>{spot.avgStarRating}</div>
-                {spot.SpotImages && spot.SpotImages.length > 0 && (
+                {spot.SpotImages && (
                     spot.SpotImages.map(img => (
                         <img src={img.url} alt="spot" className='spot_details_img' key={img.id}/>
                     ))
