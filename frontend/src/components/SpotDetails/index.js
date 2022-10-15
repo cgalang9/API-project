@@ -6,15 +6,7 @@ import './SpotDetails.css'
 
 function SpotDetails({ spot }) {
     const { spotId } = useParams()
-    console.log(spot)
-    // const dispatch = useDispatch()
-
-    // useEffect(() => {
-    //     dispatch(getAllSpotsThunk(spotId))
-    // }, [dispatch, spotId])
-
-    // const spots = useSelector(state => state.spots.spots)
-    // consolelog(spots)
+    const sessionUser = useSelector(state => state.session.user);
 
     return(
         <>

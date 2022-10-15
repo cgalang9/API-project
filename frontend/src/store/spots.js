@@ -16,6 +16,22 @@ export const getAllSpotsThunk = () => async (dispatch) => {
     }
 }
 
+//get spot detail by id
+const GET_SPOT = 'spots/GET_SPOT'
+const getSpot = (spot) => {
+    return { type: GET_SPOT, spot }
+}
+
+export const getSpotThunk = (spotId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/spots/${spotId}`)
+
+    if(response.ok) {
+        const spot = await response.json()
+        dispatch(getSpot(spot))
+        return spot
+    }
+}
+
 //create spot
 const CREATE_SPOT = 'spots/CREATE_SPOT'
 const createSpot = (spot) => {
@@ -92,9 +108,13 @@ export const spotsReducer = (state = initialState, action) => {
             });
             const newStateGetAll = Object.assign({ ...state }, {...spotsObj})
             return newStateGetAll
+        case GET_SPOT:
+            const stateGetSpot = {...state}
+            const newSpotDetails = Object.assign(stateGetSpot[action.spot.id], action.spot)
+            stateGetSpot[action.spot.id] = newSpotDetails
+            return stateGetSpot
         case CREATE_SPOT:
             const stateCreateSpot = {...state}
-            stateCreateSpot[action.spot.id] = action.spot
             return stateCreateSpot
         case EDIT_SPOT:
             const stateEditSpot = {...state}
