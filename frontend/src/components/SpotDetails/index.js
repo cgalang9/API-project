@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { NavLink, useParams, Route } from 'react-router-dom'
 import { getSpotThunk } from '../../store/spots'
 import './SpotDetails.css'
 
@@ -23,6 +23,7 @@ function SpotDetails() {
                 <div>{spot.city}, {spot.city}</div>
                 <div>{spot.country}</div>
                 <div>{spot.description}</div>
+                <div>(<NavLink to={`/spots/${spotId}/edit`}>Edit Listing</NavLink>)</div>
                 <div>${spot.price}</div>
                 <div>{spot.numReviews} reviews</div>
                 <div><i className="fa-sharp fa-solid fa-star"/>{spot.avgStarRating}</div>

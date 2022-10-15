@@ -17,7 +17,7 @@ function EditSpotForm({ spot }) {
     const history = useHistory()
     const { spotId } = useParams()
 
-    // const handleSubmit = (e) => {
+    const handleSubmit = (e) => {
     //     e.preventDefault();
     //     const newSpot = {
     //         name,
@@ -49,7 +49,7 @@ function EditSpotForm({ spot }) {
     //       });
 
     //       history.push('/')
-    // };
+    };
 
 
     return (
