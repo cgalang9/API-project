@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { editSpotThunk } from "../../store/spots";
 import { Redirect, useHistory, useParams } from "react-router-dom";
+import { deleteSpotThunk } from "../../store/spots";
 import './EditSpotForm.css'
 
 function EditSpotForm({ spot }) {
@@ -68,6 +69,13 @@ function EditSpotForm({ spot }) {
 
           history.push(`/spots/${spotId}`)
     };
+
+    const deleteSpot = () => {
+      if(window.confirm("Are you sure you want to delete this listing? You can not recover the listing after deletion.")) {
+        dispatch(deleteSpotThunk(spotId))
+        history.push('/deletion-successful')
+      }
+    }
 
 
     return (
@@ -147,6 +155,8 @@ function EditSpotForm({ spot }) {
               </label>
               <button type="submit" className="confirm_changes_btn">Confirm Changes</button>
             </form>
+
+            <button className="delete_spot_btn" onClick={deleteSpot}>Delete Listing</button>
         </div>
       )}
       </>

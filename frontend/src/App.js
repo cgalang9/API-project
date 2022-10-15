@@ -33,8 +33,11 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
+          <Route path="/deletion-successful">
+            <h1 style={{ marginTop: 125, textAlign: "center" }}>Spot Succesfully Deleted</h1>
+          </Route>
           <Route>
-            <h1>Page Not Found</h1>
+            <h1 style={{ marginTop: 125, textAlign: "center" }}>Page Not Found</h1>
           </Route>
         </Switch>
       )}
