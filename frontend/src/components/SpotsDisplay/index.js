@@ -13,13 +13,14 @@ function SpotsDisplay() {
     const spots = useSelector(state => state.spots)
     const spotsArr = Object.values(spots)
 
+
     return (
         <div className='spots_display_container'>
             <ul className='spots_list'>
                 {spotsArr.length > 0 && (
                     spotsArr.map(spot => (
                         <li key={spot.id} className='spot_container'>
-                            <img src={spot.previewImage} alt="spot" className='spot_img'/>
+                            <img src={spot.previewImage || 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png'} alt="spot" className='spot_img'/>
                             <div className='spot_container_header'>
                                 <div className='spot_location'>{spot.city}, {spot.state}</div>
                                 <div className='spot_avgStars'>
