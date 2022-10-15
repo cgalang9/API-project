@@ -12,13 +12,29 @@ function SpotDetails() {
         dispatch(getSpotThunk(spotId))
     }, [dispatch])
 
-    const spots = useSelector(state => state.spots.spots)
+    const spot = useSelector(state => state.spots.spots)
+    if(spot) console.log(spot.SpotImages)
 
-    console.log(spots)
     return(
-        <div className='spot_details_container'>
-            <h1>spot 1</h1>
-        </div>
+        <>
+        {spot && (
+            <div className='spot_details_container'>
+                <h1>{spot.name}</h1>
+                <div>{spot.address}</div>
+                <div>{spot.city}, {spot.city}</div>
+                <div>{spot.country}</div>
+                <div>{spot.description}</div>
+                <div>${spot.price}</div>
+                <div>{spot.numReviews} reviews</div>
+                <div><i className="fa-sharp fa-solid fa-star"/>{spot.avgStarRating}</div>
+                {spot.SpotImages.length > 0 && (
+                    spot.SpotImages.map(img => (
+                        <img src={img.url} alt="spot" className='spot_img'/>
+                    ))
+                )}
+            </div>
+        )}
+        </>
     )
 }
 

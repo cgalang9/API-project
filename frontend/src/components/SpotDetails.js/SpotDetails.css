@@ -1,3 +1,8 @@
 .spot_details_container {
     margin-top: 125px;
 }
+
+.spot_img {
+    height: 200px;
+    width: 200px;
+}
