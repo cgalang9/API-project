@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { editSpotThunk } from "../../store/spots";
 import { Redirect, useHistory, useParams } from "react-router-dom";
 import './EditSpotForm.css'
@@ -26,6 +26,13 @@ function EditSpotForm({ spot }) {
       if(name === null) setSt(spot.state)
       if(name === null) setCountry(spot.country)
       if(name === null) setDescription(spot.description)
+    }
+
+    //to following line along with the Redirect tag in return below, redirects user to spot details page if he is not the owner of the spot
+    const sessionUser = useSelector(state => state.session.user);
+    let isOwner = false
+    if (spot && sessionUser.id === spot.ownerId && isOwner === false) {
+        isOwner = (true)
     }
 
     const handleSubmit = (e) => {
@@ -65,6 +72,9 @@ function EditSpotForm({ spot }) {
 
     return (
       <>
+      {!isOwner && (
+        <Redirect to={`/spots/${spotId}`} />
+      )}
       {spot && (
         <div className='edit_form_container flex'>
             <form onSubmit={handleSubmit} className='edit_form flex'>
