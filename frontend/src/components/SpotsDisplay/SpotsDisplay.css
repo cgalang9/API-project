@@ -13,7 +13,7 @@
 }
 
 .spot_img {
-    width: 300px;
+    width: 100%;
     height: 275px;
     border-radius: 10px;
     align-self: center;
@@ -40,7 +40,7 @@
 
 .spot_location,
 .span_price {
-    font-size: 15px;
+    font-size: 13px;
 }
 
 .span_price,

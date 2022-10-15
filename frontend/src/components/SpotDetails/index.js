@@ -29,7 +29,7 @@ function SpotDetails() {
                 <div><i className="fa-sharp fa-solid fa-star"/>{spot.avgStarRating}</div>
                 {spot.SpotImages.length > 0 && (
                     spot.SpotImages.map(img => (
-                        <img src={img.url} alt="spot" className='spot_img'/>
+                        <img src={img.url} alt="spot" className='spot_details_img'/>
                     ))
                 )}
             </div>
