@@ -65,6 +65,37 @@ export const createSpotThunk = (spot) => async (dispatch) => {
     }
 }
 
+//spot spot
+const EDIT_SPOT = 'spots/EDIT_SPOT'
+const editSpot = (spot) => {
+    return { type: EDIT_SPOT, spot }
+}
+export const editSpotThunk = (spot) => async (dispatch) => {
+    const { name, price, address, city, state, country, description } = spot
+    const response = await csrfFetch('/api/spots', {
+        method: 'PUT',
+        body: JSON.stringify({
+            name,
+            price,
+            address,
+            city,
+            state,
+            country,
+            description,
+            //lat and lng given random numbers betwenn -100 and 100 for now
+            //eventually I will need to implement a fetch to a geolaction API that converts address to lat and lng
+            lat: ( (Math.random() * 100) - (Math.random() * 100) ),
+            lng: ( (Math.random() * 100) - (Math.random() * 100) )
+        }),
+    })
+
+    if(response.ok) {
+        const spot = await response.json()
+        console.log(spot)
+        dispatch(editSpot(spot))
+        return spot
+    }
+}
 
 
 const initialState = {}
@@ -87,6 +118,10 @@ export const spotsReducer = (state = initialState, action) => {
             const stateCreateSpot = {...state}
             stateCreateSpot[action.spot.id] = action.spot
             return stateCreateSpot
+        case EDIT_SPOT:
+            const stateEditSpot = {...state}
+            stateEditSpot[action.spot.id] = action.spot
+            return stateEditSpot
         default:
             return state
     }

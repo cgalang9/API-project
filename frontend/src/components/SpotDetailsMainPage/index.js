@@ -14,7 +14,6 @@ function SpotDetailsMainPage() {
     }, [dispatch, spotId])
 
     const spot = useSelector(state => state.spots.spots)
-    console.log(spot)
 
     return(
         <>
