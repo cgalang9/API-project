@@ -4,15 +4,17 @@ import { NavLink, useParams, Route } from 'react-router-dom'
 import { getSpotThunk } from '../../store/spots'
 import './SpotDetails.css'
 
-function SpotDetails() {
+function SpotDetails({ spot }) {
     const { spotId } = useParams()
-    const dispatch = useDispatch()
+    console.log(spot)
+    // const dispatch = useDispatch()
 
-    useEffect(() => {
-        dispatch(getSpotThunk(spotId))
-    }, [dispatch, spotId])
+    // useEffect(() => {
+    //     dispatch(getAllSpotsThunk(spotId))
+    // }, [dispatch, spotId])
 
-    const spot = useSelector(state => state.spots.spots)
+    // const spots = useSelector(state => state.spots.spots)
+    // consolelog(spots)
 
     return(
         <>
@@ -27,7 +29,7 @@ function SpotDetails() {
                 <div>${spot.price}</div>
                 <div>{spot.numReviews} reviews</div>
                 <div><i className="fa-sharp fa-solid fa-star"/>{spot.avgStarRating}</div>
-                {spot.SpotImages.length > 0 && (
+                {spot.SpotImages && spot.SpotImages.length > 0 && (
                     spot.SpotImages.map(img => (
                         <img src={img.url} alt="spot" className='spot_details_img' key={img.id}/>
                     ))

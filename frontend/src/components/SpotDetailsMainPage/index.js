@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams, Route } from 'react-router-dom'
-import { getSpotThunk } from '../../store/spots'
+import { getAllSpotsThunk } from '../../store/spots'
 import SpotDetails from '../SpotDetails'
 import EditSpotForm from '../EditSpotForm'
 
@@ -10,10 +10,11 @@ function SpotDetailsMainPage() {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(getSpotThunk(spotId))
-    }, [dispatch, spotId])
+        dispatch(getAllSpotsThunk())
+    }, [dispatch])
 
-    const spot = useSelector(state => state.spots.spots)
+    const spots = useSelector(state => state.spots)
+    const spot = spots[spotId]
 
     return(
         <>

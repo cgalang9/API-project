@@ -1,7 +1,7 @@
 import { csrfFetch } from "./csrf"
 
 //get all spots
-const GET_SPOT = 'spots/GET_SPOTS'
+const GET_ALL_SPOTS = 'spots/GET_ALL_SPOTS'
 const getAllSpots = (spots) => {
     return { type: GET_ALL_SPOTS, spots }
 }
@@ -13,22 +13,6 @@ export const getAllSpotsThunk = () => async (dispatch) => {
         const spots = await response.json()
         dispatch(getAllSpots(spots))
         return spots
-    }
-}
-
-//get spot detail by id
-const GET_ALL_SPOTS = 'spots/GET_ALL_SPOTS'
-const getSpot = (spot) => {
-    return { type: GET_SPOT, spot }
-}
-
-export const getSpotThunk = (spotId) => async (dispatch) => {
-    const response = await csrfFetch(`/api/spots/${spotId}`)
-
-    if(response.ok) {
-        const spot = await response.json()
-        dispatch(getSpot(spot))
-        return spot
     }
 }
 
@@ -59,7 +43,6 @@ export const createSpotThunk = (spot) => async (dispatch) => {
 
     if(response.ok) {
         const spot = await response.json()
-        console.log(spot)
         dispatch(createSpot(spot))
         return spot
     }
@@ -70,9 +53,9 @@ const EDIT_SPOT = 'spots/EDIT_SPOT'
 const editSpot = (spot) => {
     return { type: EDIT_SPOT, spot }
 }
-export const editSpotThunk = (spot) => async (dispatch) => {
+export const editSpotThunk = (spot, spotId) => async (dispatch) => {
     const { name, price, address, city, state, country, description } = spot
-    const response = await csrfFetch('/api/spots', {
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
         method: 'PUT',
         body: JSON.stringify({
             name,
@@ -91,7 +74,6 @@ export const editSpotThunk = (spot) => async (dispatch) => {
 
     if(response.ok) {
         const spot = await response.json()
-        console.log(spot)
         dispatch(editSpot(spot))
         return spot
     }
@@ -110,10 +92,6 @@ export const spotsReducer = (state = initialState, action) => {
             });
             const newStateGetAll = Object.assign({ ...state }, {...spotsObj})
             return newStateGetAll
-        case GET_SPOT:
-            const stateGetSpot = {...state}
-            stateGetSpot["spots"] = action.spot
-            return stateGetSpot
         case CREATE_SPOT:
             const stateCreateSpot = {...state}
             stateCreateSpot[action.spot.id] = action.spot

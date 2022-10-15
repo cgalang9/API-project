@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { createSpotThunk } from "../../store/spots";
+import { editSpotThunk } from "../../store/spots";
 import { useHistory, useParams } from "react-router-dom";
 import './EditSpotForm.css'
 
@@ -18,37 +18,37 @@ function EditSpotForm({ spot }) {
     const { spotId } = useParams()
 
     const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     const newSpot = {
-    //         name,
-    //         price,
-    //         address,
-    //         city,
-    //         state: st,
-    //         country,
-    //         description
-    //     }
+        e.preventDefault();
+        const newSpot = {
+            name,
+            price,
+            address,
+            city,
+            state: st,
+            country,
+            description
+        }
 
-    //     setErrors([]);
-    //     setName('')
-    //     setPrice(0)
-    //     setAddress('')
-    //     setCity('')
-    //     setCountry('')
-    //     setDescription('')
+        setErrors([]);
+        setName('')
+        setPrice(0)
+        setAddress('')
+        setCity('')
+        setCountry('')
+        setDescription('')
 
-    //     dispatch(createSpotThunk(newSpot))
-    //       .catch(async (res) => {
-    //         const data = await res.json();
-    //         if (data && data.errors) {
-    //               setErrors(Object.values(data.errors))
-    //               console.log(errors)
-    //           } else if (data.message) {
-    //               setErrors([data.message])
-    //           }
-    //       });
+        dispatch(editSpotThunk(newSpot, spotId))
+          .catch(async (res) => {
+            const data = await res.json();
+            if (data && data.errors) {
+                  setErrors(Object.values(data.errors))
+                  console.log(errors)
+              } else if (data.message) {
+                  setErrors([data.message])
+              }
+          });
 
-    //       history.push('/')
+          history.push(`/spots/${spotId}`)
     };
 
 
