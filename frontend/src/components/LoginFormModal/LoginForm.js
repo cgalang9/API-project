@@ -13,8 +13,26 @@ function LoginForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log('asdasd')
     setErrors([]);
     return dispatch(sessionActions.login({ credential, password }))
+      .catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) {
+            setErrors(data.errors)
+        } else if (data.message) {
+            setErrors([data.message])
+        }
+      });
+  }
+
+  const demoUserLogin = () => {
+    setErrors([]);
+    const demoUser = {
+      credential: 'Demo-lition',
+      password: 'password'
+    }
+    return dispatch(sessionActions.login(demoUser))
       .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) {
@@ -54,7 +72,7 @@ function LoginForm() {
             />
           </label>
           <button type="submit" className='login_btn'>Log In</button>
-          <button type="button" className='login_btn'>Demo User</button>
+          <button type="button" className='demo_btn' onClick={demoUserLogin} >Log In As Demo User</button>
         </form>
     </div>
   );

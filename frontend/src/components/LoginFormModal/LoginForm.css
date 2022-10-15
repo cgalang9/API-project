@@ -67,7 +67,8 @@ input:focus {
 
 
 
-.login_btn {
+.login_btn,
+.demo_btn {
     width: 95%;
     padding: 10px;
     color: white;
@@ -78,8 +79,13 @@ input:focus {
     font-weight: 300;
 }
 
-.login_btn:hover {
+.login_btn:hover,
+.demo_btn:hover {
     background-color: rgb(255, 70, 95);
+}
+
+.demo_btn {
+    margin-top: 10px;
 }
 
 .errors {
