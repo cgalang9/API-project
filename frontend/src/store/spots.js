@@ -47,7 +47,7 @@ export const createSpotThunk = (spot) => async (dispatch) => {
     }
 }
 
-//spot spot
+//edit spot
 const EDIT_SPOT = 'spots/EDIT_SPOT'
 const editSpot = (spot) => {
     return { type: EDIT_SPOT, spot }
@@ -78,6 +78,23 @@ export const editSpotThunk = (spot, spotId) => async (dispatch) => {
     }
 }
 
+//delete spot
+const DELETE_SPOT = 'spot/DELETE_SPOT'
+export const deleteSpot = (spotId) => {
+    return { type: DELETE_SPOT, spotId}
+}
+
+export const deleteSpotThunk = (spotId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
+        method: 'DELETE'
+    })
+
+    if(response.ok) {
+        dispatch(deleteSpot(spotId))
+        return
+    }
+}
+
 
 const initialState = {}
 
@@ -98,6 +115,10 @@ export const spotsReducer = (state = initialState, action) => {
             const stateEditSpot = {...state}
             stateEditSpot[action.spot.id] = action.spot
             return stateEditSpot
+        case DELETE_SPOT:
+            const stateDelete = {...state}
+            delete stateDelete[action.spotId]
+            return stateDelete
         default:
             return state
     }
