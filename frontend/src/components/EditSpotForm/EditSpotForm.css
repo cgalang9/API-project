@@ -25,10 +25,10 @@
 
 
 .input_label {
-    z-index: 1;
     background-color: white;
     padding: 5px;
 }
+
 
 input {
     width: 90%;

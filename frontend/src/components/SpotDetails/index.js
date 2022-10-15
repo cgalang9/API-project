@@ -16,7 +16,7 @@ function SpotDetails() {
     const sessionUser = useSelector(state => state.session.user);
     //show edit link only if current user is owner
     let isOwner = false
-    if (spot && sessionUser.id === spot.ownerId && isOwner === false) {
+    if (sessionUser && spot && sessionUser.id === spot.ownerId && isOwner === false) {
         isOwner = (true)
     }
 
