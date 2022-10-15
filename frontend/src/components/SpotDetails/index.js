@@ -10,10 +10,9 @@ function SpotDetails() {
 
     useEffect(() => {
         dispatch(getSpotThunk(spotId))
-    }, [dispatch])
+    }, [dispatch, spotId])
 
     const spot = useSelector(state => state.spots.spots)
-    if(spot) console.log(spot.SpotImages)
 
     return(
         <>
@@ -29,7 +28,7 @@ function SpotDetails() {
                 <div><i className="fa-sharp fa-solid fa-star"/>{spot.avgStarRating}</div>
                 {spot.SpotImages.length > 0 && (
                     spot.SpotImages.map(img => (
-                        <img src={img.url} alt="spot" className='spot_details_img'/>
+                        <img src={img.url} alt="spot" className='spot_details_img' key={img.id}/>
                     ))
                 )}
             </div>
