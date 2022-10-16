@@ -61,7 +61,7 @@ function EditSpotForm({ spot }) {
               }
           });
 
-          history.push(`/spots/${spotId}`)
+          history.push(`/edit-successful`)
     };
 
     const deleteSpot = () => {
