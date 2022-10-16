@@ -14,7 +14,6 @@ function ReivewsCurrentUser() {
     },[dispatch])
 
     const reviews = useSelector(state => state.reviews.Reviews)
-    console.log(reviews)
 
     return (
         <div className="users_reviews_container">

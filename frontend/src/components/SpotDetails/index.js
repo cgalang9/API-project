@@ -46,7 +46,6 @@ function SpotDetails() {
                     <div style={{ fontSize: 3 }}><i className="fa-solid fa-circle"/></div>
                     <div>{spot.numReviews} reviews</div>
                 </div>
-                <NavLink to={`/spots/${spotId}/reviews/new`}>Create A New Review</NavLink>
                 <Reviews />
             </div>
         )}
