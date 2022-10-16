@@ -22,6 +22,7 @@ function Navigation({ isLoaded }){
     sessionLinks = (
       <>
         <NavLink to='/create-spot'>Create New Listing</NavLink>
+        <NavLink to='/current-user/reviews'>Your Reviews</NavLink>
         <ProfileButton user={sessionUser} />
       </>
     );

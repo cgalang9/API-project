@@ -1,7 +1,6 @@
 import { getCurrUserReviewsThunk } from '../../store/reviews'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from "react";
-import EditReviewForm from '../EditReviewForm';
 import { NavLink, Route } from 'react-router-dom'
 
 import './ReivewsCurrentUser.css'
