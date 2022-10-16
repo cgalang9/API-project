@@ -3,69 +3,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory, useParams } from "react-router-dom";
 import './EditReviewForm.css'
 
-function EditReviewForm({ spot }) {
-    const [review, setReview] = useState(null)
-    const [stars, setStars] = useState(null)
+function EditReviewForm({ currentReview }) {
+    const [review, setReview] = useState(currentReview.review)
+    const [stars, setStars] = useState(currentReview.stars)
     const [errors, setErrors] = useState([])
     const dispatch = useDispatch()
     const history = useHistory()
     const { spotId } = useParams()
 
-    //fixed bug when refreshing page spot was undefined and gave an error
-    // if(spot) {
-    //   if(name === null) setName(spot.name)
-    //   if(name === null) setPrice(spot.price)
-    // }
-
-    //to following line along with the Redirect tag in return below, redirects user to spot details page if he is not the owner of the spot
-    // const sessionUser = useSelector(state => state.session.user);
-    // let isOwner = false
-    // if (spot && sessionUser.id === spot.ownerId && isOwner === false) {
-    //     isOwner = (true)
-    // }
-
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     const newSpot = {
-    //         name,
-    //         price,
-    //         address,
-    //         city,
-    //         state: st,
-    //         country,
-    //         description
-    //     }
-
-    //     setErrors([]);
-    //     setName('')
-    //     setPrice(0)
-    //     setAddress('')
-    //     setCity('')
-    //     setCountry('')
-    //     setDescription('')
-
-    //     dispatch(editSpotThunk(newSpot, spotId))
-    //       .catch(async (res) => {
-    //         const data = await res.json();
-    //         if (data && data.errors) {
-    //               setErrors(Object.values(data.errors))
-    //               console.log(errors)
-    //           } else if (data.message) {
-    //               setErrors([data.message])
-    //           }
-    //       });
-
-    //       history.push(`/spots/${spotId}`)
-    // };
-
     return (
       <>
-      {/* {!isOwner && (
-        <Redirect to={`/spots/${spotId}`} />
-      )} */}
-      {spot && (
+      {currentReview && (
         <div className='edit_review_container flex'>
-            <form onSubmit={handleSubmit} className='edit_review_form flex'>
+            <form className='edit_review_form flex'>
               <div className='title'>Edit Your Review</div>
               <ul className="errors">
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}

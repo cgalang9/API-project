@@ -9,7 +9,7 @@ function Reviews() {
 
     useEffect(() => {
         dispatch(getAllReviewsThunk(spotId))
-    }, [dispatch, spotId])
+    }, [dispatch])
 
     const reviews = useSelector(state => state.reviews.Reviews)
     console.log(reviews)

@@ -5,7 +5,6 @@ import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import SpotsDisplay from "./components/SpotsDisplay";
-import SpotDetails from "./components/SpotDetails";
 import CreateSpotForm from "./components/CreateSpotForm";
 import SpotDetailsMainPage from "./components/SpotDetailsMainPage";
 
@@ -34,7 +33,7 @@ function App() {
             <SignupFormPage />
           </Route>
           <Route path="/deletion-successful">
-            <h1 style={{ marginTop: 125, textAlign: "center" }}>Spot Succesfully Deleted</h1>
+            <h1 style={{ marginTop: 125, textAlign: "center" }}>Succesfully Deleted</h1>
           </Route>
           <Route>
             <h1 style={{ marginTop: 125, textAlign: "center" }}>Page Not Found</h1>

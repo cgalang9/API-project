@@ -18,7 +18,7 @@ function SpotDetailsMainPage() {
     return(
         <>
             <Route exact path="/spots/:spotId">
-                <SpotDetails spot={spot} />
+                <SpotDetails />
             </Route>
             <Route exact path="/spots/:spotId/edit">
                 <EditSpotForm spot={spot} />
