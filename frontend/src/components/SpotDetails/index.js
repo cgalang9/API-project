@@ -43,7 +43,7 @@ function SpotDetails() {
                 )}
                 <div className='reviews_header'>
                     <div><i className="fa-sharp fa-solid fa-star"/>{spot.avgStarRating}</div>
-                    <div style={{ fontSize: 3 }}><i class="fa-solid fa-circle"/></div>
+                    <div style={{ fontSize: 3 }}><i className="fa-solid fa-circle"/></div>
                     <div>{spot.numReviews} reviews</div>
                 </div>
                 <NavLink to={`/spots/${spotId}/reviews/new`}>Create A New Review</NavLink>
