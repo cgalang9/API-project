@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory, useParams } from "react-router-dom";
 import './EditReviewForm.css'
 
-function EditReviewForm({ currentReview }) {
-    const [review, setReview] = useState(currentReview.review)
-    const [stars, setStars] = useState(currentReview.stars)
+function EditReviewForm() {
+    const [review, setReview] = useState('')
+    const [stars, setStars] = useState('')
     const [errors, setErrors] = useState([])
     const dispatch = useDispatch()
     const history = useHistory()
@@ -13,7 +13,7 @@ function EditReviewForm({ currentReview }) {
 
     return (
       <>
-      {currentReview && (
+      {/* {currentReview && ( */}
         <div className='edit_review_container flex'>
             <form className='edit_review_form flex'>
               <div className='title'>Edit Your Review</div>
@@ -41,7 +41,7 @@ function EditReviewForm({ currentReview }) {
               <button type="submit" className="confirm_changes_btn">Confirm Changes</button>
             </form>
         </div>
-      )}
+      {/* )} */}
       </>
     )
 }

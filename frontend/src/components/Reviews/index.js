@@ -12,17 +12,16 @@ function Reviews() {
     }, [dispatch])
 
     const reviews = useSelector(state => state.reviews.Reviews)
-    console.log(reviews)
 
     return (
         <>
             {reviews && (reviews.map(review => (
-                <>
+                <div key={review.id}>
                     <div>==========================</div>
                     <div>{review.User.firstName}</div>
                     <div>{new Date(review.createdAt).toLocaleString('default', {month: 'long', year: 'numeric'})}</div>
                     <div>{review.review}</div>
-                </>
+                </div>
             )))}
         </>
     )

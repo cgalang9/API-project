@@ -7,6 +7,8 @@ import Navigation from "./components/Navigation";
 import SpotsDisplay from "./components/SpotsDisplay";
 import CreateSpotForm from "./components/CreateSpotForm";
 import SpotDetailsMainPage from "./components/SpotDetailsMainPage";
+import ReivewsCurrentUser from "./components/ReivewsCurrentUser";
+import EditReviewForm from "./components/EditReviewForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -31,6 +33,12 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route exact path='/current-user/reviews/:reviewId/edit'>
+              <EditReviewForm />
+          </Route>
+          <Route path="/current-user/reviews">
+            <ReivewsCurrentUser />
           </Route>
           <Route path="/deletion-successful">
             <h1 style={{ marginTop: 125, textAlign: "center" }}>Succesfully Deleted</h1>
