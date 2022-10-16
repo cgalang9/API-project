@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { NavLink, useParams } from 'react-router-dom'
 import { getSpotThunk } from '../../store/currentSpot'
+import Reviews from '../Reviews'
 import './SpotDetails.css'
 
 function SpotDetails() {
@@ -40,6 +41,7 @@ function SpotDetails() {
                         <img src={img.url} alt="spot" className='spot_details_img' key={img.id}/>
                     ))
                 )}
+                <Reviews />
             </div>
         )}
         </>
