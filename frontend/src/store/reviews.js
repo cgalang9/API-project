@@ -27,6 +27,29 @@ export const getCurrUserReviewsThunk = () => async (dispatch) => {
     }
 }
 
+//Create a Review for a Spot based on the Spot's id
+const CREATE_REVIEW = 'reviews/CREATE_REVIEW'
+export const createReview = (review) => {
+    return { type: CREATE_REVIEW, review }
+}
+
+export const createReviewThunk = (newReview, spotId) => async (dispatch) => {
+    const { review, stars } = newReview
+    const response = await csrfFetch(`/api/spots/${spotId}/reviews` , {
+        method: 'POST',
+        body: JSON.stringify({
+            review,
+            stars
+        })
+    })
+
+    if(response.ok) {
+        const review = await response.json()
+        dispatch(createReview(review))
+        return review
+    }
+}
+
 //edit review
 const EDIT_REVIEW = 'reviews/EDIT_REVIEW'
 export const editReview = (review) => {
@@ -62,6 +85,10 @@ export const reviewsReducer = (state = initialState, action) => {
             const stateEditReview = {...state}
             stateEditReview[action.review.id] = action.review
             return stateEditReview
+        case CREATE_REVIEW:
+            const stateCreateReview = {...state}
+            stateCreateReview[action.review.id] = action.review
+            return stateCreateReview
         default:
             return state
     }

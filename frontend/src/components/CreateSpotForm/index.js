@@ -29,12 +29,6 @@ function CreateSpotForm() {
         }
 
         setErrors([]);
-        setName('')
-        setPrice(0)
-        setAddress('')
-        setCity('')
-        setCountry('')
-        setDescription('')
 
         dispatch(createSpotThunk(newSpot))
           .catch(async (res) => {

@@ -1,19 +1,44 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Redirect, useHistory } from "react-router-dom";
+import { Redirect, useHistory, useParams } from "react-router-dom";
+import { createReviewThunk } from "../../store/reviews";
 import './CreateReviewForm.css'
 
 function CreateReviewForm() {
     const [review, setReview] = useState('')
     const [stars, setStars] = useState(0)
     const [errors, setErrors] = useState([])
+    const { spotId } = useParams()
     const dispatch = useDispatch()
     const history = useHistory()
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const newReview = {
+          review,
+          stars
+        }
+
+        setErrors([]);
+
+        dispatch(createReviewThunk(newReview, spotId))
+          .catch(async (res) => {
+            const data = await res.json();
+            if (data && data.errors) {
+                  setErrors(Object.values(data.errors))
+                  console.log(errors)
+              } else if (data.message) {
+                  setErrors([data.message])
+              }
+          });
+
+          history.push(`/spots/${spotId}`)
+      };
 
     return (
       <>
         <div className='create_review_container flex'>
-            <form className='create_review_form flex'>
+            <form className='create_review_form flex' onSubmit={handleSubmit}>
               <div className='title'>Edit Your Review</div>
               <ul className="errors">
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}

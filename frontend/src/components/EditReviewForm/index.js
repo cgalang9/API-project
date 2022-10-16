@@ -35,8 +35,6 @@ function EditReviewForm() {
       }
 
       setErrors([]);
-      setReview('')
-      setStars(0)
 
       dispatch(editReviewThunk(newReview, reviewId))
         .catch(async (res) => {
