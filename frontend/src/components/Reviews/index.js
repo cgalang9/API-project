@@ -16,8 +16,6 @@ function Reviews() {
     let userHasReview = false
     if (reviews && sessionUser) {
         reviews.forEach(review => {
-            console.log(sessionUser.id)
-            console.log(review.userId)
             if (sessionUser.id === review.userId) userHasReview = true
         });
     }

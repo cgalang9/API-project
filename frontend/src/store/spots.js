@@ -110,7 +110,7 @@ export const spotsReducer = (state = initialState, action) => {
             return newStateGetAll
         case CREATE_SPOT:
             const stateCreateSpot = {...state}
-            stateEditSpot[action.spot.id] = action.spot
+            stateCreateSpot[action.spot.id] = action.spot
             return stateCreateSpot
         case EDIT_SPOT:
             const stateEditSpot = {...state}

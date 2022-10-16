@@ -50,6 +50,9 @@ function App() {
           <Route path="/create-review-successful">
             <h1 style={{ marginTop: 125, textAlign: "center" }}>Review Succesfully Created</h1>
           </Route>
+          <Route path="/create-spot-successful">
+            <h1 style={{ marginTop: 125, textAlign: "center" }}>Listing Succesfully Created</h1>
+          </Route>
           <Route>
             <h1 style={{ marginTop: 125, textAlign: "center" }}>Page Not Found</h1>
           </Route>
