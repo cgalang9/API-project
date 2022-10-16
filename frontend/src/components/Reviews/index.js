@@ -11,11 +11,19 @@ function Reviews() {
         dispatch(getAllReviewsThunk(spotId))
     }, [dispatch, spotId])
 
-    const reviews = useSelector(state => state.reviews)
+    const reviews = useSelector(state => state.reviews.Reviews)
     console.log(reviews)
 
     return (
-        <h1>Reviews</h1>
+        <>
+            {reviews && (reviews.map(review => (
+                <>
+                    <div>{review.User.firstName}</div>
+                    <div>{new Date(review.createdAt).toLocaleString('default', {month: 'long', year: 'numeric'})}</div>
+                    <div>{review.review}</div>
+                </>
+            )))}
+        </>
     )
 }
 

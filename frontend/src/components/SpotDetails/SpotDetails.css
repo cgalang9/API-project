@@ -6,3 +6,10 @@
     height: 200px;
     width: 200px;
 }
+
+.reviews_header {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 20px;
+}

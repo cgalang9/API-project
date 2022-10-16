@@ -11,7 +11,7 @@ function SpotDetails() {
 
     useEffect(() => {
         dispatch(getSpotThunk(spotId))
-    }, [dispatch])
+    }, [dispatch, spotId])
 
     const spot = useSelector(state => state.currentSpot)
     const sessionUser = useSelector(state => state.session.user);
@@ -41,6 +41,11 @@ function SpotDetails() {
                         <img src={img.url} alt="spot" className='spot_details_img' key={img.id}/>
                     ))
                 )}
+                <div className='reviews_header'>
+                    <div><i className="fa-sharp fa-solid fa-star"/>{spot.avgStarRating}</div>
+                    <div style={{ fontSize: 3 }}><i class="fa-solid fa-circle"/></div>
+                    <div>{spot.numReviews} reviews</div>
+                </div>
                 <Reviews />
             </div>
         )}
