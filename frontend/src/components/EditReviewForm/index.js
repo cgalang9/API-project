@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory, useParams } from "react-router-dom";
-import { getCurrUserReviewsThunk } from "../../store/reviews";
-import { editReviewThunk } from "../../store/reviews";
+import { getCurrUserReviewsThunk, deleteReviewThunk, editReviewThunk } from "../../store/reviews";
 import './EditReviewForm.css'
 
 function EditReviewForm() {
@@ -34,7 +33,6 @@ function EditReviewForm() {
     if (currentReviewObj && sessionUser.id === currentReviewObj.userId && isOwner === false) {
         isOwner = (true)
     }
-    console.log(currentReviewObj)
 
     const handleSubmit = (e) => {
       e.preventDefault();
@@ -50,7 +48,6 @@ function EditReviewForm() {
           const data = await res.json();
           if (data && data.errors) {
                 setErrors(Object.values(data.errors))
-                console.log(errors)
             } else if (data.message) {
                 setErrors([data.message])
             }
@@ -58,6 +55,14 @@ function EditReviewForm() {
 
         history.push(`/current-user/reviews`)
     };
+
+    const deleteReview = (e) => {
+      e.preventDefault();
+      if(window.confirm("Are you sure you want to delete this review? You can not recover the review after deletion.")) {
+        dispatch(deleteReviewThunk(reviewId))
+        history.push('/deletion-successful')
+      }
+    }
 
 
     return (
@@ -94,6 +99,7 @@ function EditReviewForm() {
               </label>
               <button type="submit" className="confirm_changes_btn">Confirm Changes</button>
             </form>
+            <button className="delete_review_btn" onClick={deleteReview}>Delete Review</button>
         </div>
       )}
       </>

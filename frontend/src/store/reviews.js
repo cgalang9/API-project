@@ -74,7 +74,7 @@ export const editReviewThunk = (currReview, reviewId) => async (dispatch) => {
 }
 
 //delete review
-const DELETE_REVIEW = 'reviews/EDIT_REVIEW'
+const DELETE_REVIEW = 'reviews/DELETE_REVIEW'
 export const deleteReview = (reviewId) => {
     return { type: DELETE_REVIEW, reviewId }
 }
