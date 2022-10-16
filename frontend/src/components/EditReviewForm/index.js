@@ -20,12 +20,21 @@ function EditReviewForm() {
     const reviews = useSelector(state => state.reviews.Reviews)
 
     //fixes bug when refreshing page spot was undefined and gave an error
+    let currentReviewObj;
     if (reviews) {
       const currentReview = reviews.filter(review => review.id.toString() === reviewId)
-      const currentReviewObj = currentReview[0]
+      currentReviewObj = currentReview[0]
       if(stars === -10000) setStars(currentReviewObj.stars)
       if(review === null) setReview(currentReviewObj.review)
     }
+
+    //following lines along with the Redirect tag in return below, redirects user to spot details page if he is not the owner of the spot
+    const sessionUser = useSelector(state => state.session.user);
+    let isOwner = false
+    if (currentReviewObj && sessionUser.id === currentReviewObj.userId && isOwner === false) {
+        isOwner = (true)
+    }
+    console.log(currentReviewObj)
 
     const handleSubmit = (e) => {
       e.preventDefault();
@@ -53,6 +62,9 @@ function EditReviewForm() {
 
     return (
       <>
+      {!isOwner && (
+        <Redirect to={`/current-user/reviews`} />
+      )}
       {reviews && (
         <div className='edit_review_container flex'>
             <form className='edit_review_form flex' onSubmit={handleSubmit}>

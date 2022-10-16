@@ -29,7 +29,7 @@ function EditSpotForm({ spot }) {
       if(description === null) setDescription(spot.description)
     }
 
-    //to following line along with the Redirect tag in return below, redirects user to spot details page if he is not the owner of the spot
+    //following lines along with the Redirect tag in return below, redirects user to spot details page if he is not the owner of the spot
     const sessionUser = useSelector(state => state.session.user);
     let isOwner = false
     if (spot && sessionUser.id === spot.ownerId && isOwner === false) {
