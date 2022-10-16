@@ -18,15 +18,15 @@ function EditSpotForm({ spot }) {
     const history = useHistory()
     const { spotId } = useParams()
 
-    //fixed bug when refreshing page spot was undefined and gave an error
+    //fixes bug when refreshing page spot was undefined and gave an error
     if(spot) {
       if(name === null) setName(spot.name)
-      if(name === null) setPrice(spot.price)
-      if(name === null) setAddress(spot.address)
-      if(name === null) setCity(spot.city)
-      if(name === null) setSt(spot.state)
-      if(name === null) setCountry(spot.country)
-      if(name === null) setDescription(spot.description)
+      if(price === null) setPrice(spot.price)
+      if(address === null) setAddress(spot.address)
+      if(city === null) setCity(spot.city)
+      if(st === null) setSt(spot.state)
+      if(country === null) setCountry(spot.country)
+      if(description === null) setDescription(spot.description)
     }
 
     //to following line along with the Redirect tag in return below, redirects user to spot details page if he is not the owner of the spot
@@ -106,6 +106,7 @@ function EditSpotForm({ spot }) {
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
                   required
+                  min={0}
                 />
               </label>
               <label className='flex'>

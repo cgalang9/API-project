@@ -74,6 +74,7 @@ function CreateSpotForm() {
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
                   required
+                  min={0}
                 />
               </label>
               <label className='flex'>
