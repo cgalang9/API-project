@@ -49,12 +49,6 @@ function EditSpotForm({ spot }) {
         }
 
         setErrors([]);
-        setName('')
-        setPrice(0)
-        setAddress('')
-        setCity('')
-        setCountry('')
-        setDescription('')
 
         dispatch(editSpotThunk(newSpot, spotId))
           .catch(async (res) => {
@@ -106,7 +100,7 @@ function EditSpotForm({ spot }) {
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
                   required
-                  min={0}
+                  min={1}
                 />
               </label>
               <label className='flex'>

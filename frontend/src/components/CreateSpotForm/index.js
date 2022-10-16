@@ -6,7 +6,7 @@ import './CreateSpotForm.css'
 
 function CreateSpotForm() {
     const [name, setName] = useState('')
-    const [price, setPrice] = useState(0)
+    const [price, setPrice] = useState(1)
     const [address, setAddress] = useState('')
     const [city, setCity] = useState('')
     const [st, setSt] = useState('')
@@ -68,7 +68,7 @@ function CreateSpotForm() {
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
                   required
-                  min={0}
+                  min={1}
                 />
               </label>
               <label className='flex'>
