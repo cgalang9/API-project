@@ -73,6 +73,25 @@ export const editReviewThunk = (currReview, reviewId) => async (dispatch) => {
     }
 }
 
+//delete review
+const DELETE_REVIEW = 'reviews/EDIT_REVIEW'
+export const deleteReview = (reviewId) => {
+    return { type: DELETE_REVIEW, reviewId }
+}
+
+export const deleteReviewThunk = (reviewId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+        method: 'DELETE',
+    })
+
+    if(response.ok) {
+        dispatch(deleteReview(reviewId))
+        return
+    }
+}
+
+
+
 
 const initialState = {}
 
@@ -89,6 +108,10 @@ export const reviewsReducer = (state = initialState, action) => {
             const stateCreateReview = {...state}
             stateCreateReview[action.review.id] = action.review
             return stateCreateReview
+        case DELETE_REVIEW:
+            const stateDelete = {...state}
+            delete stateDelete[action.reviewId]
+            return stateDelete
         default:
             return state
     }
