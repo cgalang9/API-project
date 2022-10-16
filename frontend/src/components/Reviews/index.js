@@ -18,6 +18,7 @@ function Reviews() {
         <>
             {reviews && (reviews.map(review => (
                 <>
+                    <div>==========================</div>
                     <div>{review.User.firstName}</div>
                     <div>{new Date(review.createdAt).toLocaleString('default', {month: 'long', year: 'numeric'})}</div>
                     <div>{review.review}</div>
