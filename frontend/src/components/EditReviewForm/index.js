@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory, useParams } from "react-router-dom";
 import { getCurrUserReviewsThunk } from "../../store/reviews";
+import { editReviewThunk } from "../../store/reviews";
 import './EditReviewForm.css'
 
 function EditReviewForm() {
@@ -26,13 +27,37 @@ function EditReviewForm() {
       if(review === null) setReview(currentReviewObj.review)
     }
 
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      const newReview = {
+        review,
+        stars
+      }
+
+      setErrors([]);
+      setReview('')
+      setStars(0)
+
+      dispatch(editReviewThunk(newReview, reviewId))
+        .catch(async (res) => {
+          const data = await res.json();
+          if (data && data.errors) {
+                setErrors(Object.values(data.errors))
+                console.log(errors)
+            } else if (data.message) {
+                setErrors([data.message])
+            }
+        });
+
+        history.push(`/current-user/reviews`)
+    };
 
 
     return (
       <>
       {reviews && (
         <div className='edit_review_container flex'>
-            <form className='edit_review_form flex'>
+            <form className='edit_review_form flex' onSubmit={handleSubmit}>
               <div className='title'>Edit Your Review</div>
               <ul className="errors">
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}

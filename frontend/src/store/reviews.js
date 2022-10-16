@@ -17,11 +17,6 @@ export const getAllReviewsThunk = (spotId) => async (dispatch) => {
 }
 
 //Get all Reviews of the Current User
-// const GET_CURR_USER_REVIEWS = 'reviews/GET_CURR_USER_REVIEWS'
-// export const getCurrUserReviews = (reviews) => {
-//     return { type: GET_CURR_USER_REVIEWS, reviews }
-// }
-
 export const getCurrUserReviewsThunk = () => async (dispatch) => {
     const response = await csrfFetch(`/api/reviews/current`)
 
@@ -32,6 +27,30 @@ export const getCurrUserReviewsThunk = () => async (dispatch) => {
     }
 }
 
+//edit review
+const EDIT_REVIEW = 'reviews/EDIT_REVIEW'
+export const editReview = (review) => {
+    return { type: EDIT_REVIEW, review }
+}
+
+export const editReviewThunk = (currReview, reviewId) => async (dispatch) => {
+    const { review, stars } = currReview
+    const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+            review,
+            stars
+        })
+    })
+
+    if(response.ok) {
+        const review = await response.json()
+        dispatch(editReview(review))
+        return review
+    }
+}
+
+
 const initialState = {}
 
 export const reviewsReducer = (state = initialState, action) => {
@@ -39,6 +58,10 @@ export const reviewsReducer = (state = initialState, action) => {
         case GET_ALL_REVIEWS:
             const stateGetAllReviews = { ...action.reviews }
             return stateGetAllReviews
+        case EDIT_REVIEW:
+            const stateEditReview = {...state}
+            stateEditReview[action.review.id] = action.review
+            return stateEditReview
         default:
             return state
     }
