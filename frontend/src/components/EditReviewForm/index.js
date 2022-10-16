@@ -56,8 +56,7 @@ function EditReviewForm() {
         history.push(`/current-user/reviews`)
     };
 
-    const deleteReview = (e) => {
-      e.preventDefault();
+    const deleteReview = () => {
       if(window.confirm("Are you sure you want to delete this review? You can not recover the review after deletion.")) {
         dispatch(deleteReviewThunk(reviewId))
         history.push('/deletion-successful')

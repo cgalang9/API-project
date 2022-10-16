@@ -14,13 +14,15 @@ function ReivewsCurrentUser() {
     },[dispatch])
 
     const reviews = useSelector(state => state.reviews.Reviews)
+    console.log(reviews)
 
     return (
         <div className="users_reviews_container">
             {reviews && (reviews.map(review => (
                 <div key={review.id}>
                     <div>==========================</div>
-                    <div>{review.User.firstName}</div>
+                    <div>{review.Spot.name}</div>
+                    <div>{review.Spot.city}, {review.Spot.state}</div>
                     <div>{new Date(review.createdAt).toLocaleString('default', {month: 'long', year: 'numeric'})}</div>
                     <div>{review.review}</div>
                     <NavLink to={`reviews/${review.id}/edit`}>Edit Review</NavLink>
