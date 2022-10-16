@@ -16,6 +16,22 @@ export const getAllReviewsThunk = (spotId) => async (dispatch) => {
     }
 }
 
+//Get all Reviews of the Current User
+// const GET_CURR_USER_REVIEWS = 'reviews/GET_CURR_USER_REVIEWS'
+// export const getCurrUserReviews = (reviews) => {
+//     return { type: GET_CURR_USER_REVIEWS, reviews }
+// }
+
+export const getCurrUserReviewsThunk = () => async (dispatch) => {
+    const response = await csrfFetch(`/api/reviews/current`)
+
+    if(response.ok) {
+        const reviews = await response.json()
+        dispatch(getAllReviews(reviews))
+        return reviews
+    }
+}
+
 const initialState = {}
 
 export const reviewsReducer = (state = initialState, action) => {
