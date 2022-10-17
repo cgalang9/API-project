@@ -22,7 +22,15 @@ function SpotsDisplay() {
                 {spotsArr.length > 0 && (
                     spotsArr.map(spot => (
                         <li key={spot.id} className='spot_container' onClick={() => {history.push(`/spots/${spot.id}`)}}>
-                            <img src={spot.previewImage || 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930'} alt="spot" className='spot_img'/>
+                            <img
+                                src={spot.previewImage || 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930'}
+                                alt="spot"
+                                onError={e => {
+                                    e.target.src = "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930'"
+                                    e.onerror = null
+                                  }}
+                                className='spot_img'
+                                />
                             <div className='spot_container_header'>
                                 <div className='spot_location'>{spot.city}, {spot.state}</div>
                                 <div className='spot_avgStars'>
