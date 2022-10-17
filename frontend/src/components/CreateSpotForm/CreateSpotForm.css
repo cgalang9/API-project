@@ -36,7 +36,8 @@ input {
     border: 2px solid rgb(193, 193, 193);
     font-size: 20px;
 }
-.input_description {
+.input_description,
+.input_img_urls {
     resize: none;
     width: 90%;
     height: 125px;
@@ -45,9 +46,15 @@ input {
     font-size: 20px;
 }
 
-.input_description:focus {
+.input_description:focus,
+.input_img_urls:focus {
     border: 4px solid black;
     border-radius: 10px;
+}
+
+.input_img_urls,
+.input_prev_img {
+    font-size: 13px;
 }
 
 .create_btn {

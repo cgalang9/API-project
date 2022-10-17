@@ -38,7 +38,16 @@ function SpotDetails() {
                 <div><i className="fa-sharp fa-solid fa-star"/>{spot.avgStarRating}</div>
                 {spot.SpotImages && (
                     spot.SpotImages.map(img => (
-                        <img src={img.url} alt="spot" className='spot_details_img' key={img.id}/>
+                        <img
+                            key={img.id}
+                            src={img.url}
+                            alt="spot"
+                            className='spot_details_img'
+                            onError={e => {
+                                e.target.src = "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930"
+                                e.onerror = null
+                            }}
+                        />
                     ))
                 )}
                 <div className='reviews_header'>

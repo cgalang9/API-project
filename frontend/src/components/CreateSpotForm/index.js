@@ -13,6 +13,7 @@ function CreateSpotForm() {
     const [country, setCountry] = useState('')
     const [description, setDescription] = useState('')
     const [previewImage, setPreviewImage] = useState('')
+    const [otherImgUrls, setotherImgUrls] = useState('')
     const [errors, setErrors] = useState([])
     const dispatch = useDispatch()
     const history = useHistory()
@@ -31,7 +32,9 @@ function CreateSpotForm() {
 
         setErrors([]);
 
-        dispatch(createSpotThunk(newSpot, previewImage))
+        const imagesArr = otherImgUrls.split(', ')
+
+        dispatch(createSpotThunk(newSpot, previewImage, imagesArr))
           .catch(async (res) => {
             const data = await res.json();
             if (data && data.errors) {
@@ -114,6 +117,16 @@ function CreateSpotForm() {
                   value={previewImage}
                   onChange={(e) => setPreviewImage(e.target.value)}
                   required
+                  className="input_prev_img"
+                />
+              </label>
+              <label className='flex'>
+                <span className='input_label'>Other Images URL (separate each URL with comma)</span>
+                <textarea
+                  value={otherImgUrls}
+                  onChange={(e) => setotherImgUrls(e.target.value)}
+                  required
+                  className="input_img_urls"
                 />
               </label>
               <label className='flex'>
