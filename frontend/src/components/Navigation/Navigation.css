@@ -56,14 +56,14 @@
     top: 50px;
     padding:  10px 20px;
     background-color: white;
-    border: 1px solid rgb(193, 193, 193);
+    /* border: 1px solid rgb(193, 193, 193); */
+    box-shadow: 0 0 10px 0 rgb(193, 193, 193);
     border-radius: 5px;
     list-style: none;
     z-index: 1;
-    width: 150px;
+    width: 200px;
     /* border: 1px solid black; */
 }
-
 .logout_btn {
     color: white;
     background-color: rgb(255, 56, 95);

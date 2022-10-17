@@ -40,7 +40,7 @@ function ProfileButton({ user }) {
           <li className="username-dropdown"><span style={{fontSize: 14}}>{user.username}</span></li>
           <li className="email-dropdown"><span style={{fontSize: 12, marginTop: 5}}>{user.email}</span></li>
           <hr />
-          <NavLink to='/create-spot' className='create-listing'>Create New Listing</NavLink>
+          <NavLink to='/create-spot' className='create-listing'>Host Your Home</NavLink>
           <NavLink to='/current-user/reviews' className='reviews-link'>Reviews</NavLink>
           <li className='logout_btn_container'>
             <button onClick={logout} className='logout_btn'>Log Out</button>
