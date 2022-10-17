@@ -53,7 +53,7 @@ function EditReviewForm() {
             }
         });
 
-        history.push(`/edit-successful`)
+        history.push(`/current-user/reviews`)
     };
 
     const deleteReview = () => {

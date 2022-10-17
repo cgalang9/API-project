@@ -41,7 +41,7 @@ function CreateSpotForm() {
               }
           });
 
-          history.push('/create-spot-successful')
+          history.push('/')
     };
 
 

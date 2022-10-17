@@ -11,11 +11,13 @@ const getSpot = (spot) => {
 export const getSpotThunk = (spotId) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${spotId}`)
 
+    console.log(response)
     if(response.ok) {
         const spot = await response.json()
         dispatch(getSpot(spot))
         return spot
     }
+
 }
 
 

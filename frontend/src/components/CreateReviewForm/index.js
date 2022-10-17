@@ -32,7 +32,7 @@ function CreateReviewForm() {
               }
           });
 
-          history.push(`/create-review-successful`)
+          history.push(`/spots/${spotId}`)
       };
 
     return (

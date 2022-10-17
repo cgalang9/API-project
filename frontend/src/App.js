@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
@@ -46,15 +46,6 @@ function App() {
           </Route>
           <Route path="/deletion-successful">
             <h1 style={{ marginTop: 125, textAlign: "center" }}>Succesfully Deleted</h1>
-          </Route>
-          <Route path="/create-review-successful">
-            <h1 style={{ marginTop: 125, textAlign: "center" }}>Review Succesfully Created</h1>
-          </Route>
-          <Route path="/create-spot-successful">
-            <h1 style={{ marginTop: 125, textAlign: "center" }}>Listing Succesfully Created</h1>
-          </Route>
-          <Route path="/edit-successful">
-            <h1 style={{ marginTop: 125, textAlign: "center" }}>Succesfully Edited</h1>
           </Route>
           <Route>
             <h1 style={{ marginTop: 125, textAlign: "center" }}>Page Not Found</h1>
