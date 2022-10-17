@@ -39,7 +39,7 @@ function CreateReviewForm() {
       <>
         <div className='create_review_container flex'>
             <form className='create_review_form flex' onSubmit={handleSubmit}>
-              <div className='title'>Edit Your Review</div>
+              <div className='title'>Create Review</div>
               <ul className="errors">
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
               </ul>

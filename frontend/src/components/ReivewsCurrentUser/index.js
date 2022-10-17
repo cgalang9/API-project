@@ -1,7 +1,7 @@
 import { getCurrUserReviewsThunk } from '../../store/reviews'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from "react";
-import { NavLink, Route } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 import './ReivewsCurrentUser.css'
 
@@ -17,7 +17,7 @@ function ReivewsCurrentUser() {
 
     return (
         <div className="users_reviews_container">
-            {reviews && (reviews.map(review => (
+            {reviews && reviews[0].Spot && (reviews.map(review => (
                 <div key={review.id}>
                     <div>==========================</div>
                     <div>{review.Spot.name}</div>
