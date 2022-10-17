@@ -12,6 +12,7 @@ function CreateSpotForm() {
     const [st, setSt] = useState('')
     const [country, setCountry] = useState('')
     const [description, setDescription] = useState('')
+    const [previewImage, setPreviewImage] = useState('')
     const [errors, setErrors] = useState([])
     const dispatch = useDispatch()
     const history = useHistory()
@@ -30,7 +31,7 @@ function CreateSpotForm() {
 
         setErrors([]);
 
-        dispatch(createSpotThunk(newSpot))
+        dispatch(createSpotThunk(newSpot, previewImage))
           .catch(async (res) => {
             const data = await res.json();
             if (data && data.errors) {
@@ -104,6 +105,14 @@ function CreateSpotForm() {
                   type="text"
                   value={country}
                   onChange={(e) => setCountry(e.target.value)}
+                  required
+                />
+              </label>
+              <label className='flex'>
+                <span className='input_label'>Preview Image URL</span>
+                <input
+                  value={previewImage}
+                  onChange={(e) => setPreviewImage(e.target.value)}
                   required
                 />
               </label>
