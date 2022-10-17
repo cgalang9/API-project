@@ -96,12 +96,15 @@
 .become-host-container:visited,
 .home-link:visited,
 .reviews-link:visited,
-.reviews-link  {
+.reviews-link,
+.create-listing:visited,
+.create-listing  {
     color: black;
     text-decoration: none;
 }
 
-.reviews-link:hover {
+.reviews-link:hover,
+.create-listing:hover {
     text-decoration: underline;
 }
 
@@ -127,10 +130,14 @@
     font-size: 12px;
 }
 
-.reviews-link {
-    margin-bottom: 30px;
+.reviews-link,
+.create-listing {
     margin-top: 8px;
     font-size: 14px;
+}
+
+.reviews-link {
+    margin-bottom: 30px;
 }
 
 hr {

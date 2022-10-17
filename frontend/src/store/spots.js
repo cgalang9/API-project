@@ -53,7 +53,7 @@ export const createSpotThunk = (spot, previewImageUrl, otherImgUrls) => async (d
 
         if(responseImg.ok) {
             otherImgUrls.forEach(async imgUrl => {
-                const img = await csrfFetch(`/api/spots/${spot.id}/images`, {
+                await csrfFetch(`/api/spots/${spot.id}/images`, {
                     method: 'POST',
                     body: JSON.stringify({
                         url: imgUrl,
