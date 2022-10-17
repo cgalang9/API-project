@@ -23,6 +23,13 @@
     padding-left: 30px;
     padding-right: 30px;
     justify-self: flex-end;
+    position: relative;
+    border: 1px solid black;
+}
+
+.favicon {
+    position: absolute;
+    left: 50px;
 }
 
 .user_btn {
