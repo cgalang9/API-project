@@ -24,7 +24,7 @@ function ReivewsCurrentUser() {
                     <div>{review.Spot.city}, {review.Spot.state}</div>
                     <div>{new Date(review.createdAt).toLocaleString('default', {month: 'long', year: 'numeric'})}</div>
                     <div>{review.review}</div>
-                    <NavLink to={`reviews/${review.id}/edit`}>Edit Review</NavLink>
+                    <NavLink to={`reviews/${review.id}/edit`}>Edit/Delete Review</NavLink>
                 </div>
             )))}
         </div>

@@ -31,7 +31,7 @@ function SpotDetails() {
                 <div>{spot.country}</div>
                 <div>{spot.description}</div>
                 {isOwner && (
-                    <div>(<NavLink to={`/spots/${spotId}/edit`}>Edit Listing</NavLink>)</div>
+                    <div>(<NavLink to={`/spots/${spotId}/edit`}>Edit/Delete Listing</NavLink>)</div>
                 )}
                 <div>${spot.price}</div>
                 <div>{spot.numReviews} reviews</div>

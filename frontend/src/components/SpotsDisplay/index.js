@@ -8,13 +8,13 @@ function SpotsDisplay() {
     const dispatch = useDispatch()
     const history = useHistory()
 
-    useEffect(() => {
-        dispatch(getAllSpotsThunk())
-    }, [dispatch])
 
     const spots = useSelector(state => state.spots)
     const spotsArr = Object.values(spots)
 
+    useEffect(() => {
+        dispatch(getAllSpotsThunk())
+    }, [dispatch])
 
     return (
         <div className='spots_display_container'>
