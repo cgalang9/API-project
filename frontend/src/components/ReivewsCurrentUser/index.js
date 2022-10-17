@@ -15,9 +15,10 @@ function ReivewsCurrentUser() {
 
     const reviews = useSelector(state => state.reviews.Reviews)
 
+
     return (
         <div className="users_reviews_container">
-            {reviews && reviews[0].Spot && (reviews.map(review => (
+            {reviews && reviews.length > 0 && reviews[0].Spot && (reviews.map(review => (
                 <div key={review.id}>
                     <div>==========================</div>
                     <div>{review.Spot.name}</div>
