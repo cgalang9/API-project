@@ -21,8 +21,7 @@ function Navigation({ isLoaded }){
   if (sessionUser) {
     sessionLinks = (
       <>
-        <NavLink to='/create-spot'>Create New Listing</NavLink>
-        <NavLink to='/current-user/reviews'>Your Reviews</NavLink>
+        <NavLink to='/create-spot' className='become-host-container'>Become a Host</NavLink>
         <ProfileButton user={sessionUser} />
       </>
     );
@@ -30,17 +29,18 @@ function Navigation({ isLoaded }){
     sessionLinks = (
       <>
         <LoginFormModal />
-        <NavLink to="/signup">Sign Up</NavLink>
+        <NavLink to="/signup" className='sign-up-link'>Sign Up</NavLink>
       </>
     );
   }
 
   return (
     <ul className='nav'>
-      <div className='favicon'>
-        <NavLink exact to="/"><img src='favicon.png' alt='favicon' /></NavLink>
-      </div>
+        <div className='favicon'>
+          <NavLink exact to="/"><img src='favicon.png' alt='favicon' /></NavLink>
+        </div>
       <li className='nav_links'>
+      <NavLink exact to="/" className='home-link'>Home</NavLink>
         {isLoaded && sessionLinks}
       </li>
     </ul>
