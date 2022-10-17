@@ -37,9 +37,10 @@ function ProfileButton({ user }) {
       </button>
       {showMenu && (
         <ul className="profile-dropdown">
-          <li>{user.username}</li>
-          <li>{user.email}</li>
-          <NavLink to='/current-user/reviews'>Your Reviews</NavLink>
+          <li className="username-dropdown"><span style={{fontSize: 14}}>{user.username}</span></li>
+          <li className="email-dropdown"><span style={{fontSize: 12, marginTop: 5}}>{user.email}</span></li>
+          <hr />
+          <NavLink to='/current-user/reviews' className='reviews-link'>Reviews</NavLink>
           <li className='logout_btn_container'>
             <button onClick={logout} className='logout_btn'>Log Out</button>
           </li>
