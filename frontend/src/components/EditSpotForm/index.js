@@ -63,7 +63,7 @@ function EditSpotForm({ spot }) {
           });
     };
 
-    const deleteSpot = async () => {
+    const deleteSpot = () => {
       if(window.confirm("Are you sure you want to delete this listing? You can not recover the listing after deletion.")) {
         dispatch(deleteSpotThunk(spotId)).then(() => history.push('/'))
       }
