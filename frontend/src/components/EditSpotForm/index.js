@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { editSpotThunk } from "../../store/spots";
+import { editSpotThunk, getAllSpotsThunk } from "../../store/spots";
 import { Redirect, useHistory, useParams } from "react-router-dom";
 import { deleteSpotThunk } from "../../store/spots";
 import './EditSpotForm.css'
@@ -64,10 +64,10 @@ function EditSpotForm({ spot }) {
           history.push(`/spots/${spotId}`)
     };
 
-    const deleteSpot = () => {
+    const deleteSpot = async () => {
       if(window.confirm("Are you sure you want to delete this listing? You can not recover the listing after deletion.")) {
         dispatch(deleteSpotThunk(spotId))
-        .then(history.push('/'))
+        history.push('/')
       }
     }
 
