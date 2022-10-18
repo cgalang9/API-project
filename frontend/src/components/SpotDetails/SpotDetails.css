@@ -10,6 +10,7 @@
     padding-left: 0px;
     padding-right: 40px;
     width: 80%;
+    max-width: 1000px;
 }
 
 .details_head {
