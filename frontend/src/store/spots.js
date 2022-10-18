@@ -127,7 +127,6 @@ export const spotsReducer = (state = initialState, action) => {
     switch(action.type) {
         case GET_ALL_SPOTS:
             const spotsArr = action.spots['Spots']
-            console.log('get all spots arr', spotsArr)
             const spotsObj = {}
             spotsArr.forEach(spot => {
                 spotsObj[spot.id] = spot

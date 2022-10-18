@@ -11,7 +11,6 @@ function LoginForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('asdasd')
     setErrors([]);
     return dispatch(sessionActions.login({ credential, password }))
       .catch(async (res) => {
