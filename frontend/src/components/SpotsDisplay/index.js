@@ -38,7 +38,7 @@ function SpotsDisplay() {
                                     <div>{(spot.avgRating && spot.avgRating.toFixed(2)) || "New"}</div>
                                 </div>
                             </div>
-                            <div className='spot_distace'>300 miles away</div>
+                            <div className='spot_distance'>300 miles away</div>
                             <div className='spot_miles'>Oct 24-29</div>
                             <div className='spot_price'><span className='span_price'>${spot.price}</span> per night</div>
                         </li>
