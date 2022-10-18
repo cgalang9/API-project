@@ -40,6 +40,8 @@ function SpotDetails() {
 
     return(
         <div className='spot_details_page'>
+
+
         {spot && spot.SpotImages && (
             <div className='spot_details_container'>
 
