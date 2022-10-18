@@ -41,7 +41,7 @@ function SpotDetails() {
             <div className='spot_details_container'>
                 <div className='details_head'>{spot.name}</div>
                 <div className='details_subheader'>
-                    <div><i className="fa-sharp fa-solid fa-star"/> {spot.avgStarRating.toFixed(2)}</div>
+                    <div><i className="fa-sharp fa-solid fa-star"/> {(spot.avgRating && spot.avgRating.toFixed(2)) || "New"}</div>
                     <div style={{ fontSize: 2 }}><i className="fa-solid fa-circle"/></div>
                     <div className='underline'>{spot.numReviews} reviews</div>
                     <div style={{ fontSize: 2 }}><i className="fa-solid fa-circle"/></div>

@@ -9,6 +9,7 @@
     margin-top: 125px;
     padding-left: 0px;
     padding-right: 40px;
+    width: 80%;
 }
 
 .reviews_header,
@@ -32,7 +33,6 @@
     font-size: 25px;
     font-weight: 500;
     margin-bottom: 12px;
-    font-family: 'Montserrat', sans-serif;
 }
 
 #details_img_container {
@@ -40,7 +40,6 @@
     align-items: center;
     gap: 8px;
     height: 415px;
-       /* border: 1px solid red; */
 }
 
 .main_spot_img {
