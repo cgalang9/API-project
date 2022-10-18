@@ -54,6 +54,9 @@ function EditSpotForm({ spot }) {
           .then(() => history.push(`/spots/${spotId}`))
           .catch(async (res) => {
             const data = await res.json();
+            if(data.statusCode === 404) {
+              history.push('/404')
+            }
             if (data && data.errors) {
                   setErrors(Object.values(data.errors))
                   console.log(errors)
@@ -65,7 +68,9 @@ function EditSpotForm({ spot }) {
 
     const deleteSpot = () => {
       if(window.confirm("Are you sure you want to delete this listing? You can not recover the listing after deletion.")) {
-        dispatch(deleteSpotThunk(spotId)).then(() => history.push('/'))
+        dispatch(deleteSpotThunk(spotId))
+          .then(() => history.push('/'))
+          .catch(() => history.push('/404'))
       }
     }
 
@@ -89,6 +94,7 @@ function EditSpotForm({ spot }) {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   required
+                  maxLength={49}
                 />
               </label>
               <label className='flex'>

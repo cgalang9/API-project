@@ -1,15 +1,17 @@
 import { getAllReviewsThunk } from '../../store/reviews'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { NavLink, useParams } from 'react-router-dom'
+import { NavLink, useHistory, useParams } from 'react-router-dom'
 import './Reviews.css'
 
 function Reviews() {
     const { spotId } = useParams()
     const dispatch = useDispatch()
+    const history = useHistory()
 
     useEffect(() => {
         dispatch(getAllReviewsThunk(spotId))
+            .catch((res) => history.push('/404'))
     }, [dispatch])
 
     let reviews = useSelector(state => state.reviews.Reviews)

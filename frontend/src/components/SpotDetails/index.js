@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { NavLink, useParams } from 'react-router-dom'
+import { NavLink, useHistory, useParams } from 'react-router-dom'
 import { getSpotThunk } from '../../store/currentSpot'
 import Reviews from '../Reviews'
 import './SpotDetails.css'
@@ -8,9 +8,11 @@ import './SpotDetails.css'
 function SpotDetails() {
     const { spotId } = useParams()
     const dispatch = useDispatch()
+    const history = useHistory()
 
     useEffect(() => {
         dispatch(getSpotThunk(spotId))
+            .catch((res) => history.push('/404'))
     }, [dispatch, spotId])
 
     const spot = useSelector(state => state.currentSpot)
@@ -19,6 +21,7 @@ function SpotDetails() {
     let isOwner = false
     if (sessionUser && spot && sessionUser.id === spot.ownerId && isOwner === false) {
         isOwner = (true)
+
     }
 
     let prevImgUrl = ''

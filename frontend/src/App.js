@@ -44,6 +44,14 @@ function App() {
           <Route path="/current-user/reviews">
             <ReivewsCurrentUser />
           </Route>
+          <Route path='/404'>
+            <h1 style={{ marginTop: 125, textAlign: "center" }}>404: Page Not Found</h1>
+            <div style={{ textAlign: "center" }}><NavLink exact to="/">Home</NavLink></div>
+          </Route>
+          <Route path='/403'>
+            <h1 style={{ marginTop: 125, textAlign: "center" }}>403: Forbidden</h1>
+            <div style={{ textAlign: "center" }}><NavLink exact to="/">Home</NavLink></div>
+          </Route>
           <Route>
             <h1 style={{ marginTop: 125, textAlign: "center" }}>Page Not Found</h1>
             <div style={{ textAlign: "center" }}><NavLink exact to="/">Home</NavLink></div>

@@ -47,6 +47,9 @@ function EditReviewForm() {
         .then(() => history.push(`/current-user/reviews`))
         .catch(async (res) => {
           const data = await res.json();
+          if(data.statusCode === 404) {
+            history.push('/404')
+          }
           if (data && data.errors) {
                 setErrors(Object.values(data.errors))
             } else if (data.message) {
@@ -57,7 +60,9 @@ function EditReviewForm() {
 
     const deleteReview = () => {
       if(window.confirm("Are you sure you want to delete this review? You can not recover the review after deletion.")) {
-        dispatch(deleteReviewThunk(reviewId)).then(() => history.push('/current-user/reviews'))
+        dispatch(deleteReviewThunk(reviewId))
+          .then(() => history.push('/current-user/reviews'))
+          .catch(() => history.push('/404'))
       }
     }
 

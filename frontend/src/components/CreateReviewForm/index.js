@@ -25,6 +25,12 @@ function CreateReviewForm() {
           .then(() => history.push(`/spots/${spotId}`))
           .catch(async (res) => {
             const data = await res.json();
+            if(data.statusCode === 404) {
+              history.push('/404')
+            }
+            if(data.statusCode === 403) {
+              history.push('/403')
+            }
             if (data && data.errors) {
                   setErrors(Object.values(data.errors))
                   console.log(errors)
