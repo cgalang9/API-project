@@ -44,6 +44,7 @@ function EditReviewForm() {
       setErrors([]);
 
       dispatch(editReviewThunk(newReview, reviewId))
+        .then(() => history.push(`/current-user/reviews`))
         .catch(async (res) => {
           const data = await res.json();
           if (data && data.errors) {
@@ -52,8 +53,6 @@ function EditReviewForm() {
                 setErrors([data.message])
             }
         });
-
-        history.push(`/current-user/reviews`)
     };
 
     const deleteReview = () => {

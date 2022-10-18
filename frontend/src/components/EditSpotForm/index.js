@@ -51,6 +51,7 @@ function EditSpotForm({ spot }) {
         setErrors([]);
 
         dispatch(editSpotThunk(newSpot, spotId))
+          .then(() => history.push(`/spots/${spotId}`))
           .catch(async (res) => {
             const data = await res.json();
             if (data && data.errors) {
@@ -60,8 +61,6 @@ function EditSpotForm({ spot }) {
                   setErrors([data.message])
               }
           });
-
-          history.push(`/spots/${spotId}`)
     };
 
     const deleteSpot = async () => {

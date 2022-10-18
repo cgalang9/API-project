@@ -22,6 +22,7 @@ function CreateReviewForm() {
         setErrors([]);
 
         dispatch(createReviewThunk(newReview, spotId))
+          .then(() => history.push(`/spots/${spotId}`))
           .catch(async (res) => {
             const data = await res.json();
             if (data && data.errors) {
@@ -31,8 +32,6 @@ function CreateReviewForm() {
                   setErrors([data.message])
               }
           });
-
-          history.push(`/spots/${spotId}`)
       };
 
     return (

@@ -35,6 +35,7 @@ function CreateSpotForm() {
         const imagesArr = otherImgUrls.split(', ')
 
         dispatch(createSpotThunk(newSpot, previewImage, imagesArr))
+          .then(() => history.push('/'))
           .catch(async (res) => {
             const data = await res.json();
             if (data && data.errors) {
@@ -44,8 +45,6 @@ function CreateSpotForm() {
                   setErrors([data.message])
               }
           });
-
-          history.push('/')
     };
 
 
