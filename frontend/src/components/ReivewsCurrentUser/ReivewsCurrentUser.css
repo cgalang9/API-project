@@ -1,3 +1,34 @@
 .users_reviews_container {
     margin-top: 125px;
+    padding-left: 120px;
+    padding-right: 300px;
+}
+
+.users_reviews_list {
+    border: 1px solid rgb(193, 193, 193);
+}
+
+.users_reviews_list_head {
+    padding: 10px;
+    background-color: rgb(193, 193, 193);
+    font-size: 18px;
+}
+
+.users_reviews_list_item {
+    padding: 30px;
+}
+
+.users_reviews_list_item_name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 40px;
+}
+
+.users_reviews_list_item_text {
+    margin: 15px 0;
+}
+
+.users_reviews_list_item_date {
+    color: rgb(126, 126, 126);
+    margin-bottom: 20px;
 }
