@@ -13,7 +13,7 @@ function SpotDetails() {
     useEffect(() => {
         dispatch(getSpotThunk(spotId))
             .catch((res) => history.push('/404'))
-    }, [dispatch, spotId])
+    }, [dispatch, spotId, history])
 
     const spot = useSelector(state => state.currentSpot)
     const sessionUser = useSelector(state => state.session.user);
@@ -40,8 +40,6 @@ function SpotDetails() {
 
     return(
         <div className='spot_details_page'>
-
-
         {spot && spot.SpotImages && (
             <div className='spot_details_container'>
 
