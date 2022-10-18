@@ -104,7 +104,7 @@ function SpotDetails() {
                 </div>
 
                 <div className='description_container'>
-                    <div  className='description_head_text'>
+                    <div className='description_head_text'>
                         <div className='description_head_title'>
                             {spot.description}
                             {isOwner && (
@@ -117,6 +117,9 @@ function SpotDetails() {
                             3 beds <span style={{ fontSize: 3 }}><i className="fa-solid fa-circle"/></span>
                             1 bath
                         </div>
+                    </div>
+                    <div className='description_user_icon'>
+                        <i class="fa-solid fa-circle-user" />
                     </div>
                 </div>
                 <hr />

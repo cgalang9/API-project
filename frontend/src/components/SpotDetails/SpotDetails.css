@@ -18,16 +18,10 @@
     margin-bottom: 12px;
 }
 
-.reviews_header,
-.reviews_stars,
 .details_subheader {
     display: flex;
     align-items: center;
     gap: 7px;
-    font-size: 18px;
-}
-
-.details_subheader {
     font-size: 14px;
     margin-bottom: 30px;
 }
@@ -81,10 +75,22 @@
     border-radius: 0 15px 0 0;
 }
 
-.description_head_text {
+.description_container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.description_head_text,
+.description_user_icon {
     font-size: 18px;
     font-weight: 700;
     margin-top: 50px;
+}
+
+.description_user_icon {
+    font-size: 40px;
+    padding-right: 50px;
 }
 
 .description_head_subtitle {
@@ -93,8 +99,18 @@
     align-items: center;
     gap: 5px;
     margin-top: 7px;
+    margin-bottom: 20px;
 }
 
-.dot {
-    font-size: 3;
+.reviews_header,
+.reviews_stars {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 20px;
+    margin-top: 30px;
+}
+
+.reviews_stars {
+    margin-top: 0px;
 }
