@@ -1,0 +1,36 @@
+.reviews_list {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    max-height: 500px;
+}
+
+.reviews_list_item_container {
+    height: 150px;
+    width: 48%;
+    padding-top: 10px;
+    margin-right: 4%;
+}
+
+.reviews_list_item_head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.reviews_list_username {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.reviews_list_date {
+    font-size: 13px;
+    color: rgb(126, 126, 126);
+}
+
+.review_text {
+    font-size: 14px;
+    margin-top: 15px;
+}

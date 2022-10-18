@@ -35,8 +35,6 @@ function SpotDetails() {
         }
     }
 
-    console.log(spot)
-
     return(
         <div className='spot_details_page'>
         {spot && spot.SpotImages && (
@@ -121,7 +119,7 @@ function SpotDetails() {
                         </div>
                     </div>
                     <div className='description_user_icon'>
-                        <i class="fa-solid fa-circle-user" />
+                        <i className="fa-solid fa-circle-user" />
                     </div>
                 </div>
                 <hr />
