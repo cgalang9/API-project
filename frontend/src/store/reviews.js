@@ -85,8 +85,7 @@ export const deleteReviewThunk = (reviewId) => async (dispatch) => {
     })
 
     if(response.ok) {
-        dispatch(deleteReview(reviewId))
-        return
+        return dispatch(deleteReview(reviewId))
     }
 }
 
@@ -110,7 +109,8 @@ export const reviewsReducer = (state = initialState, action) => {
             return stateCreateReview
         case DELETE_REVIEW:
             const stateDelete = {...state}
-            delete stateDelete[action.reviewId]
+            const stateDelArr = stateDelete.Reviews.filter(review => review.id !== Number(action.reviewId))
+            stateDelete.Reviews = stateDelArr
             return stateDelete
         default:
             return state

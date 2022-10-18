@@ -44,10 +44,6 @@ function App() {
           <Route path="/current-user/reviews">
             <ReivewsCurrentUser />
           </Route>
-          <Route path="/deletion-successful">
-            <h1 style={{ marginTop: 125, textAlign: "center" }}>Succesfully Deleted</h1>
-            <div style={{ textAlign: "center" }}><NavLink exact to="/">Home</NavLink></div>
-          </Route>
           <Route>
             <h1 style={{ marginTop: 125, textAlign: "center" }}>Page Not Found</h1>
             <div style={{ textAlign: "center" }}><NavLink exact to="/">Home</NavLink></div>
