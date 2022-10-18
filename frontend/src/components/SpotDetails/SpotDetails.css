@@ -12,12 +12,19 @@
     width: 80%;
 }
 
+.details_head {
+    font-size: 25px;
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+
 .reviews_header,
+.reviews_stars,
 .details_subheader {
     display: flex;
     align-items: center;
     gap: 7px;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .details_subheader {
@@ -29,11 +36,6 @@
     text-decoration: underline;
 }
 
-.details_head {
-    font-size: 25px;
-    font-weight: 500;
-    margin-bottom: 12px;
-}
 
 #details_img_container {
     display: flex;
@@ -77,4 +79,22 @@
 
 .top_right {
     border-radius: 0 15px 0 0;
+}
+
+.description_head_text {
+    font-size: 18px;
+    font-weight: 700;
+    margin-top: 50px;
+}
+
+.description_head_subtitle {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 7px;
+}
+
+.dot {
+    font-size: 3;
 }

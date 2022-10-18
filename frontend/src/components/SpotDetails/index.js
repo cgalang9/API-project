@@ -39,6 +39,7 @@ function SpotDetails() {
         <div className='spot_details_page'>
         {spot && spot.SpotImages && (
             <div className='spot_details_container'>
+
                 <div className='details_head'>{spot.name}</div>
                 <div className='details_subheader'>
                     <div><i className="fa-sharp fa-solid fa-star"/> {(spot.avgRating && spot.avgRating.toFixed(2)) || "New"}</div>
@@ -47,6 +48,7 @@ function SpotDetails() {
                     <div style={{ fontSize: 2 }}><i className="fa-solid fa-circle"/></div>
                     <div className='underline'>{spot.city}, {spot.state}, {spot.country}</div>
                 </div>
+
                 <div id='details_img_container'>
                     <img
                         src={prevImgUrl}
@@ -98,33 +100,34 @@ function SpotDetails() {
                                 }}
                             />
                         </div>
-                        {/* {spot.SpotImages && (
-                            spot.SpotImages.map(img => (
-                                <img
-                                    key={img.id}
-                                    src={img.url}
-                                    alt="spot"
-                                    className='other_spot_img'
-                                    onError={e => {
-                                        e.target.src = "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930"
-                                        e.onerror = null
-                                    }}
-                                />
-                            ))
-                        )} */}
                     </div>
                 </div>
-                <div>{spot.description}</div>
-                {isOwner && (
-                    <div>(<NavLink to={`/spots/${spotId}/edit`}>Edit/Delete Listing</NavLink>)</div>
-                )}
-                <div>${spot.price}</div>
-                <div className='reviews_header'>
-                    <div><i className="fa-sharp fa-solid fa-star"/>{spot.avgStarRating}</div>
-                    <div style={{ fontSize: 3 }}><i className="fa-solid fa-circle"/></div>
-                    <div>{spot.numReviews} reviews</div>
+
+                <div className='description_container'>
+                    <div  className='description_head_text'>
+                        <div className='description_head_title'>
+                            {spot.description}
+                            {isOwner && (
+                                <span>(<NavLink to={`/spots/${spotId}/edit`}>Edit/Delete Listing</NavLink>)</span>
+                            )}
+                        </div>
+                        <div className='description_head_subtitle'>
+                            4 guests <span style={{ fontSize: 3 }}><i className="fa-solid fa-circle"/></span>
+                            2 bedrooms <span style={{ fontSize: 3 }}><i className="fa-solid fa-circle"/></span>
+                            3 beds <span style={{ fontSize: 3 }}><i className="fa-solid fa-circle"/></span>
+                            1 bath
+                        </div>
+                    </div>
                 </div>
-                <Reviews />
+                <hr />
+                <div className='reviews_container'>
+                    <div className='reviews_header'>
+                        <div className='reviews_stars'><span style={{ fontSize: 12 }}><i className="fa-sharp fa-solid fa-star"/></span>{spot.avgStarRating}</div>
+                        <div style={{ fontSize: 3 }}><i className="fa-solid fa-circle"/></div>
+                        <div>{spot.numReviews} reviews</div>
+                    </div>
+                    <Reviews />
+                </div>
             </div>
         )}
         </div>
