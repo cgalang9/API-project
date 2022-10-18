@@ -127,6 +127,7 @@ export const spotsReducer = (state = initialState, action) => {
     switch(action.type) {
         case GET_ALL_SPOTS:
             const spotsArr = action.spots['Spots']
+            console.log('get all spots arr', spotsArr)
             const spotsObj = {}
             spotsArr.forEach(spot => {
                 spotsObj[spot.id] = spot
@@ -143,8 +144,9 @@ export const spotsReducer = (state = initialState, action) => {
             return stateEditSpot
         case DELETE_SPOT:
             const stateDelete = {...state}
-            delete stateDelete[action.spotId]
-            return stateDelete
+            const id = action.spotId
+            delete stateDelete[id]
+            return {...stateDelete}
         default:
             return state
     }

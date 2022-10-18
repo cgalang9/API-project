@@ -125,7 +125,6 @@ function CreateSpotForm() {
                 <textarea
                   value={otherImgUrls}
                   onChange={(e) => setotherImgUrls(e.target.value)}
-                  required
                   className="input_img_urls"
                 />
               </label>

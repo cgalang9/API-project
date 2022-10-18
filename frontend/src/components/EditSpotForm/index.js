@@ -67,7 +67,7 @@ function EditSpotForm({ spot }) {
     const deleteSpot = () => {
       if(window.confirm("Are you sure you want to delete this listing? You can not recover the listing after deletion.")) {
         dispatch(deleteSpotThunk(spotId))
-        history.push('/deletion-successful')
+        .then(history.push('/'))
       }
     }
 
