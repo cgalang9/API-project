@@ -35,7 +35,7 @@ function SpotsDisplay() {
                                 <div className='spot_location'>{spot.city}, {spot.state}</div>
                                 <div className='spot_avgStars'>
                                     <i className="fa-sharp fa-solid fa-star"/>
-                                    <div>{(spot.avgRating && spot.avgRating.toFixed(2)) || "New"}</div>
+                                    <div>{(spot.avgStarRating && spot.avgStarRating.toFixed(2)) || (spot.numReviews > 0 && "0.00") || "New"}</div>
                                 </div>
                             </div>
                             <div className='spot_distance'>300 miles away</div>

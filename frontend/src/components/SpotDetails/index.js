@@ -35,6 +35,8 @@ function SpotDetails() {
         }
     }
 
+    console.log(spot)
+
     return(
         <div className='spot_details_page'>
         {spot && spot.SpotImages && (
@@ -42,7 +44,7 @@ function SpotDetails() {
 
                 <div className='details_head'>{spot.name}</div>
                 <div className='details_subheader'>
-                    <div><i className="fa-sharp fa-solid fa-star"/> {(spot.avgRating && spot.avgRating.toFixed(2)) || "New"}</div>
+                    <div><i className="fa-sharp fa-solid fa-star"/> {(spot.avgStarRating && spot.avgStarRating.toFixed(2)) || (spot.numReviews > 0 && "0.00") || "New"}</div>
                     <div style={{ fontSize: 2 }}><i className="fa-solid fa-circle"/></div>
                     <div className='underline'>{spot.numReviews} reviews</div>
                     <div style={{ fontSize: 2 }}><i className="fa-solid fa-circle"/></div>
@@ -125,7 +127,10 @@ function SpotDetails() {
                 <hr />
                 <div className='reviews_container'>
                     <div className='reviews_header'>
-                        <div className='reviews_stars'><span style={{ fontSize: 12 }}><i className="fa-sharp fa-solid fa-star"/></span>{spot.avgStarRating}</div>
+                        <div className='reviews_stars'>
+                            <span style={{ fontSize: 12 }}><i className="fa-sharp fa-solid fa-star"/></span>
+                            {(spot.avgStarRating && spot.avgStarRating.toFixed(2)) || (spot.numReviews > 0 && "0.00") || "New"}
+                        </div>
                         <div style={{ fontSize: 3 }}><i className="fa-solid fa-circle"/></div>
                         <div>{spot.numReviews} reviews</div>
                     </div>
