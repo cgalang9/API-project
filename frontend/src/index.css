@@ -6,3 +6,10 @@
 .top {
     margin-top: 125px;
 }
+
+.flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
