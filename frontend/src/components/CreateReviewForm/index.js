@@ -7,6 +7,7 @@ import './CreateReviewForm.css'
 function CreateReviewForm() {
     const [review, setReview] = useState('')
     const [stars, setStars] = useState(0)
+    const [hover, setHover] = useState(0)
     const [errors, setErrors] = useState([])
     const { spotId } = useParams()
     const dispatch = useDispatch()
@@ -67,36 +68,76 @@ function CreateReviewForm() {
                     id="1"
                     className="stars"
                     name="rating"
+                    checked={stars === 1}
+                    onChange={() => setStars(1)}
                   />
-                  <label htmlFor="1" className="stars_label"><i class="fa-sharp fa-solid fa-star" /></label>
+                  <label htmlFor="1"
+                    className={1 <= Math.max(stars, hover) ? "stars_label_on" : "stars_label_off"}
+                    onMouseEnter={() => setHover(1)}
+                    onMouseLeave={() => setHover(stars)}
+                  >
+                    <i className="fa-sharp fa-solid fa-star" />
+                  </label>
                   <input
                     type="radio"
                     id="2"
                     className="stars"
                     name="rating"
+                    checked={stars === 2}
+                    onChange={() => setStars(2)}
                   />
-                  <label htmlFor="2" className="stars_label"><i class="fa-sharp fa-solid fa-star" /></label>
+                  <label htmlFor="2"
+                    className={2 <= Math.max(stars, hover) ? "stars_label_on" : "stars_label_off"}
+                    onMouseEnter={() => setHover(2)}
+                    onMouseLeave={() => setHover(stars)}
+                  >
+                    <i className="fa-sharp fa-solid fa-star" />
+                  </label>
                   <input
                     type="radio"
                     id="3"
                     className="stars"
                     name="rating"
+                    checked={stars === 3}
+                    onChange={() => setStars(3)}
                   />
-                  <label htmlFor="3" className="stars_label"><i class="fa-sharp fa-solid fa-star" /></label>
+                  <label htmlFor="3"
+                    className={3 <= Math.max(stars, hover) ? "stars_label_on" : "stars_label_off"}
+                    onMouseEnter={() => setHover(3)}
+                    onMouseLeave={() => setHover(stars)}
+                  >
+                    <i className="fa-sharp fa-solid fa-star" />
+                  </label>
                   <input
                     type="radio"
                     id="4"
                     className="stars"
                     name="rating"
+                    checked={stars === 4}
+                    onChange={() => setStars(4)}
                   />
-                  <label htmlFor="4" className="stars_label"><i class="fa-sharp fa-solid fa-star" /></label>
+                  <label htmlFor="4"
+                    className={4 <= Math.max(stars, hover) ? "stars_label_on" : "stars_label_off"}
+                    onMouseEnter={() => setHover(4)}
+                    onMouseLeave={() => setHover(stars)}
+                  >
+                    <i className="fa-sharp fa-solid fa-star" />
+                  </label>
                   <input
                     type="radio"
                     id="5"
                     className="stars"
                     name="rating"
+                    checked={stars === 5}
+                    onChange={() => setStars(5)}
                   />
-                  <label htmlFor="5" className="stars_label"><i class="fa-sharp fa-solid fa-star" /></label>
+                  <label htmlFor="5"
+                    className={5 <= Math.max(stars, hover) ? "stars_label_on" : "stars_label_off"}
+                    onMouseEnter={() => setHover(5)}
+                    onMouseLeave={() => setHover(stars)}
+                  >
+                    <i className="fa-sharp fa-solid fa-star" />
+                  </label>
                 </div>
               </label>
               <label className='flex'>

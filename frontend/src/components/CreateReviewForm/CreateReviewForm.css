@@ -81,12 +81,12 @@ input {
     font-size: 10px;
 }
 
-.stars_label {
+.stars_label_off {
     font-size: 20px;
     color: grey;
 }
 
-.stars_label:hover {
+.stars_label_on {
     font-size: 20px;
     color: rgb(255, 56, 95);
 }
