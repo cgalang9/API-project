@@ -1,7 +1,7 @@
 import { getCurrUserReviewsThunk } from '../../store/reviews'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from "react";
-import { NavLink } from 'react-router-dom'
+import { NavLink, Redirect } from 'react-router-dom'
 
 import './ReivewsCurrentUser.css'
 
@@ -15,9 +15,18 @@ function ReivewsCurrentUser() {
 
     const reviews = useSelector(state => state.reviews.Reviews)
 
+    const sessionUser = useSelector(state => state.session.user);
+    let isOwner = false
+    if (sessionUser && isOwner === false) {
+        isOwner = (true)
+    }
+
 
     return (
         <>
+        {!isOwner && (
+            <Redirect to={`/`} />
+        )}
         <div className="users_reviews_container top">
             <h1>Reviews by you</h1>
             <div className="users_reviews_list">

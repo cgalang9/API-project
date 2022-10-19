@@ -31,7 +31,7 @@ function EditReviewForm() {
     //following lines along with the Redirect tag in return below, redirects user to spot details page if he is not the owner of the spot
     const sessionUser = useSelector(state => state.session.user);
     let isOwner = false
-    if (currentReviewObj && sessionUser.id === currentReviewObj.userId && isOwner === false) {
+    if (currentReviewObj && sessionUser && sessionUser.id === currentReviewObj.userId && isOwner === false) {
         isOwner = (true)
     }
 
@@ -71,7 +71,7 @@ function EditReviewForm() {
     return (
       <>
       {!isOwner && (
-        <Redirect to={`/current-user/reviews`} />
+        <Redirect to={`/`} />
       )}
       {reviews && (
         <div className='edit_review_container flex top'>
