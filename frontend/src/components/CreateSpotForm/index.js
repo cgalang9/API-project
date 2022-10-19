@@ -63,6 +63,7 @@ function CreateSpotForm() {
                   onChange={(e) => setName(e.target.value)}
                   required
                   maxLength={49}
+                  className="input_top"
                 />
               </label>
               <label className='flex'>
@@ -134,7 +135,7 @@ function CreateSpotForm() {
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   required
-                  className="input_description"
+                  className="input_description input_bottom"
                 />
               </label>
               <button type="submit" className="create_btn">Create Listing</button>

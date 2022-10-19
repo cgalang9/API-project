@@ -36,7 +36,7 @@ function SignupFormPage() {
   };
 
   return (
-    <div className='signup_form_container flex'>
+    <div className='signup_form_container flex top'>
         <form onSubmit={handleSubmit} className='signup_form flex'>
             <div className='title'>Sign up</div>
             <div className='welcome'>Welcome to Airbnb</div>
