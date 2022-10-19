@@ -5,10 +5,6 @@
     align-items: center;
 }
 
-.create_review_container {
-    margin-top: 125px;
-}
-
 .create_review_form {
     border: 1px solid black;
     width: 50%;

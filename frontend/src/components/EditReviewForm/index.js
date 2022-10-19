@@ -74,7 +74,7 @@ function EditReviewForm() {
         <Redirect to={`/current-user/reviews`} />
       )}
       {reviews && (
-        <div className='edit_review_container flex'>
+        <div className='edit_review_container flex top'>
             <form className='edit_review_form flex' onSubmit={handleSubmit}>
               <div className='title'>Edit Your Review</div>
               <ul className="errors">

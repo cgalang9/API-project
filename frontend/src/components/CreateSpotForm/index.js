@@ -49,7 +49,7 @@ function CreateSpotForm() {
 
 
     return (
-        <div className='create_form_container flex'>
+        <div className='create_form_container flex top'>
             <form onSubmit={handleSubmit} className='create_form flex'>
               <div className='title'>Create A New Listing</div>
               <ul className="errors">

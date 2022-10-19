@@ -18,7 +18,7 @@ function ReivewsCurrentUser() {
 
     return (
         <>
-        <div className="users_reviews_container">
+        <div className="users_reviews_container top">
             <h1>Reviews by you</h1>
             <div className="users_reviews_list">
                 <div className='users_reviews_list_head'>Past reviews you’ve written</div>

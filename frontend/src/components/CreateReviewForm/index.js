@@ -43,7 +43,7 @@ function CreateReviewForm() {
 
     return (
       <>
-        <div className='create_review_container flex'>
+        <div className='create_review_container flex top'>
             <form className='create_review_form flex' onSubmit={handleSubmit}>
               <div className='title'>Create Review</div>
               <ul className="errors">

@@ -41,7 +41,7 @@ function SpotDetails() {
     return(
         <div className='spot_details_page'>
         {spot && spot.SpotImages && (
-            <div className='spot_details_container'>
+            <div className='spot_details_container top'>
 
                 <div className='details_head'>{spot.name}</div>
                 <div className='details_subheader'>

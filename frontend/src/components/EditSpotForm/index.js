@@ -81,7 +81,7 @@ function EditSpotForm({ spot }) {
         <Redirect to={`/spots/${spotId}`} />
       )}
       {spot && (
-        <div className='edit_form_container flex'>
+        <div className='edit_form_container flex top'>
             <form onSubmit={handleSubmit} className='edit_form flex'>
               <div className='title'>Edit Your Listing</div>
               <ul className="errors">

@@ -17,7 +17,7 @@ function SpotsDisplay() {
     }, [dispatch])
 
     return (
-        <div className='spots_display_container'>
+        <div className='spots_display_container top'>
             <ul className='spots_list'>
                 {spotsArr.length > 0 && (
                     spotsArr.map(spot => (

@@ -6,7 +6,6 @@
 .spot_details_container {
     display: flex;
     flex-direction: column;
-    margin-top: 125px;
     padding-left: 0px;
     padding-right: 40px;
     width: 80%;
