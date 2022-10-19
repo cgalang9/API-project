@@ -13,7 +13,7 @@ function SpotDetailsMainPage() {
     useEffect(() => {
         dispatch(getSpotThunk(spotId))
             .catch((res) => history.push('/404'))
-    }, [dispatch])
+    }, [dispatch, history, spotId])
 
     const spot = useSelector(state => state.currentSpot)
 

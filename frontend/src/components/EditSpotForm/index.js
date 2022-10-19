@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { editSpotThunk, getAllSpotsThunk } from "../../store/spots";
+import { editSpotThunk } from "../../store/spots";
 import { Redirect, useHistory, useParams } from "react-router-dom";
 import { deleteSpotThunk } from "../../store/spots";
 import './EditSpotForm.css'

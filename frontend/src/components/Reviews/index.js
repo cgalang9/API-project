@@ -12,7 +12,7 @@ function Reviews() {
     useEffect(() => {
         dispatch(getAllReviewsThunk(spotId))
             .catch((res) => history.push('/404'))
-    }, [dispatch])
+    }, [dispatch, history, spotId])
 
     let reviews = useSelector(state => state.reviews.Reviews)
     const sessionUser = useSelector(state => state.session.user);

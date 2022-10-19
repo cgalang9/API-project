@@ -72,3 +72,21 @@ input {
     min-height: 20px;
     padding-left: 0;
 }
+
+.stars_container {
+    display: flex;
+    align-items: center;
+}
+.stars {
+    font-size: 10px;
+}
+
+.stars_label {
+    font-size: 20px;
+    color: grey;
+}
+
+.stars_label:hover {
+    font-size: 20px;
+    color: rgb(255, 56, 95);
+}

@@ -60,6 +60,46 @@ function CreateReviewForm() {
                 />
               </label>
               <label className='flex'>
+                <span className='input_label'>Rating</span>
+                <div className="stars_container">
+                  <input
+                    type="radio"
+                    id="1"
+                    className="stars"
+                    name="rating"
+                  />
+                  <label htmlFor="1" className="stars_label"><i class="fa-sharp fa-solid fa-star" /></label>
+                  <input
+                    type="radio"
+                    id="2"
+                    className="stars"
+                    name="rating"
+                  />
+                  <label htmlFor="2" className="stars_label"><i class="fa-sharp fa-solid fa-star" /></label>
+                  <input
+                    type="radio"
+                    id="3"
+                    className="stars"
+                    name="rating"
+                  />
+                  <label htmlFor="3" className="stars_label"><i class="fa-sharp fa-solid fa-star" /></label>
+                  <input
+                    type="radio"
+                    id="4"
+                    className="stars"
+                    name="rating"
+                  />
+                  <label htmlFor="4" className="stars_label"><i class="fa-sharp fa-solid fa-star" /></label>
+                  <input
+                    type="radio"
+                    id="5"
+                    className="stars"
+                    name="rating"
+                  />
+                  <label htmlFor="5" className="stars_label"><i class="fa-sharp fa-solid fa-star" /></label>
+                </div>
+              </label>
+              <label className='flex'>
                 <span className='input_label'>Review</span>
                 <textarea
                   value={review}
