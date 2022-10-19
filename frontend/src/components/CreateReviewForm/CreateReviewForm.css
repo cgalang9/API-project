@@ -76,17 +76,26 @@ input {
 .stars_container {
     display: flex;
     align-items: center;
+    justify-content: center;
+    /* gap: 10px; */
+    /* border: 1px solid greenyellow; */
 }
+
 .stars {
-    font-size: 10px;
+    font-size: 0px;
+    visibility: hidden;
+}
+
+.stars_label_off,
+.stars_label_on {
+    font-size: 30px;
+    margin-bottom: 20px;
 }
 
 .stars_label_off {
-    font-size: 20px;
     color: grey;
 }
 
 .stars_label_on {
-    font-size: 20px;
     color: rgb(255, 56, 95);
 }

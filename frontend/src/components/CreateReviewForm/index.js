@@ -50,18 +50,7 @@ function CreateReviewForm() {
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
               </ul>
               <label className='flex'>
-                <span className='input_label'>Stars</span>
-                <input
-                  type="number"
-                  value={stars}
-                  onChange={(e) => setStars(e.target.value)}
-                  required
-                  max={5}
-                  min={0}
-                />
-              </label>
-              <label className='flex'>
-                <span className='input_label'>Rating</span>
+                <span className='input_label'>Overall Rating</span>
                 <div className="stars_container">
                   <input
                     type="radio"
