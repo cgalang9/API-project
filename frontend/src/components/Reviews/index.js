@@ -26,7 +26,7 @@ function Reviews() {
 
     return (
         <>
-        {!userHasReview && (
+        {sessionUser && !userHasReview && (
             <NavLink to={`/spots/${spotId}/reviews/new`}>Create A New Review</NavLink>
         )}
         <div className='reviews_list'>

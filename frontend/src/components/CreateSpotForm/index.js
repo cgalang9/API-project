@@ -1,54 +1,58 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createSpotThunk } from "../../store/spots";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import './CreateSpotForm.css'
 
 function CreateSpotForm() {
-    const [name, setName] = useState('')
-    const [price, setPrice] = useState(1)
-    const [address, setAddress] = useState('')
-    const [city, setCity] = useState('')
-    const [st, setSt] = useState('')
-    const [country, setCountry] = useState('')
-    const [description, setDescription] = useState('')
-    const [previewImage, setPreviewImage] = useState('')
-    const [otherImgUrls, setotherImgUrls] = useState('')
-    const [errors, setErrors] = useState([])
-    const dispatch = useDispatch()
-    const history = useHistory()
+  const [name, setName] = useState('')
+  const [price, setPrice] = useState(1)
+  const [address, setAddress] = useState('')
+  const [city, setCity] = useState('')
+  const [st, setSt] = useState('')
+  const [country, setCountry] = useState('')
+  const [description, setDescription] = useState('')
+  const [previewImage, setPreviewImage] = useState('')
+  const [otherImgUrls, setotherImgUrls] = useState('')
+  const [errors, setErrors] = useState([])
+  const dispatch = useDispatch()
+  const history = useHistory()
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const newSpot = {
-            name,
-            price,
-            address,
-            city,
-            state: st,
-            country,
-            description
-        }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newSpot = {
+        name,
+        price,
+        address,
+        city,
+        state: st,
+        country,
+        description
+    }
 
-        setErrors([]);
+    setErrors([]);
 
-        const imagesArr = otherImgUrls.split(', ')
-
-        dispatch(createSpotThunk(newSpot, previewImage, imagesArr))
-          .then(() => history.push('/'))
-          .catch(async (res) => {
-            const data = await res.json();
-            if (data && data.errors) {
-                  setErrors(Object.values(data.errors))
-                  console.log(errors)
-              } else if (data.message) {
-                  setErrors([data.message])
-              }
-          });
+    const imagesArr = otherImgUrls.split(', ')
+    dispatch(createSpotThunk(newSpot, previewImage, imagesArr))
+      .then(() => history.push('/'))
+      .catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) {
+              setErrors(Object.values(data.errors))
+              console.log(errors)
+          } else if (data.message) {
+              setErrors([data.message])
+          }
+      });
     };
 
+    const sessionUser = useSelector(state => state.session.user);
 
     return (
+      <>
+        {!sessionUser && (
+            <Redirect to={`/`} />
+        )}
         <div className='create_form_container flex top'>
             <form onSubmit={handleSubmit} className='create_form flex'>
               <div className='title'>Create A New Listing</div>
@@ -64,7 +68,7 @@ function CreateSpotForm() {
                   required
                   maxLength={49}
                   className="input_top"
-                />
+                  />
               </label>
               <label className='flex'>
                 <span className='input_label'>Price per night (USD)</span>
@@ -74,7 +78,7 @@ function CreateSpotForm() {
                   onChange={(e) => setPrice(e.target.value)}
                   required
                   min={1}
-                />
+                  />
               </label>
               <label className='flex'>
                 <span className='input_label'>Address</span>
@@ -83,7 +87,7 @@ function CreateSpotForm() {
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
                   required
-                />
+                  />
               </label>
               <label className='flex'>
                 <span className='input_label'>City</span>
@@ -92,7 +96,7 @@ function CreateSpotForm() {
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
                   required
-                />
+                  />
               </label>
               <label className='flex'>
                 <span className='input_label'>State</span>
@@ -101,7 +105,7 @@ function CreateSpotForm() {
                   value={st}
                   onChange={(e) => setSt(e.target.value)}
                   required
-                />
+                  />
               </label>
               <label className='flex'>
                 <span className='input_label'>Country</span>
@@ -110,7 +114,7 @@ function CreateSpotForm() {
                   value={country}
                   onChange={(e) => setCountry(e.target.value)}
                   required
-                />
+                  />
               </label>
               <label className='flex'>
                 <span className='input_label'>Preview Image URL</span>
@@ -119,7 +123,7 @@ function CreateSpotForm() {
                   onChange={(e) => setPreviewImage(e.target.value)}
                   required
                   className="input_prev_img"
-                />
+                  />
               </label>
               <label className='flex'>
                 <span className='input_label'>Other Images URL (separate each URL with comma)</span>
@@ -127,7 +131,7 @@ function CreateSpotForm() {
                   value={otherImgUrls}
                   onChange={(e) => setotherImgUrls(e.target.value)}
                   className="input_img_urls"
-                />
+                  />
               </label>
               <label className='flex'>
                 <span className='input_label'>Description</span>
@@ -136,11 +140,12 @@ function CreateSpotForm() {
                   onChange={(e) => setDescription(e.target.value)}
                   required
                   className="input_description input_bottom"
-                />
+                  />
               </label>
               <button type="submit" className="create_btn">Create Listing</button>
             </form>
         </div>
+      </>
     )
 }
 

@@ -1,48 +1,53 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useParams, Redirect } from "react-router-dom";
 import { createReviewThunk } from "../../store/reviews";
 import './CreateReviewForm.css'
 
 function CreateReviewForm() {
-    const [review, setReview] = useState('')
-    const [stars, setStars] = useState(0)
-    const [hover, setHover] = useState(0)
-    const [errors, setErrors] = useState([])
-    const { spotId } = useParams()
-    const dispatch = useDispatch()
-    const history = useHistory()
+  const [review, setReview] = useState('')
+  const [stars, setStars] = useState(0)
+  const [hover, setHover] = useState(0)
+  const [errors, setErrors] = useState([])
+  const { spotId } = useParams()
+  const dispatch = useDispatch()
+  const history = useHistory()
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const newReview = {
-          review,
-          stars
-        }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newReview = {
+      review,
+      stars
+    }
 
-        setErrors([]);
+    setErrors([]);
 
-        dispatch(createReviewThunk(newReview, spotId))
-          .then(() => history.push(`/spots/${spotId}`))
-          .catch(async (res) => {
-            const data = await res.json();
-            if(data.statusCode === 404) {
-              history.push('/404')
-            }
-            if(data.statusCode === 403) {
-              history.push('/403')
-            }
-            if (data && data.errors) {
-                  setErrors(Object.values(data.errors))
-                  console.log(errors)
-              } else if (data.message) {
-                  setErrors([data.message])
-              }
-          });
-      };
+     dispatch(createReviewThunk(newReview, spotId))
+       .then(() => history.push(`/spots/${spotId}`))
+       .catch(async (res) => {
+         const data = await res.json();
+         if(data.statusCode === 404) {
+           history.push('/404')
+         }
+         if(data.statusCode === 403) {
+           history.push('/403')
+         }
+         if (data && data.errors) {
+               setErrors(Object.values(data.errors))
+               console.log(errors)
+           } else if (data.message) {
+               setErrors([data.message])
+           }
+       });
+    };
+
+    const sessionUser = useSelector(state => state.session.user);
 
     return (
       <>
+        {!sessionUser && (
+            <Redirect to={`/`} />
+        )}
         <div className='create_review_container flex top'>
             <form className='create_review_form flex' onSubmit={handleSubmit}>
               <div className='title'>Create Review</div>
