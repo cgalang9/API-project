@@ -22,9 +22,9 @@ function ReivewsCurrentUser() {
             <h1>Reviews by you</h1>
             <div className="users_reviews_list">
                 <div className='users_reviews_list_head'>Past reviews you’ve written</div>
-                {reviews && reviews.length > 0 && reviews[0].Spot && (reviews.map(review => (
+                {reviews && reviews.length > 0 && reviews[0].Spot && (reviews.map((review, index) => (
                     <div key={review.id} className="users_reviews_list_item" >
-                        {review.id > 1 && (<hr/>)}
+                        {index > 0 && (<hr/>)}
                         <div className='users_reviews_list_item_name'>Review for {review.Spot.name}</div>
                         <div className='users_reviews_list_item_text'>{review.review}</div>
                         <div className='users_reviews_list_item_date'>{new Date(review.createdAt).toLocaleString('default', {month: 'long', year: 'numeric'})}</div>
