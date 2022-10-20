@@ -106,26 +106,33 @@ function SpotDetails() {
                     </div>
                 </div>
 
-                <div className='description_container'>
-                    <div className='description_head_text'>
-                        <div className='description_head_title'>
-                            {spot.description}
-                            {isOwner && (
-                                <span>(<NavLink to={`/spots/${spotId}/edit`}>Edit/Delete Listing</NavLink>)</span>
-                            )}
+                <div className='sub_img_container'>
+                    <div className='description_container'>
+                        <div className='description_head_text'>
+                            <div className='description_head_title'>
+                                {spot.description}
+                                {isOwner && (
+                                    <span>(<NavLink to={`/spots/${spotId}/edit`}>Edit/Delete Listing</NavLink>)</span>
+                                )}
+                            </div>
+                            <div className='description_head_subtitle'>
+                                4 guests <span style={{ fontSize: 3 }}><i className="fa-solid fa-circle"/></span>
+                                2 bedrooms <span style={{ fontSize: 3 }}><i className="fa-solid fa-circle"/></span>
+                                3 beds <span style={{ fontSize: 3 }}><i className="fa-solid fa-circle"/></span>
+                                1 bath
+                            </div>
                         </div>
-                        <div className='description_head_subtitle'>
-                            4 guests <span style={{ fontSize: 3 }}><i className="fa-solid fa-circle"/></span>
-                            2 bedrooms <span style={{ fontSize: 3 }}><i className="fa-solid fa-circle"/></span>
-                            3 beds <span style={{ fontSize: 3 }}><i className="fa-solid fa-circle"/></span>
-                            1 bath
+                        <div className='description_user_icon'>
+                            <i className="fa-solid fa-circle-user" />
                         </div>
                     </div>
-                    <div className='description_user_icon'>
-                        <i className="fa-solid fa-circle-user" />
+                    <div className='create_bookings_container'>
+                        <h1>Bookings Container Here</h1>
                     </div>
                 </div>
+
                 <hr />
+
                 <div className='reviews_container'>
                     <div className='reviews_header'>
                         <div className='reviews_stars'>

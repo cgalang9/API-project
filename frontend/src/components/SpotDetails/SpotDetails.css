@@ -79,13 +79,14 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 65%;
+    margin-top: 50px;
 }
 
 .description_head_text,
 .description_user_icon {
     font-size: 18px;
     font-weight: 700;
-    margin-top: 50px;
 }
 
 .description_user_icon {
@@ -115,6 +116,13 @@
     margin-top: 0px;
 }
 
-.mapouter {
-    align-self: center;
+.sub_img_container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.create_bookings_container {
+    width: 45%;
+    margin-top: 50px;
+    padding-left: 10px;
 }
