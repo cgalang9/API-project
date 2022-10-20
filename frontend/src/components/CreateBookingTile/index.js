@@ -33,6 +33,13 @@ function CreateBookingTile({ spot }) {
                     <div className='fees_item_price'>${service_fee}</div>
                 </div>
             </div>
+
+            <hr />
+
+            <div className='create_booking_tile_total_fees'>
+                <div className='fees_item_title'>Total before taxes</div>
+                <div className='fees_item_price'>${spot.price + cleaning_fee + service_fee}</div>
+            </div>
         </div>
     )
 }

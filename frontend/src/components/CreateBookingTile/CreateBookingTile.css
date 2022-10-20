@@ -24,9 +24,16 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    margin-bottom: 15px;
 }
 
-.fees_item {
+.fees_item,
+.create_booking_tile_total_fees {
     display: flex;
     justify-content: space-between;
+}
+
+.create_booking_tile_total_fees {
+    margin-top: 15px;
+    font-size: 16px;
 }
