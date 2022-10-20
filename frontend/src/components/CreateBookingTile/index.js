@@ -19,6 +19,8 @@ function CreateBookingTile({ spot }) {
                 </div>
             </div>
 
+
+
             <div className='fees_list'>
                 <div className='fees_item'>
                     <div className='fees_item_title'>${spot.price} x 1 night</div>
