@@ -25,6 +25,7 @@
 
 .users_reviews_list_item_text {
     margin: 15px 0;
+    /* overflow-wrap: break-word; */
 }
 
 .users_reviews_list_item_date {
