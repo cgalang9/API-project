@@ -11,7 +11,6 @@ function SpotsDisplay() {
 
     const spots = useSelector(state => state.spots)
     const spotsArr = Object.values(spots)
-    console.log(spotsArr)
 
     useEffect(() => {
         dispatch(getAllSpotsThunk())

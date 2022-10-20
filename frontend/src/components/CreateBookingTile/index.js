@@ -1,8 +1,29 @@
+import { useEffect, useState } from 'react'
 import './CreateBookingTile.css'
 
 function CreateBookingTile({ spot }) {
+    const [checkin, setCheckin] = useState('')
+    const [checkout, setCheckout] = useState('')
+    const [guests, setGuests] = useState(1)
+    const [bookingLength, setBookingLength] = useState(1)
+
+   useEffect(() => {
+    if(checkin && checkout) {
+        if(checkin < checkout) {
+            const checkinDate = new Date(checkin)
+            const checkoutDate = new Date(checkout)
+            const diff = checkoutDate.getTime() - checkinDate.getTime();
+            const days = Math.ceil(diff / (1000 * 3600 * 24));
+            setBookingLength(days)
+        } else {
+            setBookingLength(1)
+        }
+    }
+   }, [checkin, checkout])
+
     const cleaning_fee = 100
     const service_fee = 100
+
     return (
         <div className='create_booking_tile'>
             <div className='create_booking_tile_head' >
@@ -26,8 +47,8 @@ function CreateBookingTile({ spot }) {
                             <span className='input_label' id="checkin_label">CHECK IN</span>
                             <input
                               type="date"
-                            //   value={name}
-                            //   onChange={(e) => setName(e.target.value)}
+                              value={checkin}
+                              onChange={(e) => setCheckin(e.target.value)}
                               required
                               id="create_booking_tile_checkin_input"
                               />
@@ -38,8 +59,8 @@ function CreateBookingTile({ spot }) {
                             <span className='input_label' id="checkout_label">CHECK OUT</span>
                             <input
                               type="date"
-                            //   value={name}
-                            //   onChange={(e) => setName(e.target.value)}
+                              value={checkout}
+                              onChange={(e) => setCheckout(e.target.value)}
                               required
                               id="create_booking_tile_checkout_input"
                               />
@@ -53,8 +74,8 @@ function CreateBookingTile({ spot }) {
                         <input
                           type="number"
                           min={1}
-                        //   value={name}
-                        //   onChange={(e) => setName(e.target.value)}
+                          value={guests}
+                          onChange={(e) => setGuests(e.target.value)}
                           required
                           id="create_booking_tile_guests_input"
                           />
@@ -70,8 +91,8 @@ function CreateBookingTile({ spot }) {
 
             <div className='fees_list'>
                 <div className='fees_item'>
-                    <div className='fees_item_title'>${spot.price} x 1 night</div>
-                    <div className='fees_item_price'>${spot.price}</div>
+                    <div className='fees_item_title'>${spot.price} x {bookingLength} night</div>
+                    <div className='fees_item_price'>${spot.price * bookingLength}</div>
                 </div>
                 <div className='fees_item'>
                     <div className='fees_item_title'>Cleaning fee</div>
