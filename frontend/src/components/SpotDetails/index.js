@@ -108,7 +108,9 @@ function SpotDetails() {
                 </div>
 
                 <div className='sub_img_container'>
+
                     <div className='description_container'>
+
                         <div className='description_container_section1'>
                             <div className='description_head_text'>
                                 <div className='description_head_title'>
@@ -128,7 +130,15 @@ function SpotDetails() {
                                 <i className="fa-solid fa-circle-user" />
                             </div>
                         </div>
+
+                        <div className='description_container_section2'>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet mauris vel massa tempor eleifend id ac lacus. Sed eu dictum urna, sit amet posuere nisi. Vestibulum lacinia vitae urna et rhoncus. Quisque pellentesque mollis nunc at tristique. Praesent eu dui tincidunt, ultrices ipsum lacinia, sagittis ex. Nam nec massa dignissim, facilisis sapien nec, tempor purus. Cras in suscipit felis, nec facilisis mi. Donec sollicitudin nisl sit amet nibh pretium, consequat viverra mi eleifend. Pellentesque eget venenatis nunc, nec tristique ex. Phasellus congue non risus eget ultricies. Fusce sodales ex ut ex semper consectetur. Ut vel fringilla augue. Nullam eleifend enim ac ligula mattis, sed pretium lectus consequat. Donec vestibulum diam varius ex commodo mattis. Praesent malesuada lectus et orci mattis dapibus non ac sapien.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet mauris vel massa tempor eleifend id ac lacus. Sed eu dictum urna, sit amet posuere nisi. Vestibulum lacinia vitae urna et rhoncus. Quisque pellentesque mollis nunc at tristique. Praesent eu dui tincidunt, ultrices ipsum lacinia, sagittis ex. Nam nec massa dignissim, facilisis sapien nec, tempor purus. Cras in suscipit felis, nec facilisis mi. Donec sollicitudin nisl sit amet nibh pretium, consequat viverra mi eleifend. Pellentesque eget venenatis nunc, nec tristique ex. Phasellus congue non risus eget ultricies. Fusce sodales ex ut ex semper consectetur. Ut vel fringilla augue. Nullam eleifend enim ac ligula mattis, sed pretium lectus consequat. Donec vestibulum diam varius ex commodo mattis. Praesent malesuada lectus et orci mattis dapibus non ac sapien.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet mauris vel massa tempor eleifend id ac lacus. Sed eu dictum urna, sit amet posuere nisi. Vestibulum lacinia vitae urna et rhoncus. Quisque pellentesque mollis nunc at tristique. Praesent eu dui tincidunt, ultrices ipsum lacinia, sagittis ex. Nam nec massa dignissim, facilisis sapien nec, tempor purus. Cras in suscipit felis, nec facilisis mi. Donec sollicitudin nisl sit amet nibh pretium, consequat viverra mi eleifend. Pellentesque eget venenatis nunc, nec tristique ex. Phasellus congue non risus eget ultricies. Fusce sodales ex ut ex semper consectetur. Ut vel fringilla augue. Nullam eleifend enim ac ligula mattis, sed pretium lectus consequat. Donec vestibulum diam varius ex commodo mattis. Praesent malesuada lectus et orci mattis dapibus non ac sapien.
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet mauris vel massa tempor eleifend id ac lacus. Sed eu dictum urna, sit amet posuere nisi. Vestibulum lacinia vitae urna et rhoncus. Quisque pellentesque mollis nunc at tristique. Praesent eu dui tincidunt, ultrices ipsum lacinia, sagittis ex. Nam nec massa dignissim, facilisis sapien nec, tempor purus. Cras in suscipit felis, nec facilisis mi. Donec sollicitudin nisl sit amet nibh pretium, consequat viverra mi eleifend. Pellentesque eget venenatis nunc, nec tristique ex. Phasellus congue non risus eget ultricies. Fusce sodales ex ut ex semper consectetur. Ut vel fringilla augue. Nullam eleifend enim ac ligula mattis, sed pretium lectus consequat. Donec vestibulum diam varius ex commodo mattis. Praesent malesuada lectus et orci mattis dapibus non ac sapien.
+                        </div>
                     </div>
+
                     <div className='create_bookings_container'>
                         <CreateBookingTile spot={spot} />
                     </div>

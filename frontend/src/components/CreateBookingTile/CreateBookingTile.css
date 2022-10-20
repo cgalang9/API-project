@@ -5,6 +5,9 @@
     background-color: white;
     box-shadow: 0 0 10px 0 rgb(193, 193, 193);
     border-radius: 10px;
+    position: sticky;
+    top: 50px;
+    margin-bottom: 20px;
 }
 
 .create_booking_tile_head {

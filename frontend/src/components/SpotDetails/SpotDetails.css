@@ -82,7 +82,7 @@
     margin-top: 50px;
 }
 
-.description_container_section1{
+.description_container_section1 {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -109,6 +109,16 @@
     margin-bottom: 20px;
 }
 
+.description_container_section2 {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid grey;
+    width: 95%;
+    padding: 25px 0;
+}
+
+
+
 .reviews_header,
 .reviews_stars {
     display: flex;
@@ -131,4 +141,5 @@
     width: 35%;
     margin-top: 50px;
     padding-left: 10px;
+    position: relative;
 }
