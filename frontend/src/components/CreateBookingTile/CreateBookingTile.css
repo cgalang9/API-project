@@ -1,0 +1,39 @@
+.create_booking_tile {
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    background-color: white;
+    box-shadow: 0 0 10px 0 rgb(193, 193, 193);
+    border-radius: 10px;
+}
+
+.create_booking_tile_head {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.create_booking_tile_head_right {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+}
+
+.fees_list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.fees_item,
+.create_booking_tile_total_fees {
+    display: flex;
+    justify-content: space-between;
+}
+
+.create_booking_tile_total_fees {
+    margin-top: 15px;
+    font-size: 16px;
+}

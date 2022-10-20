@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import './SignupForm.css'
 
-function SignupFormPage() {
+function SignupForm() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const [firstName, setFirstName] = useState("");
@@ -36,10 +36,9 @@ function SignupFormPage() {
   };
 
   return (
-    <div className='signup_form_container flex top'>
+    <div className='signup_form_container flex'>
         <form onSubmit={handleSubmit} className='signup_form flex'>
             <div className='title'>Sign up</div>
-            <div className='welcome'>Welcome to Airbnb</div>
           <ul className="errors">
             {errors.map((error, idx) => <li key={idx}>{error}</li>)}
           </ul>
@@ -105,4 +104,4 @@ function SignupFormPage() {
   );
 }
 
-export default SignupFormPage;
+export default SignupForm;
