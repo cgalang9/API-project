@@ -29,7 +29,6 @@ function CreateBookingTile({ spot }) {
                             //   value={name}
                             //   onChange={(e) => setName(e.target.value)}
                               required
-                            //   maxLength={49}
                               id="create_booking_tile_checkin_input"
                               />
                         </label>
@@ -42,13 +41,31 @@ function CreateBookingTile({ spot }) {
                             //   value={name}
                             //   onChange={(e) => setName(e.target.value)}
                               required
-                            //   maxLength={49}
                               id="create_booking_tile_checkout_input"
                               />
                         </label>
                     </div>
                 </div>
 
+                <div className='create_booking_tile_guests'>
+                    <label className='flex'>
+                        <span className='input_label' id="guests_label">GUESTS</span>
+                        <input
+                          type="number"
+                          min={1}
+                        //   value={name}
+                        //   onChange={(e) => setName(e.target.value)}
+                          required
+                          id="create_booking_tile_guests_input"
+                          />
+                    </label>
+                </div>
+
+            </div>
+
+            <div className='create_booking_tile_reserve'>
+                <button className='create_booking_tile_reserve_btn'>Reserve</button>
+                <div>You won't be charged yet</div>
             </div>
 
             <div className='fees_list'>

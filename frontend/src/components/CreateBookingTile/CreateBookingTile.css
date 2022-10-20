@@ -24,11 +24,15 @@
     font-size: 14px;
 }
 
+.create_booking_tile_inputs {
+    display: flex;
+    flex-direction: column;
+}
+
 .create_booking_tile_dates{
     display: flex;
     gap: 5px;
 }
-
 
 .input_label {
     background-color: white;
@@ -47,10 +51,10 @@
 }
 
 #create_booking_tile_checkin_input,
-#create_booking_tile_checkout_input {
+#create_booking_tile_checkout_input,
+#create_booking_tile_guests_input {
     height: 50px;
     font-size: 13px;
-    margin-bottom: 20px;
 }
 
 #create_booking_tile_checkin_input {
@@ -61,8 +65,15 @@
     border-radius: 0 10px 0 0;
 }
 
+#create_booking_tile_guests_input {
+    width: 95%;
+    border-radius: 0 0 10px 10px;
+    margin-bottom: 20px;
+}
+
 #checkin_label,
-#checkout_label {
+#checkout_label,
+#guests_label {
     color: black;
     font-size: 13px;
     z-index: 2;
@@ -71,6 +82,26 @@
 #create_booking_tile_checkin_input:focus,
 #create_booking_tile_checkout_input:focus {
     z-index: 1;
+}
+
+.create_booking_tile_reserve{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 25px;
+    font-size: 14px;
+}
+
+.create_booking_tile_reserve_btn {
+    width: 100%;
+    padding: 15px;
+    color: white;
+    background-color: rgb(255, 56, 95);
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 300;
+    margin-bottom: 25px;
 }
 
 
