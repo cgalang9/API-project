@@ -26,6 +26,7 @@ The BnB is inspired by AirBnB, an online marketplace that allows users to list a
 * Heroku
 
 ## Landing Page
+![landing page](./landing_page.png)
 
 
 ##  How to Launch the Application Locally
