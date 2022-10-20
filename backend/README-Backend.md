@@ -1,5 +1,3 @@
-# API-project
-
 ## Database Schema Design
 <img width="742" alt="airbnb_dbdiagram" src="https://user-images.githubusercontent.com/101982618/192052119-3952be85-af15-4d15-b958-388d41f41082.png">
 
