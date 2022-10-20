@@ -8,6 +8,7 @@
     position: sticky;
     top: 50px;
     margin-bottom: 20px;
+    width: 70%;
 }
 
 .create_booking_tile_head {
@@ -39,4 +40,5 @@
 .create_booking_tile_total_fees {
     margin-top: 15px;
     font-size: 16px;
+    font-weight: bold;
 }
