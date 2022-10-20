@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { NavLink, useHistory, useParams } from 'react-router-dom'
 import { getSpotThunk } from '../../store/currentSpot'
+import CreateBookingTile from '../CreateBookingTile'
 import Reviews from '../Reviews'
 import './SpotDetails.css'
 
@@ -127,7 +128,7 @@ function SpotDetails() {
                         </div>
                     </div>
                     <div className='create_bookings_container'>
-                        <h1>Bookings Container Here</h1>
+                        <CreateBookingTile />
                     </div>
                 </div>
 
