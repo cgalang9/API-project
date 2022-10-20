@@ -10,6 +10,7 @@
 .create_booking_tile_head {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 40px;
 }
 
 .create_booking_tile_head_right {
@@ -17,4 +18,15 @@
     align-items: center;
     gap: 5px;
     font-size: 14px;
+}
+
+.fees_list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.fees_item {
+    display: flex;
+    justify-content: space-between;
 }

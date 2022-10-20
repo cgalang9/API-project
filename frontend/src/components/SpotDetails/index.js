@@ -109,22 +109,24 @@ function SpotDetails() {
 
                 <div className='sub_img_container'>
                     <div className='description_container'>
-                        <div className='description_head_text'>
-                            <div className='description_head_title'>
-                                {spot.description}
-                                {isOwner && (
-                                    <span>(<NavLink to={`/spots/${spotId}/edit`}>Edit/Delete Listing</NavLink>)</span>
-                                )}
+                        <div className='description_container_section1'>
+                            <div className='description_head_text'>
+                                <div className='description_head_title'>
+                                    {spot.description}
+                                    {isOwner && (
+                                        <span>(<NavLink to={`/spots/${spotId}/edit`}>Edit/Delete Listing</NavLink>)</span>
+                                    )}
+                                </div>
+                                <div className='description_head_subtitle'>
+                                    4 guests <span style={{ fontSize: 3 }}><i className="fa-solid fa-circle"/></span>
+                                    2 bedrooms <span style={{ fontSize: 3 }}><i className="fa-solid fa-circle"/></span>
+                                    3 beds <span style={{ fontSize: 3 }}><i className="fa-solid fa-circle"/></span>
+                                    1 bath
+                                </div>
                             </div>
-                            <div className='description_head_subtitle'>
-                                4 guests <span style={{ fontSize: 3 }}><i className="fa-solid fa-circle"/></span>
-                                2 bedrooms <span style={{ fontSize: 3 }}><i className="fa-solid fa-circle"/></span>
-                                3 beds <span style={{ fontSize: 3 }}><i className="fa-solid fa-circle"/></span>
-                                1 bath
+                            <div className='description_user_icon'>
+                                <i className="fa-solid fa-circle-user" />
                             </div>
-                        </div>
-                        <div className='description_user_icon'>
-                            <i className="fa-solid fa-circle-user" />
                         </div>
                     </div>
                     <div className='create_bookings_container'>
@@ -132,7 +134,6 @@ function SpotDetails() {
                     </div>
                 </div>
 
-                <hr />
 
                 <div className='reviews_container'>
                     <div className='reviews_header'>
