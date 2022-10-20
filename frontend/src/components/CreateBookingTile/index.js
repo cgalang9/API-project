@@ -19,7 +19,37 @@ function CreateBookingTile({ spot }) {
                 </div>
             </div>
 
+            <div className='create_booking_tile_inputs'>
+                <div className='create_booking_tile_dates'>
+                    <div className='create_booking_tile_checkin'>
+                        <label className='flex'>
+                            <span className='input_label' id="checkin_label">CHECK IN</span>
+                            <input
+                              type="date"
+                            //   value={name}
+                            //   onChange={(e) => setName(e.target.value)}
+                              required
+                            //   maxLength={49}
+                              id="create_booking_tile_checkin_input"
+                              />
+                        </label>
+                    </div>
+                    <div className='create_booking_tile_checkout'>
+                        <label className='flex'>
+                            <span className='input_label' id="checkout_label">CHECK OUT</span>
+                            <input
+                              type="date"
+                            //   value={name}
+                            //   onChange={(e) => setName(e.target.value)}
+                              required
+                            //   maxLength={49}
+                              id="create_booking_tile_checkout_input"
+                              />
+                        </label>
+                    </div>
+                </div>
 
+            </div>
 
             <div className='fees_list'>
                 <div className='fees_item'>

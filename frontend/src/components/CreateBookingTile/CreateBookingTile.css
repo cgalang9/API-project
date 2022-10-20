@@ -8,7 +8,7 @@
     position: sticky;
     top: 50px;
     margin-bottom: 20px;
-    width: 70%;
+    width: 80%;
 }
 
 .create_booking_tile_head {
@@ -23,6 +23,57 @@
     gap: 5px;
     font-size: 14px;
 }
+
+.create_booking_tile_dates{
+    display: flex;
+    gap: 5px;
+}
+
+
+.input_label {
+    background-color: white;
+    padding: 5px;
+    position: absolute;
+    left: 5%;
+    top: 10%;
+    color: rgb(108, 108, 108);
+}
+
+.create_booking_tile_checkin,
+.create_booking_tile_checkout{
+    width: 50%;
+    font-size: 13px;
+
+}
+
+#create_booking_tile_checkin_input,
+#create_booking_tile_checkout_input {
+    height: 50px;
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+#create_booking_tile_checkin_input {
+    border-radius: 10px 0 0 0;
+}
+
+#create_booking_tile_checkout_input {
+    border-radius: 0 10px 0 0;
+}
+
+#checkin_label,
+#checkout_label {
+    color: black;
+    font-size: 13px;
+    z-index: 2;
+}
+
+#create_booking_tile_checkin_input:focus,
+#create_booking_tile_checkout_input:focus {
+    z-index: 1;
+}
+
+
 
 .fees_list {
     display: flex;
