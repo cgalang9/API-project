@@ -1,14 +1,20 @@
-/* .profile-dropdown {
+.create_booking_tile {
     display: flex;
     flex-direction: column;
-    position: absolute;
-    right: 120px;
-    top: 50px;
-    padding:  10px 20px;
+    padding: 25px;
     background-color: white;
     box-shadow: 0 0 10px 0 rgb(193, 193, 193);
-    border-radius: 5px;
-    list-style: none;
-    z-index: 1;
-    width: 200px;
-} */
+    border-radius: 10px;
+}
+
+.create_booking_tile_head {
+    display: flex;
+    justify-content: space-between;
+}
+
+.create_booking_tile_head_right {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+}

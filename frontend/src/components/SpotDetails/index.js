@@ -128,7 +128,7 @@ function SpotDetails() {
                         </div>
                     </div>
                     <div className='create_bookings_container'>
-                        <CreateBookingTile />
+                        <CreateBookingTile spot={spot} />
                     </div>
                 </div>
 
