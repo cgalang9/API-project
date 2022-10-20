@@ -1,16 +1,9 @@
 .signup_form {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     border-radius: 10px;
-    max-width: 50%;
-    min-width: 50%;
+    width: 100%;
     align-self: center;
     padding: 0px 20px 20px;
-}
-
-.welcome {
-    padding: 15px;
-    margin-top: 20px;
-    font-size: 25px;
 }
 
 .signup_btn {
@@ -26,4 +19,18 @@
 
 .signup_btn:hover {
     background-color: rgb(255, 70, 95);
+}
+
+.signup_btn_nav:hover {
+    background-color: rgb(243, 243, 243);
+}
+
+.signup_btn_nav {
+    color: black;
+    border: 1px solid black;
+    background-color: white;
+    padding: 11px 10px;
+    margin-right: 15px;
+    border-radius: 20px;
+    font-size: 15px;
 }
