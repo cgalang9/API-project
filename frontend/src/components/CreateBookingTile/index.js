@@ -1,4 +1,7 @@
 import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
+import { getAllBookingsThunk, createBookingThunk } from '../../store/bookings';
 import './CreateBookingTile.css'
 
 function CreateBookingTile({ spot }) {
@@ -7,6 +10,26 @@ function CreateBookingTile({ spot }) {
     const [guests, setGuests] = useState(1)
     const [errors, setErrors] = useState([])
     const [bookingLength, setBookingLength] = useState(1)
+
+    const dispatch = useDispatch()
+    const history = useHistory()
+    const { spotId } = useParams()
+
+    const cleaning_fee = 100
+    const service_fee = 100
+
+    let checkinFormatted;
+    if (checkin) {
+        checkinFormatted = new Date(checkin).toISOString().split('T')[0]
+        console.log('checkin', checkinFormatted)
+    }
+
+    let checkoutFormatted
+    if (checkout) {
+        checkoutFormatted = new Date(checkout).toISOString().split('T')[0]
+        console.log('checkout', checkoutFormatted)
+    }
+
 
    useEffect(() => {
     if(checkin && checkout) {
@@ -22,8 +45,35 @@ function CreateBookingTile({ spot }) {
     }
    }, [checkin, checkout])
 
-    const cleaning_fee = 100
-    const service_fee = 100
+   dispatch(getAllBookingsThunk(spotId))
+
+   const handleSubmit = (e) => {
+        e.preventDefault();
+
+        setErrors([]);
+        const newBooking = {
+            startDate: checkinFormatted,
+            endDate: checkoutFormatted
+        }
+
+     dispatch(createBookingThunk(newBooking, spotId))
+    //    .then(() => history.push(`/spots/${spotId}`))
+       .catch(async (res) => {
+         const data = await res.json();
+         if(data.statusCode === 404) {
+           history.push('/404')
+         }
+         if (data && data.errors) {
+               setErrors(Object.values(data.errors))
+               console.log(errors)
+           } else if (data.message) {
+               setErrors([data.message])
+           }
+       });
+
+    }
+
+
 
     return (
         <div className='create_booking_tile'>
@@ -45,7 +95,7 @@ function CreateBookingTile({ spot }) {
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
             </ul>
 
-            <div className='create_booking_tile_inputs'>
+            <form className='create_booking_tile_inputs' onSubmit={handleSubmit}>
                 <div className='create_booking_tile_dates'>
                     <div className='create_booking_tile_checkin'>
                         <label className='flex'>
@@ -87,12 +137,12 @@ function CreateBookingTile({ spot }) {
                     </label>
                 </div>
 
-            </div>
+                <div className='create_booking_tile_reserve'>
+                    <button type="submit" className='create_booking_tile_reserve_btn'>Reserve</button>
+                    <div>You won't be charged yet</div>
+                </div>
+            </form>
 
-            <div className='create_booking_tile_reserve'>
-                <button className='create_booking_tile_reserve_btn'>Reserve</button>
-                <div>You won't be charged yet</div>
-            </div>
 
             <div className='fees_list'>
                 <div className='fees_item'>

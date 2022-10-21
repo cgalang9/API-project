@@ -48,6 +48,7 @@ export const bookingsReducer = (state = initialState, action) => {
     switch(action.type) {
         case GET_ALL_BOOKINGS:
             const stateGetAllBookings = { ...action.bookings }
+            console.log(stateGetAllBookings)
             return stateGetAllBookings
         case CREATE_BOOKING:
             const stateCreate = {...state}
