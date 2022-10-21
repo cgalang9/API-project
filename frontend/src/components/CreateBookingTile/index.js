@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { getAllBookingsThunk, createBookingThunk } from '../../store/bookings';
 import './CreateBookingTile.css'
@@ -28,7 +28,7 @@ function CreateBookingTile({ spot }) {
         checkoutFormatted = new Date(checkout).toISOString().split('T')[0]
     }
 
-    dispatch(getAllBookingsThunk(spotId))
+    // dispatch(getAllBookingsThunk(spotId))
 
 
    useEffect(() => {

@@ -1,6 +1,22 @@
 import { csrfFetch } from "./csrf"
 
 //Get all Bookings for a Spot based on the Spot's id
+const GET_ALL_BOOKINGS_CURRENT_USER = 'bookings/GET_ALL_BOOKINGS_CURRENT_USER'
+export const getAllBookingsCurrUser = (bookings) => {
+    return { type: GET_ALL_BOOKINGS_CURRENT_USER, bookings }
+}
+
+export const getAllBookingsCurrUserThunk = () => async (dispatch) => {
+    const response = await csrfFetch(`/api/bookings/current`)
+
+    if(response.ok) {
+        const bookings = await response.json()
+        dispatch(getAllBookingsCurrUser(bookings))
+        return bookings
+    }
+}
+
+//Get all Bookings for a Spot based on the Spot's id
 const GET_ALL_BOOKINGS = 'bookings/GET_ALL_BOOKINGS'
 export const getAllBookings = (bookings) => {
     return { type: GET_ALL_BOOKINGS, bookings }
@@ -49,6 +65,9 @@ export const bookingsReducer = (state = initialState, action) => {
         case GET_ALL_BOOKINGS:
             const stateGetAllBookings = { ...action.bookings }
             return stateGetAllBookings
+        case GET_ALL_BOOKINGS_CURRENT_USER:
+            const stateCurrUserBookings = { ...action.bookings }
+            return stateCurrUserBookings
         case CREATE_BOOKING:
             const stateCreate = {...state}
             stateCreate[action.spotId] = action.booking
