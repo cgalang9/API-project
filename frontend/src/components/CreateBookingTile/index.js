@@ -5,6 +5,7 @@ function CreateBookingTile({ spot }) {
     const [checkin, setCheckin] = useState('')
     const [checkout, setCheckout] = useState('')
     const [guests, setGuests] = useState(1)
+    const [errors, setErrors] = useState([])
     const [bookingLength, setBookingLength] = useState(1)
 
    useEffect(() => {
@@ -39,6 +40,10 @@ function CreateBookingTile({ spot }) {
                     <div>{spot.numReviews} reviews</div>
                 </div>
             </div>
+
+            <ul className="errors">
+                {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+            </ul>
 
             <div className='create_booking_tile_inputs'>
                 <div className='create_booking_tile_dates'>
