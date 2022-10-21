@@ -9,6 +9,7 @@ import SpotDetailsMainPage from "./components/SpotDetailsMainPage";
 import ReivewsCurrentUser from "./components/ReivewsCurrentUser";
 import EditReviewForm from "./components/EditReviewForm";
 import CreateReviewForm from "./components/CreateReviewForm";
+import BookingConfirmation from "./components/CreateBookingTile/BookingConfirmation";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,8 +26,11 @@ function App() {
           <Route exact path="/">
             <SpotsDisplay />
           </Route>
-          <Route path="/spots/:spotId/reviews/new">
+          <Route exact path="/spots/:spotId/reviews/new">
             <CreateReviewForm />
+          </Route>
+          <Route exact path="/spots/:spotId/booking-confirmation">
+            <BookingConfirmation />
           </Route>
           <Route path="/spots/:spotId">
             <SpotDetailsMainPage />

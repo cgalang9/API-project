@@ -21,14 +21,14 @@ function CreateBookingTile({ spot }) {
     let checkinFormatted;
     if (checkin) {
         checkinFormatted = new Date(checkin).toISOString().split('T')[0]
-        console.log('checkin', checkinFormatted)
     }
 
     let checkoutFormatted
     if (checkout) {
         checkoutFormatted = new Date(checkout).toISOString().split('T')[0]
-        console.log('checkout', checkoutFormatted)
     }
+
+    dispatch(getAllBookingsThunk(spotId))
 
 
    useEffect(() => {
@@ -49,28 +49,36 @@ function CreateBookingTile({ spot }) {
 
    const handleSubmit = (e) => {
         e.preventDefault();
+        if(window.confirm(`Are you sure you want to reserve this location from ${checkin} to ${checkout}?`)) {
+            setErrors([]);
+            const newBooking = {
+                startDate: checkinFormatted,
+                endDate: checkoutFormatted
+            }
 
-        setErrors([]);
-        const newBooking = {
-            startDate: checkinFormatted,
-            endDate: checkoutFormatted
+         dispatch(createBookingThunk(newBooking, spotId))
+           .then(() => history.push(`/spots/${spotId}/booking-confirmation`, {
+                    newBooking,
+                    name: spot.name,
+                    price: spot.price,
+                    cleaningFee: cleaning_fee,
+                    serviceFee: service_fee,
+                    guests,
+                    bookingLength
+                }))
+           .catch(async (res) => {
+             const data = await res.json();
+             if(data.statusCode === 404) {
+               history.push('/404')
+             }
+             if (data && data.errors) {
+                   setErrors(Object.values(data.errors))
+                   console.log(errors)
+               } else if (data.message) {
+                   setErrors([data.message])
+               }
+           });
         }
-
-     dispatch(createBookingThunk(newBooking, spotId))
-    //    .then(() => history.push(`/spots/${spotId}`))
-       .catch(async (res) => {
-         const data = await res.json();
-         if(data.statusCode === 404) {
-           history.push('/404')
-         }
-         if (data && data.errors) {
-               setErrors(Object.values(data.errors))
-               console.log(errors)
-           } else if (data.message) {
-               setErrors([data.message])
-           }
-       });
-
     }
 
 
