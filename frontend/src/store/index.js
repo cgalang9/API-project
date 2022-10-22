@@ -5,13 +5,15 @@ import { currentSpotReducer } from "./currentSpot";
 import { spotsReducer } from "./spots";
 import { reviewsReducer } from "./reviews";
 import { bookingsReducer } from "./bookings";
+import { currentSpotReviewsReducer } from "./currSpotReviews";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   spots: spotsReducer,
   currentSpot: currentSpotReducer,
   reviews: reviewsReducer,
-  bookings: bookingsReducer
+  bookings: bookingsReducer,
+  currentSpotReviews: currentSpotReviewsReducer
 });
 
 let enhancer;

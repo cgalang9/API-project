@@ -6,17 +6,6 @@ export const getAllReviews = (reviews) => {
     return { type: GET_ALL_REVIEWS, reviews }
 }
 
-
-export const getAllReviewsThunk = (spotId) => async (dispatch) => {
-    const response = await csrfFetch(`/api/spots/${spotId}/reviews`)
-
-    if(response.ok) {
-        const reviews = await response.json()
-        dispatch(getAllReviews(reviews))
-        return reviews
-    }
-}
-
 //Get all Reviews of the Current User
 export const getCurrUserReviewsThunk = () => async (dispatch) => {
     const response = await csrfFetch(`/api/reviews/current`)
