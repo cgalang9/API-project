@@ -1,0 +1,63 @@
+.edit_booking_form {
+    border: 1px solid black;
+    padding: 30px 50px;
+    min-width: 20%;
+    max-width: 25%;
+    border-radius: 10px;
+}
+
+.edit_booking_checkin,
+.edit_booking_checkout,
+.edit_booking_guests {
+    font-size: 13px;
+    width: 100%;
+}
+
+#edit_booking_checkin_input,
+#edit_booking_checkout_input,
+#edit_booking_guests_input {
+    height: 50px;
+    width: 100%;
+    font-size: 13px;
+    padding-left: 15px;
+}
+
+#edit_booking_checkin_input {
+    border-radius: 10px 10px 0 0;
+}
+
+#edit_booking_checkout_input {
+    border-radius: 0 0 10px 10px;
+    margin-bottom: 40px;
+}
+
+/* #edit_booking_guests_input {
+    border-radius: 0 0 10px 10px;
+    margin-bottom: 40px;
+} */
+
+.edit_booking_confirm_btn,
+.delete_booking_btn {
+    width: 200px;
+    padding: 15px;
+    color: white;
+    background-color: rgb(255, 56, 95);
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 300;
+    margin-bottom: 30px;
+}
+
+.delete_booking_btn {
+    margin: 50px 0;
+    background-color: red;
+}
+
+#edit_checkin_label,
+#edit_checkout_label,
+#edit_guests_label {
+    font-size: 13px;
+    z-index: 2;
+    padding-left: 0px;
+}

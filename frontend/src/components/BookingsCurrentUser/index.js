@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from 'react-router-dom'
 import { getAllBookingsCurrUserThunk } from "../../store/bookings";
 import './BookingsCurrentUser.css'
 
@@ -15,7 +16,7 @@ function BookingsCurrentUser() {
 
     return (
         <div className="curr-user-bookings-container top flex">
-            <h1>Your Bookings</h1>
+            <h1>Your Trips</h1>
             <div className="curr_user_booking_list">
                 {bookings && (
                     bookings.map(booking => (
@@ -31,7 +32,11 @@ function BookingsCurrentUser() {
                             />
                             <div className="curr_user_booking_list_item_details">
                                 <div className="curr_user_booking_list_item_city">{booking.Spot.city}</div>
-                                <div className="curr_user_booking_list_item_dates">{new Date(booking.startDate).toDateString().slice(4)} - {new Date(booking.endDate).toDateString().slice(4)}</div>
+                                <div className="curr_user_booking_list_item_dates">
+                                    {new Date(booking.startDate).toDateString().slice(4)} - {new Date(booking.endDate).toDateString().slice(4)}
+                                </div>
+                                <NavLink to={`/bookings/${booking.id}/edit`}>Edit/Delete Trip</NavLink>
+
                             </div>
                         </div>
                     ))

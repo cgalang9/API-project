@@ -11,6 +11,7 @@ import EditReviewForm from "./components/EditReviewForm";
 import CreateReviewForm from "./components/CreateReviewForm";
 import BookingConfirmation from "./components/CreateBookingTile/BookingConfirmation";
 import BookingsCurrentUser from "./components/BookingsCurrentUser";
+import EditBooking from "./components/EditBooking";
 
 function App() {
   const dispatch = useDispatch();
@@ -47,6 +48,9 @@ function App() {
           </Route>
           <Route path="/current-user/bookings">
             <BookingsCurrentUser />
+          </Route>
+          <Route path={"/bookings/:bookingId/edit"}>
+            <EditBooking />
           </Route>
           <Route path='/404'>
             <h1 style={{ marginTop: 125, textAlign: "center" }}>404: Page Not Found</h1>
