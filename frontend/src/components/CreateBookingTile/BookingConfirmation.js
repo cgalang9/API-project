@@ -2,7 +2,6 @@ import { useLocation, NavLink } from "react-router-dom"
 
 function BookingConfirmation() {
     const location = useLocation()
-    console.log(location.state)
     const startDate = new Date(location.state.newBooking.startDate.replace(/-/g, '\/')).toDateString()
     const endDate = new Date(location.state.newBooking.endDate.replace(/-/g, '\/')).toDateString()
     return (

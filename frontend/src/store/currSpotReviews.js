@@ -22,7 +22,6 @@ export const currentSpotReviewsReducer = (state = null, action) => {
     switch(action.type) {
         case GET_ALL_REVIEWS_CURR:
             const reviewsArr = action.reviews['Reviews']
-            console.log(reviewsArr)
             const reviewsObj = {}
             reviewsArr.forEach(review => {
                 reviewsObj[review.id] = review
