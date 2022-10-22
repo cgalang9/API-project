@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { getAllBookingsCurrUserThunk } from "../../store/bookings";
 import { useDispatch, useSelector } from "react-redux";
 import { editBookingThunk, deleteBookingThunk } from "../../store/bookings";
+import { getSpotThunk } from "../../store/currentSpot";
 import './EditBookingForm.css'
 
 
@@ -25,6 +26,16 @@ function EditBooking() {
     if(bookings) {
         booking = bookings[bookingId]
     }
+
+    useEffect(() => {
+        if(booking) {
+            dispatch(getSpotThunk(booking.spotId))
+        }
+    }, [booking])
+
+    const spot = useSelector(state => state.currentSpot)
+    console.log(spot)
+
 
 
     useEffect(() => {
@@ -93,6 +104,9 @@ function EditBooking() {
         }
     }
 
+    const cleaning_fee = 100
+    const service_fee = 100
+
     return (
         <div className='edit_booking_container top flex'>
         <form className='edit_booking_form flex' onSubmit={handleSubmit}>
@@ -138,6 +152,37 @@ function EditBooking() {
                 </label>
             </div> */}
 
+            {spot && (
+                <div className="edit_booking_new_price">
+                    <div className='fees_list'>
+                        <div className='fees_item'>
+                            <div className='fees_item_title'>${spot.price} x {bookingLength} night</div>
+                            <div className='fees_item_price'>${spot.price * bookingLength}</div>
+                        </div>
+                        <div className='fees_item'>
+                            <div className='fees_item_title'>Cleaning fee</div>
+                            <div className='fees_item_price'>${cleaning_fee}</div>
+                        </div>
+                        <div className='fees_item'>
+                            <div className='fees_item_title'>Service fee</div>
+                            <div className='fees_item_price'>${service_fee}</div>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <div className='create_booking_tile_total_fees'>
+                        <div className='fees_item_title'>New total before taxes</div>
+                        <div className='fees_item_price'>${spot.price + cleaning_fee + service_fee}</div>
+                    </div>
+
+                </div>
+
+            )}
+
+            <div className="edit_booking_new_price">
+
+            </div>
             <button type="submit" className='edit_booking_confirm_btn'>Confirm Changes</button>
         </form>
         <button className='delete_booking_btn' onClick={deleteBooking}>Delete Booking</button>
