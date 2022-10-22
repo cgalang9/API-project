@@ -33,15 +33,16 @@ export const getAllBookingsThunk = (bookingId) => async (dispatch) => {
 }
 
 
-//Create a Booking from a booking based on the booking's id
+//Create a Booking from a Spot based on the Spot's id
 const CREATE_BOOKING = 'bookings/CREATE_BOOKING'
 export const createBooking = (booking, bookingId) => {
     return { type: CREATE_BOOKING, booking, bookingId }
 }
 
-export const createBookingThunk = (newBooking, bookingId) => async (dispatch) => {
+export const createBookingThunk = (newBooking, spotId) => async (dispatch) => {
     const { startDate, endDate } = newBooking
-    const response = await csrfFetch(`/api/bookings/${bookingId}/bookings` , {
+    console.log(newBooking)
+    const response = await csrfFetch(`/api/spots/${spotId}/bookings` , {
         method: 'POST',
         body: JSON.stringify({
             startDate,

@@ -85,13 +85,13 @@ function EditBooking() {
         }
     }
 
-    // const deleteBooking = () => {
-    //     if(window.confirm("Are you sure you want to delete this booking? You can not recover the booking after deletion.")) {
-    //       dispatch(deleteBookingThunk(bookingId))
-    //         .then(() => history.push('/current-user/bookings'))
-    //         .catch(() => history.push('/404'))
-    //     }
-    // }
+    const deleteBooking = () => {
+        if(window.confirm("Are you sure you want to delete this booking? You can not recover the booking after deletion.")) {
+          dispatch(deleteBookingThunk(bookingId))
+            .then(() => history.push('/current-user/bookings'))
+            .catch(() => history.push('/404'))
+        }
+    }
 
     return (
         <div className='edit_booking_container top flex'>
@@ -140,7 +140,7 @@ function EditBooking() {
 
             <button type="submit" className='edit_booking_confirm_btn'>Confirm Changes</button>
         </form>
-        <button className='delete_booking_btn'>Delete Booking</button>
+        <button className='delete_booking_btn' onClick={deleteBooking}>Delete Booking</button>
     </div>
     )
 
