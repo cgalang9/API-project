@@ -6,6 +6,11 @@ export const getAllReviews = (reviews) => {
     return { type: GET_ALL_REVIEWS, reviews }
 }
 
+const GET_ALL_REVIEWS_CURR = 'reviews/GET_ALL_REVIEWS_CURR'
+export const getAllReviewsCurr = (reviews) => {
+    return { type: GET_ALL_REVIEWS_CURR, reviews }
+}
+
 export const getAllReviewsThunk = (spotId) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`)
 
@@ -22,7 +27,7 @@ export const getCurrUserReviewsThunk = () => async (dispatch) => {
 
     if(response.ok) {
         const reviews = await response.json()
-        dispatch(getAllReviews(reviews))
+        dispatch(getAllReviewsCurr(reviews))
         return reviews
     }
 }
@@ -97,8 +102,21 @@ const initialState = {}
 export const reviewsReducer = (state = initialState, action) => {
     switch(action.type) {
         case GET_ALL_REVIEWS:
-            const stateGetAllReviews = { ...action.reviews }
-            return stateGetAllReviews
+            const reviewsArr = action.reviews['Reviews']
+            const reviewsObj = {}
+            reviewsArr.forEach(review => {
+                reviewsObj[review.id] = review
+            });
+            const newStateGetAll = Object.assign({ ...state }, {...reviewsObj})
+            return newStateGetAll
+        case GET_ALL_REVIEWS_CURR:
+                const reviewsArrCurr = action.reviews['Reviews']
+                const reviewsCurrObj = {}
+                reviewsArrCurr.forEach(review => {
+                    reviewsCurrObj[review.id] = review
+                });
+                const newStateGetAllCurr = Object.assign({ ...state }, {...reviewsObj})
+                return newStateGetAllCurr
         case EDIT_REVIEW:
             const stateEditReview = {...state}
             stateEditReview[action.review.id] = action.review
@@ -109,9 +127,9 @@ export const reviewsReducer = (state = initialState, action) => {
             return stateCreateReview
         case DELETE_REVIEW:
             const stateDelete = {...state}
-            const stateDelArr = stateDelete.Reviews.filter(review => review.id !== Number(action.reviewId))
-            stateDelete.Reviews = stateDelArr
-            return stateDelete
+            const id = action.reviewId
+            delete stateDelete[id]
+            return {...stateDelete}
         default:
             return state
     }

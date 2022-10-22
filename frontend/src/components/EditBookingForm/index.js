@@ -34,9 +34,6 @@ function EditBooking() {
     }, [booking])
 
     const spot = useSelector(state => state.currentSpot)
-    console.log(spot)
-
-
 
     useEffect(() => {
         if(booking) {

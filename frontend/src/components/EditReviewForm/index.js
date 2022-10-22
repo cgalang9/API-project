@@ -17,13 +17,16 @@ function EditReviewForm() {
       dispatch(getCurrUserReviewsThunk())
     },[dispatch])
 
-    const reviews = useSelector(state => state.reviews.Reviews)
+    const reviewsObj = useSelector(state => state.reviews)
+    // const reviews = Object.values(reviewsObj)
 
     //fixes bug when refreshing page spot was undefined and gave an error
     let currentReviewObj;
-    if (reviews) {
-      const currentReview = reviews.filter(review => review.id.toString() === reviewId)
-      currentReviewObj = currentReview[0]
+    if (reviewsObj) {
+      currentReviewObj = reviewsObj[reviewId]
+    }
+
+    if(currentReviewObj) {
       if(stars === -10000) setStars(currentReviewObj.stars)
       if(review === null) setReview(currentReviewObj.review)
     }
@@ -73,7 +76,7 @@ function EditReviewForm() {
       {!isOwner && (
         <Redirect to={`/`} />
       )}
-      {reviews && (
+      {currentReviewObj && (
         <div className='edit_review_container flex top'>
             <form className='edit_review_form flex' onSubmit={handleSubmit}>
               <div className='title'>Edit Your Review</div>
