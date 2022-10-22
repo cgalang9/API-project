@@ -1,12 +1,12 @@
 import { csrfFetch } from "./csrf"
 
-//Get all Reviews by a Spot's id
+
+//Get all Reviews of the Current User
 const GET_ALL_REVIEWS = 'reviews/GET_ALL_REVIEWS'
 export const getAllReviews = (reviews) => {
     return { type: GET_ALL_REVIEWS, reviews }
 }
 
-//Get all Reviews of the Current User
 export const getCurrUserReviewsThunk = () => async (dispatch) => {
     const response = await csrfFetch(`/api/reviews/current`)
 

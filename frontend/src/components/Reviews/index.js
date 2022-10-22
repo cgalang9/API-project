@@ -1,4 +1,3 @@
-// import { getAllReviewsThunk } from '../../store/reviews'
 import { getAllReviewsThunk } from '../../store/currSpotReviews'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
