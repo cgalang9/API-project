@@ -2,13 +2,18 @@ import { useHistory, useParams } from "react-router-dom";
 import { useEffect, useState } from 'react'
 import { getAllBookingsCurrUserThunk } from "../../store/bookings";
 import { useDispatch, useSelector } from "react-redux";
-import './EditBooking.css'
+import './EditBookingForm.css'
 
 
 function EditBooking() {
     const { bookingId } = useParams()
     const dispatch = useDispatch()
     const history = useHistory()
+    const [checkin, setCheckin] = useState('')
+    const [checkout, setCheckout] = useState('')
+    // const [guests, setGuests] = useState(1)
+    const [errors, setErrors] = useState([])
+    const [bookingLength, setBookingLength] = useState(1)
 
     useEffect(() => {
         dispatch(getAllBookingsCurrUserThunk())
@@ -16,15 +21,16 @@ function EditBooking() {
 
     const bookingsObj = useSelector(state => state.bookings)
     const bookings = bookingsObj.Bookings
-    let booking = {};
+    let booking;
     if(bookings) booking = bookings.find(booking => booking.id.toString() === bookingId)
-    console.log(booking.startDate)
 
-    const [checkin, setCheckin] = useState(booking.startDate.toString())
-    const [checkout, setCheckout] = useState(booking.endDate.toString())
-    // const [guests, setGuests] = useState(1)
-    const [errors, setErrors] = useState([])
-    const [bookingLength, setBookingLength] = useState(1)
+
+    useEffect(() => {
+        if(booking) {
+            setCheckin(booking.startDate.toString())
+            setCheckout(booking.endDate.toString())
+        }
+    }, [booking])
 
     let checkinFormatted;
     if (checkin) {
