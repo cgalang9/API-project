@@ -547,7 +547,7 @@ router.post('/:spotId/bookings', requireAuth, validateDate, async (req, res, nex
         }
 
         if(spot.ownerId === req.user.id) {
-            let err = new Error('Forbidden')
+            let err = new Error('Forbidden: Listing must NOT belong to the current user')
             err.status = 403
             next(err)
         }

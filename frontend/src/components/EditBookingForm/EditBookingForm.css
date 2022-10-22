@@ -1,8 +1,8 @@
 .edit_booking_form {
     border: 1px solid black;
     padding: 30px 50px;
-    min-width: 20%;
-    max-width: 25%;
+    min-width: 25%;
+    max-width: 30%;
     border-radius: 10px;
 }
 
@@ -18,7 +18,7 @@
 #edit_booking_guests_input {
     height: 50px;
     width: 100%;
-    font-size: 13px;
+    font-size: 15px;
     padding-left: 15px;
 }
 
