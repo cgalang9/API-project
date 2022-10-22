@@ -28,8 +28,6 @@ function CreateBookingTile({ spot }) {
         checkoutFormatted = new Date(checkout).toISOString().split('T')[0]
     }
 
-    // dispatch(getAllBookingsThunk(spotId))
-
 
    useEffect(() => {
     if(checkin && checkout) {
@@ -44,8 +42,6 @@ function CreateBookingTile({ spot }) {
         }
     }
    }, [checkin, checkout])
-
-   dispatch(getAllBookingsThunk(spotId))
 
    const handleSubmit = (e) => {
         e.preventDefault();

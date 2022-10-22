@@ -1,6 +1,6 @@
 import { csrfFetch } from "./csrf"
 
-//Get all Bookings for a booking based on the booking's id
+//Get all Bookings for a current user
 const GET_ALL_BOOKINGS_CURRENT_USER = 'bookings/GET_ALL_BOOKINGS_CURRENT_USER'
 export const getAllBookingsCurrUser = (bookings) => {
     return { type: GET_ALL_BOOKINGS_CURRENT_USER, bookings }
@@ -84,7 +84,7 @@ export const deleteBooking = (bookingId) => {
     return { type: DELETE_BOOKING, bookingId}
 }
 
-export const deleteSpotThunk = (bookingId) => async (dispatch) => {
+export const deleteBookingThunk = (bookingId) => async (dispatch) => {
     const response = await csrfFetch(` /api/bookings/${bookingId}`, {
         method: 'DELETE'
     })
@@ -103,11 +103,21 @@ const initialState = {}
 export const bookingsReducer = (state = initialState, action) => {
     switch(action.type) {
         case GET_ALL_BOOKINGS:
-            const stateGetAllBookings = { ...action.bookings }
-            return stateGetAllBookings
+            const bookingsArr = action.bookings['Bookings']
+            const bookingsObj = {}
+            bookingsArr.forEach(booking => {
+                bookingsObj[booking.id] = booking
+            });
+            const newStateGetAll = Object.assign({ ...state }, {...bookingsObj})
+            return newStateGetAll
         case GET_ALL_BOOKINGS_CURRENT_USER:
-            const stateCurrUserBookings = { ...action.bookings }
-            return stateCurrUserBookings
+            const bookingsArrCurrUser = action.bookings['Bookings']
+            const bookingsObjCurrUser = {}
+            bookingsArrCurrUser.forEach(booking => {
+                bookingsObjCurrUser[booking.id] = booking
+            });
+            const newStateGetAllCurrUser = Object.assign({ ...state }, {...bookingsObjCurrUser})
+            return newStateGetAllCurrUser
         case CREATE_BOOKING:
             const stateCreate = {...state}
             stateCreate[action.bookingId] = action.booking
@@ -118,7 +128,7 @@ export const bookingsReducer = (state = initialState, action) => {
             return stateEdit
         case DELETE_BOOKING:
             const stateDelete = {...state}
-            const id = action.spotId
+            const id = action.bookingId
             delete stateDelete[id]
             return {...stateDelete}
         default:

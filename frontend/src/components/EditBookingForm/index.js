@@ -2,6 +2,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { useEffect, useState } from 'react'
 import { getAllBookingsCurrUserThunk } from "../../store/bookings";
 import { useDispatch, useSelector } from "react-redux";
+import { editBookingThunk, deleteBookingThunk } from "../../store/bookings";
 import './EditBookingForm.css'
 
 
@@ -19,10 +20,11 @@ function EditBooking() {
         dispatch(getAllBookingsCurrUserThunk())
     }, [dispatch])
 
-    const bookingsObj = useSelector(state => state.bookings)
-    const bookings = bookingsObj.Bookings
+    const bookings = useSelector(state => state.bookings)
     let booking;
-    if(bookings) booking = bookings.find(booking => booking.id.toString() === bookingId)
+    if(bookings) {
+        booking = bookings[bookingId]
+    }
 
 
     useEffect(() => {
@@ -40,6 +42,7 @@ function EditBooking() {
     let checkoutFormatted
     if (checkout) {
         checkoutFormatted = new Date(checkout).toISOString().split('T')[0]
+
     }
 
    useEffect(() => {
@@ -58,37 +61,37 @@ function EditBooking() {
 
    const handleSubmit = (e) => {
         e.preventDefault();
-        // if(window.confirm(`Are you sure you want to reserve this location from ${checkin} to ${checkout}?`)) {
-        //     setErrors([]);
-        //     const newBooking = {
-        //         startDate: checkinFormatted,
-        //         endDate: checkoutFormatted
-        //     }
+        if(window.confirm(`Are you sure you want to edit reservation dates to ${checkin} to ${checkout}?`)) {
+            setErrors([]);
+            const newBooking = {
+                startDate: checkinFormatted,
+                endDate: checkoutFormatted
+            }
 
-        //  dispatch(createBookingThunk(newBooking, spotId))
-        //    .then(() => history.push(`/spots/${spotId}/booking-confirmation`, {
-        //             newBooking,
-        //             name: spot.name,
-        //             price: spot.price,
-        //             cleaningFee: cleaning_fee,
-        //             serviceFee: service_fee,
-        //             guests,
-        //             bookingLength
-        //         }))
-        //    .catch(async (res) => {
-        //      const data = await res.json();
-        //      if(data.statusCode === 404) {
-        //        history.push('/404')
-        //      }
-        //      if (data && data.errors) {
-        //            setErrors(Object.values(data.errors))
-        //            console.log(errors)
-        //        } else if (data.message) {
-        //            setErrors([data.message])
-        //        }
-        //    });
-        // }
+         dispatch(editBookingThunk(newBooking, bookingId))
+           .then(() => history.push('/current-user/bookings'))
+           .catch(async (res) => {
+             const data = await res.json();
+             if(data.statusCode === 404) {
+               history.push('/404')
+             }
+             if (data && data.errors) {
+                   setErrors(Object.values(data.errors))
+                   console.log(errors)
+               } else if (data.message) {
+                   setErrors([data.message])
+               }
+           });
+        }
     }
+
+    // const deleteBooking = () => {
+    //     if(window.confirm("Are you sure you want to delete this booking? You can not recover the booking after deletion.")) {
+    //       dispatch(deleteBookingThunk(bookingId))
+    //         .then(() => history.push('/current-user/bookings'))
+    //         .catch(() => history.push('/404'))
+    //     }
+    // }
 
     return (
         <div className='edit_booking_container top flex'>
