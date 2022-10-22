@@ -20,9 +20,9 @@ function BookingsCurrentUser() {
             <div className="curr_user_booking_list">
                 {bookings && (
                     bookings.map(booking => (
-                        <>
+                        <div key={booking.id}>
                         {booking.Spot && (
-                            <div className="curr_user_booking_list_item_container" key={booking.id}>
+                            <div className="curr_user_booking_list_item_container">
                                 <img
                                     src={booking.Spot.previewImage || 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930'}
                                     alt="spot"
@@ -42,7 +42,7 @@ function BookingsCurrentUser() {
                                 </div>
                             </div>
                         )}
-                        </>
+                        </div>
                     ))
                 )}
             </div>
