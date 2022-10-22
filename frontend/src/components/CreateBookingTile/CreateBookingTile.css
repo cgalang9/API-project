@@ -35,6 +35,12 @@
     max-height: 68px;
 }
 
+.create_booking_tile_guests {
+    max-height: 68px;
+    margin-bottom: 20px;
+}
+
+
 .input_label {
     background-color: white;
     padding: 5px;
@@ -68,7 +74,6 @@
 #create_booking_tile_guests_input {
     width: 95%;
     border-radius: 0 0 10px 10px;
-    margin-bottom: 20px;
 }
 
 #checkin_label,
