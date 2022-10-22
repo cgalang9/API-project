@@ -6,10 +6,6 @@ export const getAllReviews = (reviews) => {
     return { type: GET_ALL_REVIEWS, reviews }
 }
 
-const GET_ALL_REVIEWS_CURR = 'reviews/GET_ALL_REVIEWS_CURR'
-export const getAllReviewsCurr = (reviews) => {
-    return { type: GET_ALL_REVIEWS_CURR, reviews }
-}
 
 export const getAllReviewsThunk = (spotId) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`)
@@ -27,7 +23,7 @@ export const getCurrUserReviewsThunk = () => async (dispatch) => {
 
     if(response.ok) {
         const reviews = await response.json()
-        dispatch(getAllReviewsCurr(reviews))
+        dispatch(getAllReviews(reviews))
         return reviews
     }
 }
@@ -109,14 +105,6 @@ export const reviewsReducer = (state = initialState, action) => {
             });
             const newStateGetAll = Object.assign({ ...state }, {...reviewsObj})
             return newStateGetAll
-        case GET_ALL_REVIEWS_CURR:
-                const reviewsArrCurr = action.reviews['Reviews']
-                const reviewsCurrObj = {}
-                reviewsArrCurr.forEach(review => {
-                    reviewsCurrObj[review.id] = review
-                });
-                const newStateGetAllCurr = Object.assign({ ...state }, {...reviewsObj})
-                return newStateGetAllCurr
         case EDIT_REVIEW:
             const stateEditReview = {...state}
             stateEditReview[action.review.id] = action.review

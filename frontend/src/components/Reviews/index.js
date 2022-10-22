@@ -23,7 +23,6 @@ function Reviews() {
             if (sessionUser.id === review.userId) userHasReview = true
         });
         reviews = reviews.slice(0, 6)
-        console.log(reviews)
     }
 
     return (
