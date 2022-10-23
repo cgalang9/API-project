@@ -109,14 +109,44 @@
     margin-bottom: 20px;
 }
 
-.description_container_section2 {
+.description_container_section2,
+.description_container_section3 {
     display: flex;
     align-items: center;
     border-bottom: 1px solid grey;
     width: 95%;
-    padding: 25px 0;
+    padding: 40px 0;
 }
 
+.description_container_section2 {
+    flex-direction: column;
+    gap: 20px;
+}
+
+.section2_item {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    align-items: flex-start;
+    font-size: 15px;
+}
+
+.section2_item_icon {
+    font-size: 30px;
+}
+
+
+.section2_text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+}
+
+.section2_text_bottom {
+    font-size: 13px;
+    color: grey;
+}
 
 
 .reviews_header,
