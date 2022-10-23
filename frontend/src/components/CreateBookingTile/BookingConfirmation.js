@@ -16,7 +16,7 @@ function BookingConfirmation() {
                 <div className='service_fee_confirmed'>Service Fee = ${location.state.serviceFee}</div>
                 <div className="total_fee_confirmed">Total = ${(location.state.price * location.state.bookingLength) + location.state.cleaningFee + location.state.serviceFee}</div>
             </div>
-            <div style={{ marginTop: 25 }}><NavLink exact to="/">Home Page</NavLink></div>
+            <div style={{ marginTop: 25 }}><NavLink exact to="/current-user/bookings">Go To Your Bookings</NavLink></div>
         </div>
     )
 }
