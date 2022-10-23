@@ -85,7 +85,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid grey;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgb(193, 193, 193);
     width: 95%;
 }
 
@@ -110,22 +111,34 @@
 }
 
 .description_container_section2,
-.description_container_section3 {
+.description_container_section3,
+.description_container_section4  {
     display: flex;
     align-items: center;
-    border-bottom: 1px solid grey;
+    border-bottom: 1px solid rgb(193, 193, 193);
     width: 95%;
     padding: 40px 0;
 }
 
-.description_container_section2 {
+.description_container_section2,
+.description_container_section4 {
     flex-direction: column;
-    gap: 20px;
+    gap: 30px;
 }
+
+.description_container_section3 {
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+.description_container_section4 {
+    border-bottom: none;
+}
+
 
 .section2_item {
     display: flex;
-    gap: 20px;
+    gap: 15px;
     width: 100%;
     align-items: flex-start;
     font-size: 15px;
@@ -133,6 +146,26 @@
 
 .section2_item_icon {
     font-size: 30px;
+    width: 40px;
+}
+
+.section4_title {
+    width: 100%;
+    font-size: 18px;
+}
+
+.section4_list {
+    display: flex;
+    width: 100%;
+}
+
+.section4_col {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+    width: 50%;
+    font-size: 14px;
 }
 
 
@@ -148,6 +181,9 @@
     color: grey;
 }
 
+.reviews_container {
+    border-top: 1px solid rgb(193, 193, 193);
+}
 
 .reviews_header,
 .reviews_stars {
@@ -165,6 +201,7 @@
 .sub_img_container {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 25px;
 }
 
 .create_bookings_container {

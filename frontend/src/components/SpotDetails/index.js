@@ -133,31 +133,59 @@ function SpotDetails() {
 
                         <div className='description_container_section2'>
                             <div className='section2_item'>
-                                <div className='section2_item_icon'><i class="fas fa-desktop"></i></div>
+                                <div className='section2_item_icon'><i className="fas fa-desktop"></i></div>
                                 <div className='section2_text'>
                                     <div className='section2_text_top'>Dedicated workspace</div>
                                     <div className='section2_text_bottom'>A common area with wifi that’s well-suited for working.</div>
                                 </div>
                             </div>
                             <div className='section2_item'>
-                                <div className='section2_item_icon'><i class="far fa-calendar-check"></i></div>
+                                <div className='section2_item_icon'><i className="far fa-calendar-check"></i></div>
                                 <div className='section2_text'>
                                     <div className='section2_text_top'>Self check-in</div>
                                     <div className='section2_text_bottom'>Check yourself in with the smartlock.</div>
                                 </div>
                             </div>
                             <div className='section2_item'>
-                                <div className='section2_item_icon'><i class="fa-regular fa-calendar"></i></div>
+                                <div className='section2_item_icon'><i className="fa-regular fa-calendar"></i></div>
                                 <div className='section2_text'>Free cancellation before Nov 25.</div>
                             </div>
                         </div>
 
                         <div className='description_container_section3'>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet mauris vel massa tempor eleifend id ac lacus. Sed eu dictum urna, sit amet posuere nisi. Vestibulum lacinia vitae urna et rhoncus. Quisque pellentesque mollis nunc at tristique. Praesent eu dui tincidunt, ultrices ipsum lacinia, sagittis ex. Nam nec massa dignissim, facilisis sapien nec, tempor purus. Cras in suscipit felis, nec facilisis mi. Donec sollicitudin nisl sit amet nibh pretium, consequat viverra mi eleifend. Pellentesque eget venenatis nunc, nec tristique ex. Phasellus congue non risus eget ultricies. Fusce sodales ex ut ex semper consectetur. Ut vel fringilla augue. Nullam eleifend enim ac ligula mattis, sed pretium lectus consequat. Donec vestibulum diam varius ex commodo mattis. Praesent malesuada lectus et orci mattis dapibus non ac sapien.
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet mauris vel massa tempor eleifend id ac lacus. Sed eu dictum urna, sit amet posuere nisi. Vestibulum lacinia vitae urna et rhoncus. Quisque pellentesque mollis nunc at tristique. Praesent eu dui tincidunt, ultrices ipsum lacinia, sagittis ex. Nam nec massa dignissim, facilisis sapien nec, tempor purus. Cras in suscipit felis, nec facilisis mi. Donec sollicitudin nisl sit amet nibh pretium, consequat viverra mi eleifend. Pellentesque eget venenatis nunc, nec tristique ex. Phasellus congue non risus eget ultricies. Fusce sodales ex ut ex semper consectetur. Ut vel fringilla augue. Nullam eleifend enim ac ligula mattis, sed pretium lectus consequat. Donec vestibulum diam varius ex commodo mattis. Praesent malesuada lectus et orci mattis dapibus non ac sapien.
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet mauris vel massa tempor eleifend id ac lacus. Sed eu dictum urna, sit amet posuere nisi. Vestibulum lacinia vitae urna et rhoncus. Quisque pellentesque mollis nunc at tristique. Praesent eu dui tincidunt, ultrices ipsum lacinia, sagittis ex. Nam nec massa dignissim, facilisis sapien nec, tempor purus. Cras in suscipit felis, nec facilisis mi. Donec sollicitudin nisl sit amet nibh pretium, consequat viverra mi eleifend. Pellentesque eget venenatis nunc, nec tristique ex. Phasellus congue non risus eget ultricies. Fusce sodales ex ut ex semper consectetur. Ut vel fringilla augue. Nullam eleifend enim ac ligula mattis, sed pretium lectus consequat. Donec vestibulum diam varius ex commodo mattis. Praesent malesuada lectus et orci mattis dapibus non ac sapien.
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet mauris vel massa tempor eleifend id ac lacus. Sed eu dictum urna, sit amet posuere nisi. Vestibulum lacinia vitae urna et rhoncus. Quisque pellentesque mollis nunc at tristique. Praesent eu dui tincidunt, ultrices ipsum lacinia, sagittis ex. Nam nec massa dignissim, facilisis sapien nec, tempor purus. Cras in suscipit felis, nec facilisis mi. Donec sollicitudin nisl sit amet nibh pretium, consequat viverra mi eleifend. Pellentesque eget venenatis nunc, nec tristique ex. Phasellus congue non risus eget ultricies. Fusce sodales ex ut ex semper consectetur. Ut vel fringilla augue. Nullam eleifend enim ac ligula mattis, sed pretium lectus consequat. Donec vestibulum diam varius ex commodo mattis. Praesent malesuada lectus et orci mattis dapibus non ac sapien.
+                            ***ABOUT THIS SPACE EXAMPLE***
+                            <br />
+                            <br />
+                            This home is a perfect getaway ready to welcome you for some care free time with your family and friends.
+                            Newly renovated stylish home w/ tons of natural light.
+                            This cozy space has everything you need to be comfortable for your stay.
+                            Your private retreat includes wifi, Apple TV, 55" screen TV, fully equipped kitchen & many more amenities.
+                            Centrally located, a few blocks away from downtown.
+                            <br />
+                            <br />
+                            Book your next staycation here !
                         </div>
+
+                        <div className='description_container_section4'>
+                            <div className='section4_title'>What this place offers</div>
+                            <div className='section4_list'>
+                                <div className='section4_col'>
+                                    <div>Lake view</div>
+                                    <div>Wifi</div>
+                                    <div>Free parking on premises</div>
+                                    <div>Free washer – In unit</div>
+                                    <div>Private patio or balcony</div>
+                                </div>
+                                <div className='section4_col'>
+                                    <div>Kitchen</div>
+                                    <div>Dedicated workspace</div>
+                                    <div>TV</div>
+                                    <div>Central air conditioning</div>
+                                    <div>Security cameras on property</div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
                     <div className='create_bookings_container'>
