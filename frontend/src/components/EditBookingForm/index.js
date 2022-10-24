@@ -170,7 +170,7 @@ function EditBooking() {
 
                     <div className='create_booking_tile_total_fees'>
                         <div className='fees_item_title'>New total before taxes</div>
-                        <div className='fees_item_price'>${spot.price + cleaning_fee + service_fee}</div>
+                        <div className='fees_item_price'>${(spot.price * bookingLength) + cleaning_fee + service_fee}</div>
                     </div>
 
                 </div>
