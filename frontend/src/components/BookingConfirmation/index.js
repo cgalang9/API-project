@@ -1,11 +1,13 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useLocation, useHistory, useParams } from "react-router-dom"
 import { useDispatch } from 'react-redux'
+import { createBookingThunk } from "../../store/bookings"
 import './BookingConfirmation.css'
 
 function BookingConfirmation() {
     const location = useLocation()
     const history = useHistory()
+    const dispatch = useDispatch()
     const { spotId } = useParams()
 
     //redirect to home page if no booking details passed in
@@ -15,7 +17,32 @@ function BookingConfirmation() {
         }
     }, [])
 
-    console.log(spotId)
+    const [errors, setErrors] = useState([])
+
+    const handlePay = async() => {
+        setErrors([]);
+        const newBooking = {
+            startDate: location.state.newBooking.startDate,
+            endDate: location.state.newBooking.endDate
+        }
+
+
+        dispatch(createBookingThunk(newBooking, spotId))
+            .then(() => history.push('/current-user/bookings'))
+            .catch(async (res) => {
+                const data = await res.json();
+                if(data.statusCode === 404) {
+                  history.push('/404')
+                }
+                if (data && data.errors) {
+                      setErrors(Object.values(data.errors))
+                      console.log(errors)
+                  } else if (data.message) {
+                      setErrors([data.message])
+                  }
+            })
+
+    }
 
 
     return (
@@ -49,7 +76,10 @@ function BookingConfirmation() {
                                 <div className="booking_confirmed_left_policy_text">This reservation is non-refundable. Learn more</div>
                             </div>
                             <div className='confirm_pay_btn_container'>
-                                {/* <button className='confirm_pay_btn'>Confirm and pay</button> */}
+                                <div className="errors" style={{ marginBottom: 12 }}>
+                                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                                </div>
+                                <button className='confirm_pay_btn' onClick={handlePay}>Confirm and pay</button>
                             </div>
                         </div>
                         <div className="booking_confirmed_right">
