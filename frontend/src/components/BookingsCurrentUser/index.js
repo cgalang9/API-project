@@ -26,15 +26,17 @@ function BookingsCurrentUser() {
                         <div key={booking.id}>
                         {booking.Spot && (
                             <div className="curr_user_booking_list_item_container">
-                                <img
-                                    src={booking.Spot.previewImage || error_img}
-                                    alt="spot"
-                                    onError={e => {
-                                        e.target.src = "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930"
-                                        e.onerror = null
-                                      }}
-                                    className='curr_user_booking_list_item__img'
-                                />
+                                <a href={`/spots/${booking.spotId}`}>
+                                    <img
+                                        src={booking.Spot.previewImage || error_img}
+                                        alt="spot"
+                                        onError={e => {
+                                            e.target.src = "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930"
+                                            e.onerror = null
+                                        }}
+                                        className='curr_user_booking_list_item__img'
+                                    />
+                                </a>
                                 <div className="curr_user_booking_list_item_details">
                                     <div className="curr_user_booking_list_item_city">{booking.Spot.city}</div>
                                     <div className="curr_user_booking_list_item_dates">
