@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getAllSpotsThunk } from '../../store/spots'
 import { useHistory } from "react-router-dom";
 import './SpotsDisplay.css'
+import error_img from '../../assests/error_img.jpeg'
 
 function SpotsDisplay() {
     const dispatch = useDispatch()
@@ -23,7 +24,7 @@ function SpotsDisplay() {
                     spotsArr.map(spot => (
                         <li key={spot.id} className='spot_container' onClick={() => {history.push(`/spots/${spot.id}`)}}>
                             <img
-                                src={spot.previewImage || 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930'}
+                                src={spot.previewImage || error_img}
                                 alt="spot"
                                 onError={e => {
                                     e.target.src = "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930"

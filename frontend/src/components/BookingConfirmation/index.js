@@ -3,6 +3,7 @@ import { useLocation, useHistory, useParams } from "react-router-dom"
 import { useDispatch } from 'react-redux'
 import { createBookingThunk } from "../../store/bookings"
 import './BookingConfirmation.css'
+import error_img from '../../assests/error_img.jpeg'
 
 function BookingConfirmation() {
     const location = useLocation()
@@ -87,7 +88,7 @@ function BookingConfirmation() {
                                 <div className="booking_confirmed_right_tile_spot_container">
                                     <div className="booking_confirmed_right_tile_spot_img">
                                         <img
-                                            src={location.state.prevImgUrl}
+                                            src={location.state.prevImgUrl || error_img}
                                             alt="spot"
                                             className='booking_confirmed_spot_img'
                                             onError={e => {

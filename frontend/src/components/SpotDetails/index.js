@@ -5,6 +5,7 @@ import { getSpotThunk } from '../../store/currentSpot'
 import CreateBookingTile from '../CreateBookingTile'
 import Reviews from '../Reviews'
 import './SpotDetails.css'
+import error_img from '../../assests/error_img.jpeg'
 
 function SpotDetails() {
     const { spotId } = useParams()
@@ -35,7 +36,7 @@ function SpotDetails() {
             }
         });
         while (otherImgsArr.length < 4) {
-            otherImgsArr.push(' ')
+            otherImgsArr.push(error_img)
         }
     }
 

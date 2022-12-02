@@ -135,6 +135,10 @@
     word-break: break-word;
 }
 
+.booking_confirmed_right_tile_spot_details_top {
+    font-size: 20px;
+}
+
 
 .booking_confirmed_right_tile_spot_details_bottom {
     display: flex;
