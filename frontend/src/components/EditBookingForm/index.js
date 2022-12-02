@@ -94,10 +94,15 @@ function EditBooking() {
     }
 
     const deleteBooking = () => {
-        if(window.confirm("Are you sure you want to delete this booking? You can not recover the booking after deletion.")) {
-          dispatch(deleteBookingThunk(bookingId))
-            .then(() => history.push('/current-user/bookings'))
-            .catch(() => history.push('/404'))
+        setErrors([])
+        if(checkinFormatted < new Date().toLocaleDateString('fr-CA')) {
+            setErrors(['Can not delete booking after checkin in']);
+        } else {
+            if(window.confirm("Are you sure you want to delete this booking? You can not recover the booking after deletion.")) {
+              dispatch(deleteBookingThunk(bookingId))
+                .then(() => history.push('/current-user/bookings'))
+                .catch(() => history.push('/404'))
+            }
         }
     }
 
@@ -182,7 +187,9 @@ function EditBooking() {
             </div>
             <button type="submit" className='edit_booking_confirm_btn'>Confirm Changes</button>
         </form>
-        <button className='delete_booking_btn' onClick={deleteBooking}>Delete Booking</button>
+        {checkinFormatted >= new Date().toLocaleDateString('fr-CA') && (
+            <button className='delete_booking_btn' onClick={deleteBooking}>Delete Booking</button>
+        )}
     </div>
     )
 

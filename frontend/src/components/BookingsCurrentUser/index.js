@@ -12,7 +12,9 @@ function BookingsCurrentUser() {
     }, [dispatch])
 
     const bookingsObj = useSelector(state => state.bookings)
-    const bookings = Object.values(bookingsObj)
+    const bookingsArr = Object.values(bookingsObj)
+    //sort bookings by check in date
+    const bookings = bookingsArr.sort((a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime())
 
     return (
         <div className="curr-user-bookings-container top flex">
@@ -37,7 +39,9 @@ function BookingsCurrentUser() {
                                     <div className="curr_user_booking_list_item_dates">
                                         {new Date(booking.startDate.replace(/-/g, '\/')).toDateString().slice(4)} - {new Date(booking.endDate.replace(/-/g, '\/')).toDateString().slice(4)}
                                     </div>
-                                    <NavLink to={`/bookings/${booking.id}/edit`}>Edit/Delete Trip</NavLink>
+                                    {booking.startDate >= new Date().toLocaleDateString('fr-CA') && (
+                                        <NavLink to={`/bookings/${booking.id}/edit`}>Edit/Delete Trip</NavLink>
+                                    )}
 
                                 </div>
                             </div>
