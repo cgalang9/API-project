@@ -9,7 +9,7 @@ import SpotDetailsMainPage from "./components/SpotDetailsMainPage";
 import ReivewsCurrentUser from "./components/ReivewsCurrentUser";
 import EditReviewForm from "./components/EditReviewForm";
 import CreateReviewForm from "./components/CreateReviewForm";
-import BookingConfirmation from "./components/CreateBookingTile/BookingConfirmation";
+import BookingConfirmation from "./components/BookingConfirmation";
 import BookingsCurrentUser from "./components/BookingsCurrentUser";
 import EditBookingForm from"./components/EditBookingForm";
 
