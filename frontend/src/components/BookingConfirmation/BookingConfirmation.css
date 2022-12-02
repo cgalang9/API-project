@@ -18,6 +18,25 @@
 }
 
 /* left side */
+.booking_confirmed_left_head {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+    padding-bottom: 40px;
+}
+
+.booking_confirmed_back{
+    border-radius: 50%;
+    font-size: 20px;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.booking_confirmed_back:hover {
+    background-color: rgb(240, 240, 240);
+}
+
+
 .booking_confirmed_left_details {
     display: flex;
     flex-direction: column;
@@ -60,6 +79,23 @@
 .booking_confirmed_left_policy_head {
     margin-bottom: 25px;
 }
+
+.confirm_pay_btn_container {
+    padding-top: 40px;
+}
+
+.confirm_pay_btn {
+    padding: 15px;
+    color: white;
+    background-color: rgb(255, 56, 95);
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 300;
+    margin-bottom: 25px;
+    cursor: pointer;
+}
+
 
 
 /* right side */
