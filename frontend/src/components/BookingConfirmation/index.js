@@ -49,7 +49,7 @@ function BookingConfirmation() {
                                 <div className="booking_confirmed_left_policy_text">This reservation is non-refundable. Learn more</div>
                             </div>
                             <div className='confirm_pay_btn_container'>
-                                <button className='confirm_pay_btn'>Confirm and pay</button>
+                                {/* <button className='confirm_pay_btn'>Confirm and pay</button> */}
                             </div>
                         </div>
                         <div className="booking_confirmed_right">

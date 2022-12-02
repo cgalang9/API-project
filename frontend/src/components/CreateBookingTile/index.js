@@ -28,6 +28,9 @@ function CreateBookingTile({ spot, prevImgUrl }) {
         checkoutFormatted = new Date(checkout).toISOString().split('T')[0]
     }
 
+    console.log(checkin)
+    console.log(new Date().toLocaleDateString('fr-CA'))
+    console.log('=============', checkin < new Date().toLocaleDateString('fr-CA'))
 
    useEffect(() => {
     if(checkin && checkout) {

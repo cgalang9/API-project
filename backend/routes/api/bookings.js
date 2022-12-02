@@ -14,12 +14,24 @@ router.use(express.json())
 
 const validateDate = [
     check('startDate')
-    .isDate(),
+    .isDate()
+    .custom(startDate => {
+        if(new Date(startDate) < new Date()) {
+            throw new Error ('Can not make booking in the past');
+        }
+        return true;
+    }),
     check('endDate')
     .isDate()
     .custom( (endDate, { req }) => {
         if(new Date(req.body.startDate) >= new Date(endDate)) {
             throw new Error ('endDate cannot be on or before startDate');
+        }
+        return true;
+    })
+    .custom(endDate => {
+        if(new Date(endDate) < new Date()) {
+            throw new Error ('Can not make booking in the past');
         }
         return true;
     }),
@@ -78,6 +90,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
     res.json({ "Bookings": allBookings})
 })
 
+//edit booking
 router.put('/:bookingId', requireAuth, validateDate, async (req, res, next) => {
     const booking = await Booking.findOne({ where: { id: req.params.bookingId }})
     let numErrors = 0

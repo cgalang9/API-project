@@ -61,12 +61,24 @@ const validateReview = [
 
 const validateDate = [
     check('startDate')
-    .isDate(),
+    .isDate()
+    .custom(startDate => {
+        if(startDate < new Date().toLocaleDateString('fr-CA')) {
+            throw new Error ('Can not make booking in the past');
+        }
+        return true;
+    }),
     check('endDate')
     .isDate()
     .custom( (endDate, { req }) => {
         if(new Date(req.body.startDate) >= new Date(endDate)) {
-            throw new Error ('endDate cannot be on or before startDate');
+            throw new Error ('Check in date cannot be on or before checkout date');
+        }
+        return true;
+    })
+    .custom(endDate => {
+        if(endDate < new Date().toLocaleDateString('fr-CA')) {
+            throw new Error ('Can not make booking in the past');
         }
         return true;
     }),
