@@ -1,4 +1,4 @@
-/* .booking_fees_confirmed {
+.booking_fees_confirmed {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -20,13 +20,4 @@
 
 .booking_confirmed_container > div {
     width: 50%;
-} */
-
-.booking_confirmed_wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    margin-top: 100px;
-    /* width: 1000px; */
 }
