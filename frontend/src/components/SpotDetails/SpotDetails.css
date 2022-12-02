@@ -42,6 +42,7 @@
     height: 100%;
     border-radius: 15px 0 0 15px;
     width: 50%;
+    object-fit: cover;
 }
 
 .other_imgs_container {
@@ -55,6 +56,7 @@
 .other_spot_img {
     width: 49% ;
     max-height: 100%;
+    object-fit: cover;
 }
 
 #imgs_row_1,

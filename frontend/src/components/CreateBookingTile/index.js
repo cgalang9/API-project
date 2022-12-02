@@ -4,7 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { getAllBookingsThunk, createBookingThunk } from '../../store/bookings';
 import './CreateBookingTile.css'
 
-function CreateBookingTile({ spot }) {
+function CreateBookingTile({ spot, prevImgUrl }) {
     const [checkin, setCheckin] = useState('')
     const [checkout, setCheckout] = useState('')
     const [guests, setGuests] = useState(1)
@@ -57,10 +57,14 @@ function CreateBookingTile({ spot }) {
                     newBooking,
                     name: spot.name,
                     price: spot.price,
+                    avgStarRating: spot.avgStarRating,
+                    numReviews: spot.numReviews,
                     cleaningFee: cleaning_fee,
                     serviceFee: service_fee,
+                    prevImgUrl,
                     guests,
-                    bookingLength
+                    bookingLength,
+
                 }))
            .catch(async (res) => {
              const data = await res.json();

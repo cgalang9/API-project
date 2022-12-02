@@ -1,11 +1,13 @@
 import { useEffect } from "react"
-import { useLocation, NavLink, useHistory } from "react-router-dom"
+import { useLocation, useHistory, useParams } from "react-router-dom"
+import { useDispatch } from 'react-redux'
 import './BookingConfirmation.css'
 
 function BookingConfirmation() {
     const location = useLocation()
     const history = useHistory()
 
+    //redirect to home page if no booking details passed in
     useEffect(() => {
         if (!location.state) {
             history.push('/')
@@ -26,9 +28,9 @@ function BookingConfirmation() {
                                     <div className="booking_confirmed_left_dates_head">Dates</div>
                                     <div className="booking_confirmed_left_dates">
                                         {/* format start and end dates */}
-                                        {new Date(location.state.newBooking.startDate.replace(/-/g, '\/')).toLocaleString('default', { month: 'short', day: 'numeric' })}
-                                        -
-                                        {new Date(location.state.newBooking.endDate.replace(/-/g, '\/')).toLocaleString('default', { month: 'short', day: 'numeric' })}
+                                        <span>{new Date(location.state.newBooking.startDate.replace(/-/g, '\/')).toLocaleString('default', { month: 'short', day: 'numeric' })}</span>
+                                        <span>-</span>
+                                        <span>{new Date(location.state.newBooking.endDate.replace(/-/g, '\/')).toLocaleString('default', { month: 'short', day: 'numeric' })}</span>
                                     </div>
                                 </div>
                                 <div className="booking_confirmed_left_guests_container">
@@ -36,9 +38,34 @@ function BookingConfirmation() {
                                     <div className="booking_confirmed_left_guests">{location.state.guests} {location.state.guests === 1 ? 'Guest' : 'Guests'}</div>
                                 </div>
                             </div>
+                            <div className="booking_confirmed_cancel_policy">
+                                <div className="booking_confirmed_left_policy_head">Cancellation policy</div>
+                                <div className="booking_confirmed_left_policy_text">This reservation is non-refundable. Learn more</div>
+                            </div>
                         </div>
                         <div className="booking_confirmed_right">
                             <div className="booking_confirmed_right_tile_container">
+                                <div className="booking_confirmed_right_tile_spot_container">
+                                    <div className="booking_confirmed_right_tile_spot_img">
+                                        <img
+                                            src={location.state.prevImgUrl}
+                                            alt="spot"
+                                            className='booking_confirmed_spot_img'
+                                            onError={e => {
+                                                e.target.src = "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930"
+                                                e.onerror = null
+                                            }}
+                                        />
+                                    </div>
+                                    <div className="booking_confirmed_right_tile_spot_details">
+                                        <div className="booking_confirmed_right_tile_spot_details_top">{location.state.name}</div>
+                                        <div className="booking_confirmed_right_tile_spot_details_bottom">
+                                            <span style={{ fontSize: 12 }}><i className="fa-sharp fa-solid fa-star"/></span>
+                                            <span>{(location.state.avgStarRating && location.state.avgStarRating.toFixed(2)) || (location.state.numReviews > 0 && "0.00") || "New"}</span>
+                                            <span style={{ color: 'gray' }}>({location.state.numReviews === 1 ? '1 review' : `${location.state.numReviews} reviews`})</span>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div className="booking_confirmed_right_tile_details_container">
                                     <div className="booking_confirmed_right_tile_details_head">Price Details</div>
                                     <div className='booking_confirmed_right_tile_base_fee'>

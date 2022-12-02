@@ -189,7 +189,7 @@ function SpotDetails() {
                     </div>
 
                     <div className='create_bookings_container'>
-                        <CreateBookingTile spot={spot} />
+                        <CreateBookingTile spot={spot} prevImgUrl={prevImgUrl}/>
                     </div>
                 </div>
 
