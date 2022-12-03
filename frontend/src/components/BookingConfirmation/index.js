@@ -18,13 +18,32 @@ function BookingConfirmation() {
         }
     }, [])
 
+    const [checkin, setCheckin] = useState(location.state.newBooking.startDate)
+    const [checkout, setCheckout] = useState(location.state.newBooking.endDate)
+    const [bookingLength, setBookingLength] = useState(location.state.bookingLength)
     const [errors, setErrors] = useState([])
+
+    //updates booking length
+    useEffect(() => {
+        if(checkin && checkout) {
+            if(checkin < checkout) {
+                const checkinDate = new Date(checkin)
+                const checkoutDate = new Date(checkout)
+                const diff = checkoutDate.getTime() - checkinDate.getTime();
+                const days = Math.ceil(diff / (1000 * 3600 * 24));
+                setBookingLength(days)
+            } else {
+                setBookingLength(1)
+            }
+        }
+    }, [checkin, checkout])
+
 
     const handlePay = async() => {
         setErrors([]);
         const newBooking = {
-            startDate: location.state.newBooking.startDate,
-            endDate: location.state.newBooking.endDate
+            startDate: checkin,
+            endDate: checkout
         }
 
 
@@ -45,6 +64,15 @@ function BookingConfirmation() {
 
     }
 
+    const toggleEditDates = () => {
+        const edit_dates_div = document.querySelector('.booking_confirmed_edit_dates')
+        if(edit_dates_div.classList.contains('hidden')) {
+            edit_dates_div.classList.remove('hidden')
+          } else {
+            edit_dates_div.classList.add('hidden')
+          }
+    }
+
 
     return (
         <>
@@ -60,11 +88,40 @@ function BookingConfirmation() {
                                 <div className="booking_confirmed_left_details_head">Your Trip</div>
                                 <div className="booking_confirmed_left_dates_container">
                                     <div className="booking_confirmed_left_dates_head">Dates</div>
-                                    <div className="booking_confirmed_left_dates">
-                                        {/* format start and end dates */}
-                                        <span>{new Date(location.state.newBooking.startDate.replace(/-/g, '\/')).toLocaleString('default', { month: 'short', day: 'numeric' })}</span>
-                                        <span>-</span>
-                                        <span>{new Date(location.state.newBooking.endDate.replace(/-/g, '\/')).toLocaleString('default', { month: 'short', day: 'numeric' })}</span>
+                                    <div className="booking_confirmed_left_dates_bottom">
+                                        <div className="booking_confirmed_left_dates">
+                                            {/* format start and end dates */}
+                                            <span>{new Date(checkin.replace(/-/g, '\/')).toLocaleString('default', { month: 'short', day: 'numeric' })}</span>
+                                            <span>-</span>
+                                            <span>{new Date(checkout.replace(/-/g, '\/')).toLocaleString('default', { month: 'short', day: 'numeric' })}</span>
+                                        </div>
+                                        <div onClick={toggleEditDates} id='booking_confirmed_edit_dates_btn'>Edit</div>
+                                    </div>
+                                    <div className="booking_confirmed_edit_dates hidden">
+                                        <div className='booking_confirmed_edit_checkin'>
+                                            <label className='flex'>
+                                                <span className='input_label' id="edit_checkin_label">CHECK IN</span>
+                                                <input
+                                                type="date"
+                                                value={checkin}
+                                                onChange={(e) => setCheckin(e.target.value)}
+                                                required
+                                                id="booking_confirmed_edit_checkin"
+                                                />
+                                            </label>
+                                        </div>
+                                        <div className='booking_confirmed_edit_checkout'>
+                                            <label className='flex'>
+                                                <span className='input_label' id="edit_checkout_label">CHECK OUT</span>
+                                                <input
+                                                type="date"
+                                                value={checkout}
+                                                onChange={(e) => setCheckout(e.target.value)}
+                                                required
+                                                id="booking_confirmed_edit_checkout"
+                                                />
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="booking_confirmed_left_guests_container">
@@ -109,8 +166,8 @@ function BookingConfirmation() {
                                 <div className="booking_confirmed_right_tile_details_container">
                                     <div className="booking_confirmed_right_tile_details_head">Price Details</div>
                                     <div className='booking_confirmed_right_tile_base_fee'>
-                                        <div>${location.state.price} x {location.state.bookingLength} night</div>
-                                        <div>${location.state.price * location.state.bookingLength}</div>
+                                        <div>${location.state.price} x {bookingLength} night</div>
+                                        <div>${location.state.price * bookingLength}</div>
                                     </div>
                                     <div className='booking_confirmed_right_tile_cleaning_fee'>
                                         <div>Cleaning Fee</div>
@@ -123,7 +180,7 @@ function BookingConfirmation() {
                                 </div>
                                     <div className="booking_confirmed_right_total_fee">
                                         <div>Total</div>
-                                        <div>${(location.state.price * location.state.bookingLength) + location.state.cleaningFee + location.state.serviceFee}</div>
+                                        <div>${(location.state.price * bookingLength) + location.state.cleaningFee + location.state.serviceFee}</div>
                                     </div>
                             </div>
                         </div>

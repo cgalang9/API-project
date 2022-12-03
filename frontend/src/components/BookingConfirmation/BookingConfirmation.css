@@ -61,6 +61,11 @@
     font-size: 18px;
 }
 
+.booking_confirmed_left_dates_bottom {
+    display: flex;
+    justify-content: space-between;
+}
+
 .booking_confirmed_left_dates,
 .booking_confirmed_left_guests {
     font-size: 15px;
@@ -70,6 +75,42 @@
     display: flex;
     gap: 3px;
 }
+
+#booking_confirmed_edit_dates_btn {
+    cursor: pointer;
+    text-decoration: underline;
+    font-weight: 700;
+}
+
+/* edit dates section */
+.hidden {
+    display: none;
+}
+
+.booking_confirmed_edit_dates {
+    margin-top: 15px;
+    width: 300px;
+}
+
+#booking_confirmed_edit_checkin {
+    border-radius: 10px 10px 0 0;
+}
+
+#booking_confirmed_edit_checkout {
+    border-radius: 0 0 10px 10px;
+}
+
+#booking_confirmed_edit_checkin,
+#booking_confirmed_edit_checkout {
+    height: 50px;
+    font-size: 14px;
+}
+
+#edit_checkin_label,
+#edit_checkout_label {
+    font-size: 10px;
+}
+
 
 .booking_confirmed_cancel_policy {
     border-bottom: 1px solid rgb(193, 193, 193);
