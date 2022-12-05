@@ -1,8 +1,14 @@
 'use strict';
 
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;
+}
+
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.bulkInsert('SpotImages', [
+    options.tableName = 'SpotImages';
+    await queryInterface.bulkInsert(options, [
       {
         spotId: 1,
         url: 'https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg',
@@ -68,8 +74,9 @@ module.exports = {
 
   async down (queryInterface, Sequelize) {
     const Op = Sequelize.Op;
-     await queryInterface.bulkDelete('SpotImages', {
-      spotId: { [Op.in]: [1, 2, 3, 4, 5] }
-     }, {});
+    options.tableName = 'SpotImages';
+    await queryInterface.bulkDelete(options, {
+     spotId: { [Op.in]: [1, 2, 3, 4, 5] }
+    }, {});
   }
 };
