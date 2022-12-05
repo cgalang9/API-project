@@ -22,7 +22,7 @@ function Navigation({ isLoaded }){
   if (sessionUser) {
     sessionLinks = (
       <>
-        <NavLink to='/create-spot' className='become-host-container'>Become a Host</NavLink>
+        <NavLink to='/create-spot' className='become-host-container'><span style={{ color: 'black' }}>Become a Host</span></NavLink>
         <ProfileButton user={sessionUser} />
       </>
     );
@@ -41,7 +41,7 @@ function Navigation({ isLoaded }){
           <NavLink exact to="/"><img src='/favicon.png' alt='favicon' /></NavLink>
         </div>
       <li className='nav_links'>
-      <NavLink exact to="/" className='home-link'>Home</NavLink>
+      <NavLink exact to="/" className='home-link'><span style={{ color: 'black' }}>Home</span></NavLink>
         {isLoaded && sessionLinks}
       </li>
     </ul>

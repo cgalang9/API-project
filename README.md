@@ -2,7 +2,7 @@
 
 The BnB is inspired by AirBnB, an online marketplace that allows users to list and rent out their homes or other properties for short term rent.
 
-[Live Site](https://cg-airbnb-clone.herokuapp.com/)
+[Live Site](https://thebnb.onrender.com/)
 
 
 
