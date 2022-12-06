@@ -23,7 +23,7 @@ The BnB is inspired by AirBnB, an online marketplace that allows users to list a
 * HTML
 * CSS
 * PostgreSQL
-* Heroku
+* Render
 
 ## Landing Page
 ![landing page](./landing_page.png)
