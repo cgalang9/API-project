@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createSpotThunk } from "../../store/spots";
 import { useHistory, Redirect } from "react-router-dom";
-import AWS from 'aws-sdk'
-import {uploadFile} from 'react-s3'
+import AWS, { ConnectContactLens } from 'aws-sdk'
 import './CreateSpotForm.css'
-window.Buffer = window.Buffer || require("buffer").Buffer;
+// window.Buffer = window.Buffer || require("buffer").Buffer;
 
 function CreateSpotForm() {
   const [name, setName] = useState('')
@@ -16,7 +15,7 @@ function CreateSpotForm() {
   const [country, setCountry] = useState('')
   const [description, setDescription] = useState('')
   const [previewImage, setPreviewImage] = useState(null)
-  const [otherImgUrls, setotherImgUrls] = useState(null)
+  const [otherImgs, setOtherImgs] = useState([])
   const [errors, setErrors] = useState([])
   const dispatch = useDispatch()
   const history = useHistory()
@@ -24,31 +23,23 @@ function CreateSpotForm() {
   const [previewImageUrl, setPreviewImageUrl] = useState(null)
   const [prevImgUploaded, setPrevImgUploaded] = useState(null)
 
+  const [otherImgUrl, setOtherImageUrl] = useState([])
+  // const [otherImgUploaded, setOtherImgUploaded] = useState(null)
 
-  // console.log(process.env.REACT_APP_S3_BUCKET)
-  // console.log(process.env.REACT_APP_REGION)
-  // console.log(process.env.REACT_APP_ACCESS_KEY)
-  // console.log(process.env.REACT_APP_SECRET_ACCESS_KEY)
 
   const uploadPrevImg = async(e) => {
     e.preventDefault();
 
     AWS.config.update({
-      accessKeyId: 'AKIAWV3WQI7IFQUYZCWR',
-      secretAccessKey: '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'
+      accessKeyId: process.env.REACT_APP_ACCESS_KEY,
+      secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY
     })
-
-    const params = {
-      Body: previewImage,
-      Bucket: 'thebnb',
-      Key: previewImage.lastModified + previewImage.name
-    };
 
     var upload = new AWS.S3.ManagedUpload({
       params: {
         Body: previewImage,
         Bucket: 'thebnb',
-        Key: previewImage.lastModified + previewImage.name
+        Key: `${Math.floor(Math.random() * 1000000)}` + previewImage.name
       }
     });
 
@@ -56,6 +47,7 @@ function CreateSpotForm() {
     setPrevImgUploaded('Uploading...')
     await promise.then(
       function(data) {
+        console.log(data)
         alert("Successfully uploaded photo.");
         setPreviewImageUrl(data.Location);
         setPrevImgUploaded('Upload Complete')
@@ -65,26 +57,56 @@ function CreateSpotForm() {
         return alert("There was an error uploading your photo: ", err.message);
       }
     )
-    .then(() => {
-      console.log(previewImageUrl)
-    })
-
-
-
-    // if(otherImgUrls) {
-    //   for (let i = 0; i < otherImgUrls.length; i++) {
-    //     console.log(otherImgUrls[i])
-    //     uploadFile(otherImgUrls[i], config)
-    //     .then(data => {
-    //       imagesArr.push(data.location)
-    //       console.log(data.location, 'other')
-    //     })
-    //     .catch(err => alert('Error uploading images.'))
-    //   }
-    // }
   }
 
+  // const uploadOtherImg = async(e) => {
+  //   e.preventDefault();
+  //   setOtherImageUrl([])
 
+  //   AWS.config.update({
+  //     accessKeyId: 'AKIAWV3WQI7IFQUYZCWR',
+  //     secretAccessKey: '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'
+  //   })
+
+  //   let count = 1
+  //   for (let i = 0; i < otherImgs.length; i++) {
+  //     const imgFile = otherImgs[i]
+  //     const params = {
+  //       Body: imgFile,
+  //       Bucket: 'thebnb',
+  //       Key: imgFile.lastModified + imgFile.name
+  //     }
+
+  //     var upload = new AWS.S3.ManagedUpload({
+  //       params: {
+  //         Body: imgFile,
+  //         Bucket: 'thebnb',
+  //         Key: imgFile.lastModified + imgFile.name
+  //       }
+  //     })
+
+  //     var promise = upload.promise();
+  //     setOtherImgUploaded(`Uploading... ${count} of ${otherImgs.length}`)
+  //     await promise.then(
+  //       function(data) {
+  //         alert("Successfully uploaded photo.");
+  //         const newUrls = otherImgUrl.push(data.Location)
+  //         setOtherImageUrl(newUrls);
+  //         console.log(otherImgUrl)
+  //         count++
+  //         if(count >= otherImgs.length) {
+  //           setOtherImgUploaded('Upload Complete')
+  //         } else {
+  //           setOtherImgUploaded(`Uploading... ${count} of ${otherImgs.length}`)
+  //         }
+  //       },
+  //       function(err) {
+  //         setPrevImgUploaded('Error')
+  //         return alert("There was an error uploading your photo: ", err.message);
+  //       }
+  //     )
+  //   }
+  // }
 
 
   const handleSubmit = (e) => {
@@ -105,11 +127,10 @@ function CreateSpotForm() {
 
     setErrors([]);
 
-    const imagesArr = []
-
-    dispatch(createSpotThunk(newSpot, previewImageUrl, imagesArr))
+    dispatch(createSpotThunk(newSpot, previewImageUrl, otherImgUrl))
       .then(() => history.push('/'))
       .catch(async (res) => {
+        console.log(res)
         const data = await res.json();
         if (data && data.errors) {
               setErrors(Object.values(data.errors))
@@ -190,24 +211,6 @@ function CreateSpotForm() {
                   required
                   />
               </label>
-              {/* <label className='flex'>
-                <span className='input_label'>Preview Image</span>
-                <input
-                  value={previewImage}
-                  onChange={(e) => setPreviewImage(e.target.value)}
-                  required
-                  className="input_prev_img"
-                  />
-                <input className="input_file" type="file" onChange={(e) => setPreviewImage(e.target.files[0])} required/>
-              </label> */}
-              {/* <label className='flex'>
-                <span className='input_label'>Other Images URL (separate each URL with comma)</span>
-                <textarea
-                  value={otherImgUrls}
-                  onChange={(e) => setotherImgUrls(e.target.value)}
-                  className="input_img_urls"
-                  />
-              </label> */}
               <label className='flex'>
                 <span className='input_label'>Description</span>
                 <textarea
@@ -218,19 +221,23 @@ function CreateSpotForm() {
                   />
               </label>
               <div className="add_imgs_spot_form flex">
-                <div className="add_imgs_spot_head">Upload Images</div>
+                <div className="add_imgs_spot_head">Upload Preview Image</div>
                 <label className="input_top">
-                  <span>Preview Image:</span>
+                  {/* <span>Preview Image:</span> */}
                   <input className="input_file" type="file" onChange={(e) => setPreviewImage(e.target.files[0])} required accept="image/*"/>
                   {previewImage && (
                     <button type="button" className="upload_img" onClick={uploadPrevImg}>Upload Image</button>
                   )}
                   <div className="upload_prog">{prevImgUploaded}</div>
                 </label>
-                <label className="input_bottom">
+                {/* <label className="input_bottom">
                   <span >Other Images:</span>
-                  <input className="input_file" type="file" onChange={(e) => setotherImgUrls(e.target.files)} multiple accept="image/*"/>
-                </label>
+                  <input className="input_file" type="file" onChange={(e) => setOtherImgs(e.target.files)} multiple accept="image/*"/>
+                  {otherImgs.length > 0 && (
+                    <button type="button" className="upload_img" onClick={uploadOtherImg}>Upload Image</button>
+                  )}
+                  <div className="upload_prog">{otherImgUploaded}</div>
+                </label> */}
               </div>
               <button type="submit" className="create_btn">Create Listing</button>
             </form>

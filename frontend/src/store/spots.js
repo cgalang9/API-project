@@ -21,7 +21,7 @@ const createSpot = (spot) => {
     return { type: CREATE_SPOT, spot}
 }
 
-export const createSpotThunk = (spot, previewImageUrl, otherImgUrls) => async (dispatch) => {
+export const createSpotThunk = (spot, previewImageUrl, otherImgUrl) => async (dispatch) => {
     const { name, price, address, city, state, country, description } = spot
     const response = await csrfFetch('/api/spots', {
         method: 'POST',
@@ -52,7 +52,7 @@ export const createSpotThunk = (spot, previewImageUrl, otherImgUrls) => async (d
         })
 
         if(responseImg.ok) {
-            otherImgUrls.forEach(async imgUrl => {
+            otherImgUrl.forEach(async imgUrl => {
                 await csrfFetch(`/api/spots/${spot.id}/images`, {
                     method: 'POST',
                     body: JSON.stringify({
