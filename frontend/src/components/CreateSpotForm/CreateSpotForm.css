@@ -33,17 +33,37 @@
 .input_file {
     font-size: 15px;
     width: 90%;
-    height: 75px;
-    padding: 15px 10px 0px;
+    height: 30px;
+    padding: 5px;
+    border: none
+}
+.input_file:focus {
     border: none;
+    border-radius: none;
+}
+.add_imgs_spot_form > label {
+    border: 2px solid rgb(193, 193, 193);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.upload_img {
+    margin-top: 10px;
+    align-self: center;
+    max-width: 150px;
+}
+.upload_prog {
+    align-self: center;
+    font-size: 16px;
+    margin-top: 10px;
 }
 
 .add_imgs_spot_form {
     margin-top: 10px;
-    gap: 5px;
 }
 
 .add_imgs_spot_head {
     font-size: 22px;
-    margin-bottom: 25px;
+    margin-bottom: 10px;
 }
