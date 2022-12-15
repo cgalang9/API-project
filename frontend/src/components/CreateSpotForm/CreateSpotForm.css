@@ -29,3 +29,21 @@
     font-size: 20px;
     font-weight: 300;
 }
+
+.input_file {
+    font-size: 15px;
+    width: 90%;
+    height: 75px;
+    padding: 15px 10px 0px;
+    border: none;
+}
+
+.add_imgs_spot_form {
+    margin-top: 10px;
+    gap: 5px;
+}
+
+.add_imgs_spot_head {
+    font-size: 22px;
+    margin-bottom: 25px;
+}

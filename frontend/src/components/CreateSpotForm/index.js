@@ -12,8 +12,8 @@ function CreateSpotForm() {
   const [st, setSt] = useState('')
   const [country, setCountry] = useState('')
   const [description, setDescription] = useState('')
-  const [previewImage, setPreviewImage] = useState('')
-  const [otherImgUrls, setotherImgUrls] = useState('')
+  const [previewImage, setPreviewImage] = useState(null)
+  const [otherImgUrls, setotherImgUrls] = useState(null)
   const [errors, setErrors] = useState([])
   const dispatch = useDispatch()
   const history = useHistory()
@@ -47,7 +47,7 @@ function CreateSpotForm() {
     };
 
     const sessionUser = useSelector(state => state.session.user);
-
+    console.log(previewImage)
     return (
       <>
         {!sessionUser && (
@@ -116,23 +116,24 @@ function CreateSpotForm() {
                   required
                   />
               </label>
-              <label className='flex'>
-                <span className='input_label'>Preview Image URL</span>
+              {/* <label className='flex'>
+                <span className='input_label'>Preview Image</span>
                 <input
                   value={previewImage}
                   onChange={(e) => setPreviewImage(e.target.value)}
                   required
                   className="input_prev_img"
                   />
-              </label>
-              <label className='flex'>
+                <input className="input_file" type="file" onChange={(e) => setPreviewImage(e.target.files[0])} required/>
+              </label> */}
+              {/* <label className='flex'>
                 <span className='input_label'>Other Images URL (separate each URL with comma)</span>
                 <textarea
                   value={otherImgUrls}
                   onChange={(e) => setotherImgUrls(e.target.value)}
                   className="input_img_urls"
                   />
-              </label>
+              </label> */}
               <label className='flex'>
                 <span className='input_label'>Description</span>
                 <textarea
@@ -142,6 +143,17 @@ function CreateSpotForm() {
                   className="input_description input_bottom"
                   />
               </label>
+              <div className="add_imgs_spot_form flex">
+                <div className="add_imgs_spot_head">Upload Images</div>
+                <label>
+                  <span>Preview Image:</span>
+                  <input className="input_file" type="file" onChange={(e) => setPreviewImage(e.target.files[0])} required/>
+                </label>
+                <label>
+                  <span >Other Images:</span>
+                  <input className="input_file" type="file" onChange={(e) => setotherImgUrls(e.target.files)} multiple/>
+                </label>
+              </div>
               <button type="submit" className="create_btn">Create Listing</button>
             </form>
         </div>
