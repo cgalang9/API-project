@@ -21,6 +21,7 @@
     border-radius: 10px;
     font-size: 20px;
     font-weight: 300;
+    cursor: pointer;
 }
 
 .login_btn:hover,
@@ -40,6 +41,7 @@
     margin-right: 15px;
     border-radius: 20px;
     font-size: 15px;
+    cursor: pointer;
 }
 
 .log-in-btn:hover {

@@ -23,7 +23,6 @@ function SpotDetails() {
     let isOwner = false
     if (sessionUser && spot && sessionUser.id === spot.ownerId && isOwner === false) {
         isOwner = (true)
-
     }
 
     let prevImgUrl = ''
@@ -53,7 +52,9 @@ function SpotDetails() {
                     <div style={{ fontSize: 2 }}><i className="fa-solid fa-circle"/></div>
                     <div className='underline'>{spot.city}, {spot.state}, {spot.country}</div>
                 </div>
-
+                {isOwner && (
+                    <div className='add_spot_img_link'><NavLink to={`/spots/${spotId}/add-img`}>Add Images</NavLink></div>
+                )}
                 <div id='details_img_container'>
                     <img
                         src={prevImgUrl}

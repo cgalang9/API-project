@@ -215,3 +215,10 @@
     padding-left: 10px;
     position: relative;
 }
+
+.add_spot_img_link {
+    padding-bottom: 15px;
+    padding-right: 10px;
+    font-size: 18px;
+    text-align: right;
+}
