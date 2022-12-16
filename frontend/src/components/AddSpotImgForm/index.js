@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, Redirect } from "react-router-dom";
+import { useHistory, Redirect, useParams } from "react-router-dom";
 import AWS, { ConnectContactLens } from 'aws-sdk'
-import './CreateSpotForm.css'
+import { addSpotImgThunk } from "../../store/currentSpot";
+import './AddSpotImgForm.css'
 
 function AddSpotImgForm() {
   const { spotId } = useParams()
@@ -12,6 +13,7 @@ function AddSpotImgForm() {
   const [img, setImg] = useState(null)
   const [imageUrl, setImageUrl] = useState(null)
   const [imgUploaded, setImgUploaded] = useState(null)
+  const [errors, setErrors] = useState([])
 
   const uploadPrevImg = async(e) => {
     e.preventDefault();
@@ -44,20 +46,15 @@ function AddSpotImgForm() {
     )
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
 
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     if(imgUploaded === 'Uploading...') return alert('Please wait for images to finish uploading before submitting')
     if(imgUploaded === 'Error') return alert('There was an error uploading your preview image. Please upload again.')
 
-    const newReview = {
-      review,
-      stars
-    }
 
-     dispatch(createReviewThunk(newReview, spotId))
+    dispatch(addSpotImgThunk(spotId, imageUrl))
        .then(() => history.push(`/spots/${spotId}`))
        .catch(async (res) => {
          const data = await res.json();
@@ -83,15 +80,18 @@ function AddSpotImgForm() {
         {!sessionUser && (
             <Redirect to={`/`} />
         )}
-        <div className='create_form_container flex top'>
-            <form className='create_form_container flex' onSubmit={handleSubmit}>
-                <div>Upload Image</div>
+        <div className='add_spot_img_container flex top'>
+            <form className='add_spot_imgform_container flex' onSubmit={handleSubmit}>
+                <ul className="errors">
+                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                </ul>
                 <label className="input_top">
-                      <input className="input_file" type="file" onChange={(e) => setImg(e.target.files[0])} required accept="image/*"/>
+                      <div className="add_img_spot_head" >Upload Your Image</div>
+                      <input className="input_file" id="add_img_form_input" type="file" onChange={(e) => setImg(e.target.files[0])} required accept="image/*"/>
                       {img && (
                         <button type="button" className="upload_img" onClick={uploadPrevImg}>Upload Image</button>
                       )}
-                      <div className="upload_prog">{prevImgUploaded}</div>
+                      <div className="upload_prog">{imgUploaded}</div>
                 </label>
                 <button type="submit" className="create_btn">Submit</button>
             </form>

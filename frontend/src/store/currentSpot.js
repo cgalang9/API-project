@@ -24,11 +24,11 @@ const addSpotImg = (spot) => {
     return { type: ADD_SPOT_IMG, spot }
 }
 
-export const addSpotImgThunk = (spotId, url) => async (dispatch) => {
+export const addSpotImgThunk = (spotId, imgUrl) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${spotId}/images` , {
         method: 'POST',
         body: JSON.stringify({
-            url,
+            url: imgUrl,
             preview: false
         })
     })

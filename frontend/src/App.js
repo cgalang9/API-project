@@ -12,6 +12,7 @@ import CreateReviewForm from "./components/CreateReviewForm";
 import BookingConfirmation from "./components/BookingConfirmation";
 import BookingsCurrentUser from "./components/BookingsCurrentUser";
 import EditBookingForm from"./components/EditBookingForm";
+import AddSpotImgForm from "./components/AddSpotImgForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,6 +34,9 @@ function App() {
           </Route>
           <Route exact path="/spots/:spotId/booking-confirmation">
             <BookingConfirmation />
+          </Route>
+          <Route exact path={"/spots/:spotId/add-img"}>
+            <AddSpotImgForm />
           </Route>
           <Route path="/spots/:spotId">
             <SpotDetailsMainPage />
