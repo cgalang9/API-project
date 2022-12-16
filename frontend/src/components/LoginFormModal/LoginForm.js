@@ -26,7 +26,7 @@ function LoginForm() {
   const demoUserLogin = () => {
     setErrors([]);
     const demoUser = {
-      credential: 'Demo',
+      credential: 'demo@user.io',
       password: 'password'
     }
     return dispatch(sessionActions.login(demoUser))
