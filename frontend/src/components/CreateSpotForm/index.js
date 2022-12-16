@@ -4,7 +4,6 @@ import { createSpotThunk } from "../../store/spots";
 import { useHistory, Redirect } from "react-router-dom";
 import AWS, { ConnectContactLens } from 'aws-sdk'
 import './CreateSpotForm.css'
-// window.Buffer = window.Buffer || require("buffer").Buffer;
 
 function CreateSpotForm() {
   const [name, setName] = useState('')
@@ -47,7 +46,6 @@ function CreateSpotForm() {
     setPrevImgUploaded('Uploading...')
     await promise.then(
       function(data) {
-        console.log(data)
         alert("Successfully uploaded photo.");
         setPreviewImageUrl(data.Location);
         setPrevImgUploaded('Upload Complete')
@@ -113,7 +111,7 @@ function CreateSpotForm() {
     e.preventDefault();
 
     if(prevImgUploaded === 'Uploading...') return alert('Please wait for images to finish uploading before submitting')
-    if(prevImgUploaded === 'Error') return alert('There was an error uploading your preview image. Please upload again.')
+    if(prevImgUploaded === 'Error') return alert('There was an error uploading your image. Please upload again.')
 
     const newSpot = {
         name,
