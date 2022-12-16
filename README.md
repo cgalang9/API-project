@@ -20,9 +20,10 @@ The BnB is inspired by AirBnB, an online marketplace that allows users to list a
 * React
 * React Router
 * Redux
+* PostgreSQL
+* AWS S3
 * HTML
 * CSS
-* PostgreSQL
 * Render
 
 ## Landing Page
