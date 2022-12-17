@@ -126,3 +126,7 @@ label {
     min-height: 20px;
     padding-left: 0;
 }
+
+button {
+    cursor: pointer;
+}
