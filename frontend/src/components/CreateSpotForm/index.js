@@ -23,7 +23,7 @@ function CreateSpotForm() {
   const [prevImgUploaded, setPrevImgUploaded] = useState(null)
 
   const [otherImgUrl, setOtherImageUrl] = useState([])
-  // const [otherImgUploaded, setOtherImgUploaded] = useState(null)
+  const [otherImgUploaded, setOtherImgUploaded] = useState(null)
 
 
   const uploadPrevImg = async(e) => {
@@ -57,54 +57,49 @@ function CreateSpotForm() {
     )
   }
 
-  // const uploadOtherImg = async(e) => {
-  //   e.preventDefault();
-  //   setOtherImageUrl([])
+  const uploadOtherImg = async(e) => {
+    e.preventDefault();
+    setOtherImageUrl([])
 
-  //   AWS.config.update({
-  //     accessKeyId: 'AKIAWV3WQI7IFQUYZCWR',
-  //     secretAccessKey: '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'
-  //   })
+    AWS.config.update({
+      accessKeyId: process.env.REACT_APP_ACCESS_KEY,
+      secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY
+    })
 
-  //   let count = 1
-  //   for (let i = 0; i < otherImgs.length; i++) {
-  //     const imgFile = otherImgs[i]
-  //     const params = {
-  //       Body: imgFile,
-  //       Bucket: 'thebnb',
-  //       Key: imgFile.lastModified + imgFile.name
-  //     }
+    let newUrls = []
+    let count = 1
+    for (let i = 0; i < otherImgs.length; i++) {
+      const imgFile = otherImgs[i]
 
-  //     var upload = new AWS.S3.ManagedUpload({
-  //       params: {
-  //         Body: imgFile,
-  //         Bucket: 'thebnb',
-  //         Key: imgFile.lastModified + imgFile.name
-  //       }
-  //     })
+      var upload = new AWS.S3.ManagedUpload({
+        params: {
+          Body: imgFile,
+          Bucket: 'thebnb',
+          Key: imgFile.lastModified + imgFile.name
+        }
+      })
 
-  //     var promise = upload.promise();
-  //     setOtherImgUploaded(`Uploading... ${count} of ${otherImgs.length}`)
-  //     await promise.then(
-  //       function(data) {
-  //         alert("Successfully uploaded photo.");
-  //         const newUrls = otherImgUrl.push(data.Location)
-  //         setOtherImageUrl(newUrls);
-  //         console.log(otherImgUrl)
-  //         count++
-  //         if(count >= otherImgs.length) {
-  //           setOtherImgUploaded('Upload Complete')
-  //         } else {
-  //           setOtherImgUploaded(`Uploading... ${count} of ${otherImgs.length}`)
-  //         }
-  //       },
-  //       function(err) {
-  //         setPrevImgUploaded('Error')
-  //         return alert("There was an error uploading your photo: ", err.message);
-  //       }
-  //     )
-  //   }
-  // }
+      var promise = upload.promise();
+      setOtherImgUploaded(`Uploading... ${count} of ${otherImgs.length}`)
+      await promise.then(
+        function(data) {
+          alert("Successfully uploaded photo.");
+          newUrls.push(data.Location)
+          count++
+          if(count >= otherImgs.length) {
+            setOtherImgUploaded('Upload Complete')
+          } else {
+            setOtherImgUploaded(`Uploading... ${count} of ${otherImgs.length}`)
+          }
+        },
+        function(err) {
+          setPrevImgUploaded('Error')
+          return alert("There was an error uploading your photo: ", err.message);
+        }
+      )
+    }
+    setOtherImageUrl(newUrls);
+  }
 
 
   const handleSubmit = (e) => {
@@ -124,7 +119,6 @@ function CreateSpotForm() {
     }
 
     setErrors([]);
-
     dispatch(createSpotThunk(newSpot, previewImageUrl, otherImgUrl))
       .then(() => history.push('/'))
       .catch(async (res) => {
@@ -219,23 +213,23 @@ function CreateSpotForm() {
                   />
               </label>
               <div className="add_imgs_spot_form flex">
-                <div className="add_imgs_spot_head">Upload Preview Image</div>
+                <div className="add_imgs_spot_head">Upload Images</div>
                 <label className="input_top">
-                  {/* <span>Preview Image:</span> */}
+                  <span>Preview Image:</span>
                   <input className="input_file" type="file" onChange={(e) => setPreviewImage(e.target.files[0])} required accept="image/*"/>
                   {previewImage && (
                     <button type="button" className="upload_img" onClick={uploadPrevImg}>Upload Image</button>
                   )}
                   <div className="upload_prog">{prevImgUploaded}</div>
                 </label>
-                {/* <label className="input_bottom">
+                <label className="input_bottom">
                   <span >Other Images:</span>
                   <input className="input_file" type="file" onChange={(e) => setOtherImgs(e.target.files)} multiple accept="image/*"/>
                   {otherImgs.length > 0 && (
                     <button type="button" className="upload_img" onClick={uploadOtherImg}>Upload Image</button>
                   )}
                   <div className="upload_prog">{otherImgUploaded}</div>
-                </label> */}
+                </label>
               </div>
               <button type="submit" className="create_btn">Create Listing</button>
             </form>
