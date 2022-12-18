@@ -1,70 +1,70 @@
 .create_form {
-    border: 1px solid black;
-    width: 50%;
-    border-radius: 10px;
-    margin-bottom: 20px;
+  border: 1px solid black;
+  width: 50%;
+  border-radius: 10px;
+  margin-bottom: 20px;
 }
 
 .input_description,
 .input_img_urls {
-    resize: none;
-    width: 90%;
-    height: 125px;
-    padding: 50px 10px 0px;
-    border: 2px solid rgb(193, 193, 193);
-    font-size: 20px;
+  resize: none;
+  width: 90%;
+  height: 125px;
+  padding: 50px 10px 0px;
+  border: 2px solid rgb(193, 193, 193);
+  font-size: 20px;
 }
 
 .input_img_urls,
 .input_prev_img {
-    font-size: 13px;
+  font-size: 13px;
 }
 
 .create_btn {
-    margin: 30px 0;
-    padding: 10px;
-    color: white;
-    background-color: rgb(255, 56, 95);
-    border: none;
-    border-radius: 10px;
-    font-size: 20px;
-    font-weight: 300;
+  margin: 30px 0;
+  padding: 10px;
+  color: white;
+  background-color: rgb(255, 56, 95);
+  border: none;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 300;
 }
 
 .input_file {
-    font-size: 15px;
-    width: 90%;
-    height: 30px;
-    padding: 5px;
-    border: none
+  font-size: 15px;
+  width: 90%;
+  height: 30px;
+  padding: 5px;
+  border: none;
 }
 .input_file:focus {
-    border: none;
-    border-radius: none;
+  border: none;
+  border-radius: none;
 }
 .add_imgs_spot_form > label {
-    border: 2px solid rgb(193, 193, 193);
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
+  border: 2px solid rgb(193, 193, 193);
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
 }
 
 .upload_img {
-    margin-top: 10px;
-    align-self: center;
-    max-width: 150px;
+  margin-top: 10px;
+  align-self: center;
+  max-width: 150px;
 }
 .upload_prog {
-    align-self: center;
-    font-size: 16px;
-    margin-top: 10px;
+  align-self: center;
+  font-size: 16px;
+  margin-top: 10px;
 }
 
 .add_imgs_spot_form {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .add_imgs_spot_head {
-    font-size: 22px;
-    margin-bottom: 10px;
+  font-size: 22px;
+  margin-bottom: 10px;
 }

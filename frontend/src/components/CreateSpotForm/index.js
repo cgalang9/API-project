@@ -105,7 +105,7 @@ function CreateSpotForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    if (!previewImageUrl) return alert("Please upload your preview image");
     if (prevImgUploaded === "Uploading...")
       return alert(
         "Please wait for images to finish uploading before submitting"
@@ -226,6 +226,7 @@ function CreateSpotForm() {
               onChange={(e) => setDescription(e.target.value)}
               required
               className="input_description input_bottom"
+              maxLength={1000}
             />
           </label>
           <div className="add_imgs_spot_form flex">
