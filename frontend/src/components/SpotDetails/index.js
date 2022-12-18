@@ -170,12 +170,12 @@ function SpotDetails() {
               <div className="description_container_section2">
                 <div className="section2_item">
                   <div className="section2_item_icon">
-                    <i className="fas fa-desktop"></i>
+                    <i class="fa-solid fa-computer" />
                   </div>
                   <div className="section2_text">
                     <div className="section2_text_top">Dedicated workspace</div>
                     <div className="section2_text_bottom">
-                      A common area with wifi that’s well-suited for working.
+                      A common area that’s well-suited for working.
                     </div>
                   </div>
                 </div>
@@ -200,39 +200,94 @@ function SpotDetails() {
                 </div>
               </div>
 
+              <div className="description_container_section_aircover">
+                <img
+                  src="https://a0.muscache.com/im/pictures/54e427bb-9cb7-4a81-94cf-78f19156faad.jpg"
+                  alt="aircover logo"
+                  className="aircover_img"
+                  onError={(e) => {
+                    e.target.src =
+                      "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930";
+                    e.onerror = null;
+                  }}
+                />
+                <div>
+                  Every booking includes free protection from Host
+                  cancellations, listing inaccuracies, and other issues like
+                  trouble checking in.
+                </div>
+              </div>
+
               <div className="description_container_section3">
                 {spot.description}
-                {/* ***ABOUT THIS SPACE EXAMPLE***
-                <br />
-                <br />
-                This home is a perfect getaway ready to welcome you for some
-                care free time with your family and friends. Newly renovated
-                stylish home w/ tons of natural light. This cozy space has
-                everything you need to be comfortable for your stay. Your
-                private retreat includes wifi, Apple TV, 55" screen TV, fully
-                equipped kitchen & many more amenities. Centrally located, a few
-                blocks away from downtown.
-                <br />
-                <br />
-                Book your next staycation here ! */}
               </div>
 
               <div className="description_container_section4">
                 <div className="section4_title">What this place offers</div>
                 <div className="section4_list">
                   <div className="section4_col">
-                    <div>Lake view</div>
-                    <div>Wifi</div>
-                    <div>Free parking on premises</div>
-                    <div>Free washer – In unit</div>
-                    <div>Private patio or balcony</div>
+                    <div>
+                      <div className="included_icon">
+                        <i class="fa-solid fa-kitchen-set" />
+                      </div>
+                      <div>Kitchen</div>
+                    </div>
+                    <div>
+                      <div className="included_icon">
+                        <i class="fa-solid fa-door-closed" />
+                      </div>
+                      <div>Private entrance</div>
+                    </div>
+                    <div>
+                      <div className="included_icon">
+                        <i class="fa-solid fa-car" />
+                      </div>
+                      <div>Free parking on premises</div>
+                    </div>
+                    <div>
+                      <div className="included_icon">
+                        <i class="fa-solid fa-jug-detergent" />
+                      </div>
+                      <div>Free washer – In unit</div>
+                    </div>
+                    <div>
+                      <div className="included_icon">
+                        <i class="fa-solid fa-house" />
+                      </div>
+                      <div>Private patio or balcony</div>
+                    </div>
                   </div>
                   <div className="section4_col">
-                    <div>Kitchen</div>
-                    <div>Dedicated workspace</div>
-                    <div>TV</div>
-                    <div>Central air conditioning</div>
-                    <div>Security cameras on property</div>
+                    <div>
+                      <div className="included_icon">
+                        <i class="fa-solid fa-mug-saucer" />
+                      </div>
+                      <div>Coffee maker</div>
+                    </div>
+                    <div>
+                      <div className="included_icon">
+                        <i class="fa-solid fa-computer" />
+                      </div>
+                      <div>Dedicated workspace</div>
+                    </div>
+                    <div>
+                      <div className="included_icon">
+                        <i className="fas fa-desktop" />
+                      </div>
+                      <div>TV</div>
+                    </div>
+                    <div>
+                      <div className="included_icon">
+                        <i class="fa-solid fa-snowflake" />
+                      </div>
+                      <div>Central air conditioning</div>
+                    </div>
+                    <div>
+                      <div className="included_icon">
+                        <i class="fa-solid fa-shield-halved"></i>
+                      </div>
+                      <div>Security cameras on property</div>
+                    </div>
                   </div>
                 </div>
               </div>
