@@ -11,7 +11,7 @@ import EditReviewForm from "./components/EditReviewForm";
 import CreateReviewForm from "./components/CreateReviewForm";
 import BookingConfirmation from "./components/BookingConfirmation";
 import BookingsCurrentUser from "./components/BookingsCurrentUser";
-import EditBookingForm from"./components/EditBookingForm";
+import EditBookingForm from "./components/EditBookingForm";
 import AddSpotImgForm from "./components/AddSpotImgForm";
 
 function App() {
@@ -44,8 +44,8 @@ function App() {
           <Route path="/create-spot">
             <CreateSpotForm />
           </Route>
-          <Route exact path='/current-user/reviews/:reviewId/edit'>
-              <EditReviewForm />
+          <Route exact path="/current-user/reviews/:reviewId/edit">
+            <EditReviewForm />
           </Route>
           <Route path="/current-user/reviews">
             <ReivewsCurrentUser />
@@ -56,17 +56,35 @@ function App() {
           <Route path={"/bookings/:bookingId/edit"}>
             <EditBookingForm />
           </Route>
-          <Route path='/404'>
-            <h1 style={{ marginTop: 125, textAlign: "center" }}>404: Page Not Found</h1>
-            <div style={{ textAlign: "center" }}><NavLink exact to="/">Home</NavLink></div>
+          <Route path="/404">
+            <h1 style={{ marginTop: 125, textAlign: "center" }}>
+              404: Page Not Found
+            </h1>
+            <div style={{ textAlign: "center" }}>
+              <NavLink exact to="/">
+                Home
+              </NavLink>
+            </div>
           </Route>
-          <Route path='/403'>
-            <h1 style={{ marginTop: 125, textAlign: "center" }}>403: Forbidden</h1>
-            <div style={{ textAlign: "center" }}><NavLink exact to="/">Home</NavLink></div>
+          <Route path="/403">
+            <h1 style={{ marginTop: 125, textAlign: "center" }}>
+              403: Forbidden
+            </h1>
+            <div style={{ textAlign: "center" }}>
+              <NavLink exact to="/">
+                Home
+              </NavLink>
+            </div>
           </Route>
           <Route>
-            <h1 style={{ marginTop: 125, textAlign: "center" }}>Page Not Found</h1>
-            <div style={{ textAlign: "center" }}><NavLink exact to="/">Home</NavLink></div>
+            <h1 style={{ marginTop: 125, textAlign: "center" }}>
+              Page Not Found
+            </h1>
+            <div style={{ textAlign: "center" }}>
+              <NavLink exact to="/">
+                Home
+              </NavLink>
+            </div>
           </Route>
         </Switch>
       )}

@@ -313,7 +313,9 @@ function SpotDetails() {
               </div>
               <div>{spot.numReviews} reviews</div>
             </div>
-            <Reviews />
+            <div style={{ marginTop: 10 }}>
+              <Reviews />
+            </div>
           </div>
         </div>
       )}

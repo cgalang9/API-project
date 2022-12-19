@@ -1,134 +1,165 @@
 .nav {
-    border-bottom: 1px solid rgb(193, 193, 193);
-    background-color: white;
-    width: 100%;
-    position: absolute;
-    right: 0;
-    top: 0;
-    height: 25px;
-    padding: 20px 0px 30px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+  border-bottom: 1px solid rgb(193, 193, 193);
+  background-color: white;
+  width: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 25px;
+  padding: 20px 0px 30px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .nav_links {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding-left: 30px;
-    padding-right: 30px;
-    justify-self: flex-end;
-    position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
+  justify-self: flex-end;
+  position: relative;
 }
 
 .favicon {
-    position: absolute;
-    left: 50px;
+  position: absolute;
+  left: 50px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.get_in_touch {
+  display: flex;
+  font-size: 16px;
+  margin-left: 20px;
+  align-items: center;
+}
+
+.get_in_touch_icon {
+  color: black;
+  font-size: 22px;
+}
+
+.get_in_touch > div > a {
+  display: flex;
+  text-decoration: none;
+  align-items: center;
+  gap: 8px;
+  margin-left: 15px;
+  padding: 11px 10px;
+  border-radius: 25px;
+  font-size: 16px;
+}
+
+.get_in_touch_icon_text {
+  font-size: 16px;
+  color: black;
 }
 
 .user_btn {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 5px;
-    padding-left: 10px;
-    font-size: 25px;
-    border-radius: 50px;
-    background-color: white;
-    border: 1px solid rgb(193, 193, 193);
-    color: rgb(152, 152, 152);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px;
+  padding-left: 10px;
+  font-size: 25px;
+  border-radius: 50px;
+  background-color: white;
+  border: 1px solid rgb(193, 193, 193);
+  color: rgb(152, 152, 152);
 }
 
-.menu_icon{
-    font-size: 15px;
+.menu_icon {
+  font-size: 15px;
 }
 
 .profile-dropdown {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    right: 120px;
-    top: 50px;
-    padding:  10px 20px;
-    background-color: white;
-    box-shadow: 0 0 10px 0 rgb(193, 193, 193);
-    border-radius: 5px;
-    list-style: none;
-    z-index: 1;
-    width: 200px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 120px;
+  top: 50px;
+  padding: 10px 20px;
+  background-color: white;
+  box-shadow: 0 0 10px 0 rgb(193, 193, 193);
+  border-radius: 5px;
+  list-style: none;
+  z-index: 1;
+  width: 200px;
 }
 
 .logout_btn {
-    color: white;
-    background-color: rgb(255, 56, 95);
-    border-radius: 5px;
-    border: none;
-    padding: 5px;
+  color: white;
+  background-color: rgb(255, 56, 95);
+  border-radius: 5px;
+  border: none;
+  padding: 5px;
 }
 
 .become-host-container,
 .sign-up-link,
 .home-link {
-    text-decoration: none;
-    padding: 11px 10px;
-    margin-right: 15px;
-    border-radius: 20px;
-    font-size: 15px;
+  text-decoration: none;
+  padding: 11px 10px;
+  margin-right: 15px;
+  border-radius: 20px;
+  font-size: 16px;
 }
 
 .become-host-container:hover,
 .home-link:hover,
-.sign-up-link:hover {
-    background-color: rgb(243, 243, 243);
+.sign-up-link:hover,
+.get_in_touch > div > a:hover {
+  background-color: rgb(243, 243, 243);
 }
-
 
 .become-host-container:visited,
 .home-link:visited,
 .dropdown_menu_link:visited,
 .dropdown_menu_link {
-    color: black;
-    text-decoration: none;
+  color: black;
+  text-decoration: none;
 }
 
 .dropdown_menu_link:hover,
 .create-listing:hover,
 .bookings-link:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .sign-up-link:visited,
 .sign-up-link {
-    color: black;
-    border: 1px solid black;
-    margin-right: 75px;
+  color: black;
+  border: 1px solid black;
+  margin-right: 75px;
 }
 
 .sign-up-link:hover {
-    background-color: rgb(248, 248, 248);
+  background-color: rgb(248, 248, 248);
 }
 
 .user_icon_container {
-    margin-right: 75px;
+  margin-right: 75px;
 }
 
 .email-dropdown {
-    margin-top: 5px;
-    font-size: 12px;
+  margin-top: 5px;
+  font-size: 12px;
 }
 
 .dropdown_menu_link {
-    margin-top: 8px;
-    font-size: 14px;
+  margin-top: 8px;
+  font-size: 14px;
 }
 
 .logout_btn_container {
-    margin-top: 30px;
-    margin-bottom: 10px;
+  margin-top: 30px;
+  margin-bottom: 10px;
 }
 
 hr {
-    width: 100%;
-    color: rgb(193, 193, 193);
+  width: 100%;
+  color: rgb(193, 193, 193);
 }
