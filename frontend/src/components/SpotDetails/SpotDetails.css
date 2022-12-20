@@ -205,6 +205,7 @@
 
 .reviews_container {
   border-top: 1px solid rgb(193, 193, 193);
+  padding-left: 10px;
 }
 
 .reviews_header,

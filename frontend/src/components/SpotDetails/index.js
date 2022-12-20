@@ -195,7 +195,7 @@ function SpotDetails() {
                     <i className="fa-regular fa-calendar"></i>
                   </div>
                   <div className="section2_text">
-                    Free cancellation before Nov 25.
+                    Free cancellation before booking date
                   </div>
                 </div>
               </div>
