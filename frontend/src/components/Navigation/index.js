@@ -17,6 +17,21 @@ function Navigation({ isLoaded }) {
     }
   }, [dispatch, sessionUser]);
 
+  const demoUserLogin = () => {
+    const demoUser = {
+      credential: "demo@user.io",
+      password: "password",
+    };
+    return dispatch(sessionActions.login(demoUser)).catch(async (res) => {
+      const data = await res.json();
+      if (data && data.errors) {
+        alert("There was an error logging in.", data.errors);
+      } else if (data.message) {
+        alert("There was an error logging in.", data.message);
+      }
+    });
+  };
+
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
@@ -30,6 +45,9 @@ function Navigation({ isLoaded }) {
   } else {
     sessionLinks = (
       <>
+        <button type="button" className="log-in-btn" onClick={demoUserLogin}>
+          Log In As Demo User
+        </button>
         <LoginFormModal />
         <SignupFormModal />
       </>
