@@ -1,18 +1,18 @@
 .reviews_list {
-  /* display: flex;
+  display: flex;
   flex-direction: column;
-  flex-wrap: wrap; */
-  display: grid;
-  grid-template-columns: 330px 330px;
+  flex-wrap: wrap;
   margin-top: 20px;
   max-height: 500px;
   overflow: hidden;
+  width: 630px;
 }
 
 .reviews_list_item_container {
   height: 150px;
   padding-top: 10px;
-  /* border: 1px solid red; */
+  width: 300px;
+  padding-right: 15px;
 }
 
 .reviews_list_item_head {
