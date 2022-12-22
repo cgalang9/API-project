@@ -136,7 +136,7 @@ module.exports = {
       },
       {
         spotId: 6,
-        url: "https://a0.muscache.com/im/pictures/miso/Hosting-679668778377143330/original/1cf5c8c0-8847-485b-8681-c465eb3271b3.jpeg",
+        url: "https://a0.muscache.com/im/pictures/miso/Hosting-782496083938409566/original/1eed67d4-b576-4e6f-8249-0f1d72084ad8.jpeg",
         preview: true,
       },
       {
@@ -146,7 +146,7 @@ module.exports = {
       },
       {
         spotId: 6,
-        url: "https://a0.muscache.com/im/pictures/miso/Hosting-782496083938409566/original/1eed67d4-b576-4e6f-8249-0f1d72084ad8.jpeg",
+        url: "https://a0.muscache.com/im/pictures/miso/Hosting-679668778377143330/original/1cf5c8c0-8847-485b-8681-c465eb3271b3.jpeg",
         preview: false,
       },
       {
