@@ -65,7 +65,7 @@ module.exports = {
         ownerId: 5,
         address: "123 Disney Lane",
         city: "London",
-        state: "London",
+        state: "England",
         country: "United Kingdom",
         lat: -20.9081509,
         lng: 153.5224999,
