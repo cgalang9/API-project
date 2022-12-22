@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink, useHistory, useParams } from "react-router-dom";
-import { getSpotThunk } from "../../store/currentSpot";
+import { getSpotThunk, clearSpot } from "../../store/currentSpot";
 import CreateBookingTile from "../CreateBookingTile";
 import Reviews from "../Reviews";
 import "./SpotDetails.css";
@@ -42,6 +42,12 @@ function SpotDetails() {
       otherImgsArr.push(error_img);
     }
   }
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearSpot());
+    };
+  }, []);
 
   return (
     <div className="spot_details_page">
