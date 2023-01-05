@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { editSpotThunk } from "../../store/spots";
 import { Redirect, useHistory, useParams } from "react-router-dom";
 import { deleteSpotThunk } from "../../store/spots";
+import { getSpotThunk } from "../../store/currentSpot";
 import "./EditSpotForm.css";
 
-function EditSpotForm({ spot }) {
+function EditSpotForm() {
   const [name, setName] = useState(null);
   const [price, setPrice] = useState(null);
   const [address, setAddress] = useState(null);
@@ -14,32 +15,40 @@ function EditSpotForm({ spot }) {
   const [country, setCountry] = useState(null);
   const [description, setDescription] = useState(null);
   const [errors, setErrors] = useState([]);
+  const [isOwner, setIsOwner] = useState(true);
   const dispatch = useDispatch();
   const history = useHistory();
   const { spotId } = useParams();
 
+  useEffect(() => {
+    dispatch(getSpotThunk(spotId)).catch((res) => history.push("/404"));
+  }, [dispatch, spotId]);
+
+  const spot = useSelector((state) => state.currentSpot);
+
   //fixes bug when refreshing page spot was undefined and gave an error
-  if (spot) {
-    if (name === null) setName(spot.name);
-    if (price === null) setPrice(spot.price);
-    if (address === null) setAddress(spot.address);
-    if (city === null) setCity(spot.city);
-    if (st === null) setSt(spot.state);
-    if (country === null) setCountry(spot.country);
-    if (description === null) setDescription(spot.description);
-  }
+  useEffect(() => {
+    if (spot) {
+      if (name === null) setName(spot.name);
+      if (price === null) setPrice(spot.price);
+      if (address === null) setAddress(spot.address);
+      if (city === null) setCity(spot.city);
+      if (st === null) setSt(spot.state);
+      if (country === null) setCountry(spot.country);
+      if (description === null) setDescription(spot.description);
+    }
+  }, [spot]);
 
   //following lines along with the Redirect tag in return below, redirects user to spot details page if he is not the owner of the spot
   const sessionUser = useSelector((state) => state.session.user);
-  let isOwner = false;
-  if (
-    spot &&
-    sessionUser &&
-    sessionUser.id === spot.ownerId &&
-    isOwner === false
-  ) {
-    isOwner = true;
-  }
+
+  useEffect(() => {
+    if (spot && sessionUser && sessionUser.id !== spot.ownerId) {
+      setIsOwner(false);
+    } else {
+      setIsOwner(true);
+    }
+  }, [spot]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -83,6 +92,7 @@ function EditSpotForm({ spot }) {
     }
   };
 
+  console.log(spot);
   return (
     <>
       {!isOwner && <Redirect to={`/spots/${spotId}`} />}
